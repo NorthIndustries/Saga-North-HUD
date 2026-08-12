@@ -26,6 +26,8 @@ From [GitHub Releases](https://github.com/NorthIndustries/Saga-North-HUD/release
    - `Saga-North-HUD.conf`
    - `autoconf/custom/saganorth/custom/mydu_atlas.lua`
 
+   Link elements to **s1** … **s11**, **s14**, and **s21** (not `slot1` — that name is reserved by autoconf). The HUD aliases them internally to `slot1` … `slot21` for Saga code.
+
 3. In game, on your pilot seat / control unit, apply autoconf profile **Saga North HUD** (filename `Saga-North-HUD.conf`).
 4. Link elements per the usual Saga HUD setup (slots `slot1` … `slot21`).
 
@@ -48,9 +50,7 @@ This variant is suitable when you cannot drop extra `.lua` files beside the conf
 |---------|-----|
 | Wrong planet names / autopilot targets vanilla bodies | Reinstall from **Saga-North-HUD.zip**; ensure `mydu_atlas.lua` is present |
 | `no file '…lua' in the lua folder` | Extract the full zip so `autoconf/custom/saganorth/custom/mydu_atlas.lua` exists |
-| `=> -3: missing 'class' description` | Old JSON-format release — reinstall latest build (YAML output) |
-| `=> 0: missing 'class' description` | Old JSON-format release — reinstall latest build (YAML output) |
-| `=> N: missing 'class' description` | Old JSON-format release — reinstall latest build (YAML output) |
+| `=> N: missing 'class' description` | Old build used reserved names `slot1` in YAML — reinstall latest build (uses `s1`…`s21`) |
 | HUD works but map icons wrong | Add missing planet PNGs or fix `iconPath` in atlas |
 
 ## Help

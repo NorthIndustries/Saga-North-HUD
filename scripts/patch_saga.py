@@ -18,6 +18,15 @@ EMPTY_SLOT_TYPE = {"methods": [], "events": []}
 HANDLER_SLOT_KEY_REMAP = {"-3": "-5", "-2": "-4"}
 HANDLER_SLOTS = {"-5": "library", "-4": "system", "-1": "unit"}
 FORCEFIELD_SLOTS = {"slot14", "slot21"}
+# Autoconf reserves default names slot1..slotN; use sN in YAML and alias in code.
+SLOT_YAML_NAMES = {f"slot{i}": f"s{i}" for i in range(1, 12)}
+SLOT_YAML_NAMES["slot14"] = "s14"
+SLOT_YAML_NAMES["slot21"] = "s21"
+SLOT_ALIAS_LINE = (
+    "slot1=s1 slot2=s2 slot3=s3 slot4=s4 slot5=s5 slot6=s6 slot7=s7 slot8=s8 "
+    "slot9=s9 slot10=s10 slot11=s11 slot14=s14 slot21=s21"
+)
+INDENT = "    "
 
 
 def atlas_table_literal() -> str:
@@ -82,10 +91,14 @@ def element_slot_names(data: dict) -> list[str]:
     return ordered
 
 
-def slot_class(name: str) -> tuple[str, str | None]:
-    if name == "core":
+def yaml_slot_name(original_name: str) -> str:
+    return SLOT_YAML_NAMES.get(original_name, original_name)
+
+
+def slot_class(original_name: str) -> tuple[str, str | None]:
+    if original_name == "core":
         return "CoreUnit", None
-    if name in FORCEFIELD_SLOTS:
+    if original_name in FORCEFIELD_SLOTS:
         return "ForceFieldUnit", "manual"
     return "ScreenUnit", "manual"
 
@@ -104,15 +117,18 @@ def yaml_arg(value: str) -> str:
     return f"'{value}'"
 
 
-def emit_lua_block(lines: list[str], indent: int, code: str) -> None:
-    pad = " " * indent
-    pad_code = " " * (indent + 2)
+def emit_lua_block(lines: list[str], indent_level: int, code: str) -> None:
+    pad = INDENT * indent_level
+    pad_code = INDENT * (indent_level + 1)
     lines.append(f"{pad}lua: |")
-    if code:
-        for line in code.splitlines():
-            lines.append(f"{pad_code}{line}")
-    else:
+    stripped = code.strip("\n")
+    if not stripped:
         lines.append(pad_code)
+        return
+    for line in stripped.splitlines():
+        if not line.strip():
+            continue
+        lines.append(f"{pad_code}{line}")
 
 
 def handler_yaml_key(filter_obj: dict) -> tuple[str, list[str] | None]:
@@ -134,10 +150,17 @@ def handler_yaml_key(filter_obj: dict) -> tuple[str, list[str] | None]:
     return event_name, yaml_args
 
 
-def emit_handlers(lines: list[str], handlers: list[dict], indent: int) -> None:
-    pad = " " * indent
-    pad2 = " " * (indent + 2)
+def emit_handlers(
+    lines: list[str],
+    handlers: list[dict],
+    indent_level: int,
+    *,
+    on_start_prefix: str | None = None,
+) -> None:
+    pad = INDENT * indent_level
+    pad2 = INDENT * (indent_level + 1)
     index = 0
+    prefix_used = False
     while index < len(handlers):
         handler = handlers[index]
         filt = handler["filter"]
@@ -155,8 +178,11 @@ def emit_handlers(lines: list[str], handlers: list[dict], indent: int) -> None:
                 chunks.append(handlers[next_index]["code"])
                 next_index += 1
             event_name = signature[:-2]
+            if event_name == "onStart" and on_start_prefix and not prefix_used:
+                chunks.insert(0, on_start_prefix)
+                prefix_used = True
             lines.append(f"{pad}{event_name}:")
-            emit_lua_block(lines, indent + 2, "\n".join(chunks))
+            emit_lua_block(lines, indent_level + 1, "\n".join(chunk for chunk in chunks if chunk.strip()))
             index = next_index
             continue
 
@@ -165,18 +191,19 @@ def emit_handlers(lines: list[str], handlers: list[dict], indent: int) -> None:
         if yaml_args:
             rendered = ", ".join(yaml_arg(value) for value in yaml_args)
             lines.append(f"{pad2}args: [{rendered}]")
-        emit_lua_block(lines, indent + 2, handler["code"])
+        emit_lua_block(lines, indent_level + 1, handler["code"])
         index += 1
 
 
 def to_yaml(data: dict, name: str) -> str:
     lines = [f"name: {name}", "", "slots:"]
-    for slot_name in element_slot_names(data):
-        class_name, select_mode = slot_class(slot_name)
-        lines.append(f"  {slot_name}:")
-        lines.append(f"    class: {class_name}")
+    for original_name in element_slot_names(data):
+        yaml_name = yaml_slot_name(original_name)
+        class_name, select_mode = slot_class(original_name)
+        lines.append(f"{INDENT}{yaml_name}:")
+        lines.append(f"{INDENT}{INDENT}class: {class_name}")
         if select_mode:
-            lines.append(f"    select: {select_mode}")
+            lines.append(f"{INDENT}{INDENT}select: {select_mode}")
 
     lines.append("")
     lines.append("handlers:")
@@ -190,12 +217,13 @@ def to_yaml(data: dict, name: str) -> str:
         if slot_name:
             grouped[slot_name].append(handler)
 
-    for slot_name in ("library", "unit", "system"):
+    for slot_name in ("unit", "system", "library"):
         slot_handlers = grouped[slot_name]
         if not slot_handlers:
             continue
-        lines.append(f"  {slot_name}:")
-        emit_handlers(lines, slot_handlers, indent=4)
+        lines.append(f"{INDENT}{slot_name}:")
+        prefix = SLOT_ALIAS_LINE if slot_name == "library" else None
+        emit_handlers(lines, slot_handlers, indent_level=2, on_start_prefix=prefix)
 
     return "\n".join(lines) + "\n"
 

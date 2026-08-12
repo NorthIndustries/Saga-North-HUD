@@ -41,8 +41,8 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v0.1.2-ni.4
-          name: Saga North HUD v0.1.2-ni.4
+          tag_name: v0.1.2-ni.5
+          name: Saga North HUD v0.1.2-ni.5
           body_path: ReleaseNotes.md
           files: |
             Saga-North-HUD.zip

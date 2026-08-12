@@ -21,9 +21,15 @@ echo "Checking modular patch..."
 python3 scripts/patch_saga.py --output "$MODULAR"
 head -n 1 "$MODULAR" | grep -q '^name: '
 grep -q 'class: CoreUnit' "$MODULAR"
+grep -q 's1:' "$MODULAR"
 grep -q 'class: ScreenUnit' "$MODULAR"
 grep -q 'class: ForceFieldUnit' "$MODULAR"
 grep -q "$BUNDLED" "$MODULAR"
+grep -q 'slot1=s1' "$MODULAR"
+if grep -q 'slot1:' "$MODULAR"; then
+  echo "ERROR: slot1: must not appear in slots (reserved autoconf name)" >&2
+  exit 1
+fi
 if grep -q "require('atlas')" "$MODULAR"; then
   echo "ERROR: modular conf still requires global atlas" >&2
   exit 1
@@ -31,9 +37,8 @@ fi
 python3 <<'PY'
 from pathlib import Path
 text = Path("scripts/work/Saga-North-HUD.conf").read_text()
-for slot in ["core:", "slot1:", "slot14:", "slot21:", "  library:", "  system:", "  unit:"]:
-    assert slot in text, slot
-assert "-3:" not in text
+for token in ["    core:", "    s1:", "    s14:", "    s21:", "    unit:", "    system:", "    library:"]:
+    assert token in text, token
 print("YAML structure OK")
 PY
 
