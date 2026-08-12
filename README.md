@@ -18,7 +18,7 @@ See [INSTALL.md](INSTALL.md) for player setup.
 
 ## What changed
 
-The minified Saga release calls `require('atlas')` once in its startup handler. This repo patches that to:
+The minified Saga release is converted from legacy JSON export into **YAML autoconf** with explicit slot classes (required for MyDU file installs). Atlas loading is patched to:
 
 ```lua
 require('autoconf/custom/saganorth/custom/mydu_atlas')
