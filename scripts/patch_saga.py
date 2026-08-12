@@ -15,6 +15,9 @@ BUNDLED_REQUIRE = "autoconf/custom/saganorth/custom/mydu_atlas"
 ATLAS_REQUIRE = "require('atlas')"
 ASSIGNMENT = f"bW={ATLAS_REQUIRE}"
 VERSION_RE = re.compile(r'Q="([0-9.]+)"')
+EMPTY_SLOT_TYPE = {"methods": [], "events": []}
+# Saga export uses legacy keys (-3=library, -2=system). MyDU expects -5/-4/-3/-2/-1.
+HANDLER_SLOT_KEY_REMAP = {"-3": "-5", "-2": "-4"}
 
 
 def atlas_table_literal() -> str:
@@ -31,6 +34,34 @@ def atlas_table_literal() -> str:
 
 def display_name(version: str) -> str:
     return f"Saga North HUD v{version} (North Industries)"
+
+
+def normalize_slot_keys(data: dict) -> None:
+    """Remap legacy Saga slot keys to current MyDU JSON autoconf layout."""
+    slots = data.get("slots", {})
+    if slots.get("-5", {}).get("name") == "library":
+        return
+
+    legacy_library = slots.get("-3")
+    legacy_system = slots.get("-2")
+    unit = slots.get("-1")
+    if legacy_library is None or legacy_system is None or unit is None:
+        raise SystemExit("Expected legacy Saga slots -3 (library), -2 (system), -1 (unit)")
+
+    element_slots = {key: value for key, value in slots.items() if not str(key).startswith("-")}
+    data["slots"] = {
+        **element_slots,
+        "-5": legacy_library,
+        "-4": legacy_system,
+        "-3": {"name": "player", "type": dict(EMPTY_SLOT_TYPE)},
+        "-2": {"name": "construct", "type": dict(EMPTY_SLOT_TYPE)},
+        "-1": unit,
+    }
+
+    for handler in data.get("handlers", []):
+        slot_key = handler.get("filter", {}).get("slotKey")
+        if slot_key in HANDLER_SLOT_KEY_REMAP:
+            handler["filter"]["slotKey"] = HANDLER_SLOT_KEY_REMAP[slot_key]
 
 
 def patch_source(inline: bool) -> dict:
@@ -58,6 +89,8 @@ def patch_source(inline: bool) -> dict:
 
     if hits != 1:
         raise SystemExit(f"Expected exactly 1 atlas require, found {hits}")
+
+    normalize_slot_keys(data)
     return data
 
 

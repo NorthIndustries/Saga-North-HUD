@@ -24,6 +24,19 @@ if grep -q "require('atlas')" "$MODULAR"; then
   echo "ERROR: modular conf still requires global atlas" >&2
   exit 1
 fi
+python3 <<'PY'
+import json, sys
+from pathlib import Path
+data = json.loads(Path("scripts/work/Saga-North-HUD.conf").read_text())
+slots = data["slots"]
+assert slots["-5"]["name"] == "library", slots
+assert slots["-4"]["name"] == "system", slots
+assert slots["-3"]["name"] == "player", slots
+assert slots["-2"]["name"] == "construct", slots
+assert "-3" not in {h["filter"]["slotKey"] for h in data["handlers"]}
+assert "-2" not in {h["filter"]["slotKey"] for h in data["handlers"]}
+print("Slot key normalization OK")
+PY
 
 echo "Checking inline patch..."
 python3 scripts/patch_saga.py --inline --output "$GFN"
