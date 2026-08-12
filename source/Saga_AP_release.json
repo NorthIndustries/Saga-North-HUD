@@ -1,0 +1,939 @@
+{
+  "slots": {
+    "-3": {
+      "name": "library",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "-2": {
+      "name": "system",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "-1": {
+      "name": "unit",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "0": {
+      "name": "slot1",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "1": {
+      "name": "slot2",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "2": {
+      "name": "slot3",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "3": {
+      "name": "slot4",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "4": {
+      "name": "slot5",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "5": {
+      "name": "slot6",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "6": {
+      "name": "slot7",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "7": {
+      "name": "slot8",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "8": {
+      "name": "slot9",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "9": {
+      "name": "slot10",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "10": {
+      "name": "slot11",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    },
+    "11": {
+      "name": "slot21",
+      "type": {
+        "methods": [],
+        "events": []
+      }
+    }
+  },
+  "handlers": [
+    {
+      "code": "json={Q=\"0.1.2\"}local BN\nlocal XC={[\"\\\\\"]=\"\\\\\",[\"\\\"\"]=\"\\\"\",[\"\\b\"]=\"b\",[\"\\f\"]=\"f\",[\"\\n\"]=\"n\",[\"\\r\"]=\"r\",[\"\\t\"]=\"t\"}local ZX={[\"/\"]=\"/\"}for rt,ty in pairs(XC)do ZX[ty]=rt end\nlocal function HJ(rt)\nreturn\"\\\\\"..(XC[rt]or\nstring.format(\"u%04x\",rt:byte()))end\nlocal function SD(rt)return\"null\"end\nlocal function FG(ty,rt)local yu={}rt=\nrt or{}if rt[ty]then Q(\"circular reference\")end\nrt[ty]=true\nif rawget(ty,1)~=nil or next(ty)==nil then local ui=0\nfor op in pairs(ty)do\nif\nW(op)~=\"number\"then Q(\"invalid table: mixed or invalid key types\")end\nui=ui+1 end\nif ui~=#ty then\nQ(\"invalid table: sparse array\")end\nfor op,pl in ipairs(ty)do E.W(yu,BN(pl,rt))end\nrt[ty]=nil\nreturn\"[\"..E.E(yu,\",\")..\"]\"else\nfor op,ui in pairs(ty)do\nif\nW(op)~=\"string\"then Q(\"invalid table: mixed or invalid key types\")end\nE.W(yu,BN(op,rt)..\":\"..BN(ui,rt))end\nrt[ty]=nil\nreturn\"{\"..E.E(yu,\",\")..\"}\"end end\nlocal function PA(rt)\nreturn'\"'..rt:gsub('[%z\\1-\\31\\\\\"]',HJ)..'\"'end\nlocal function AS(rt)if\nrt~=rt or rt<=-R.R or rt>=R.R then\nQ(\"unexpected number value '\"..T(rt)..\"'\")end\nreturn string.format(\"%.14g\",rt)end\nlocal TY={[\"nil\"]=SD,[\"table\"]=FG,[\"string\"]=PA,[\"number\"]=AS,[\"boolean\"]=_G['tostring']}\nBN=function(ty,rt)local yu=W(ty)local ui=TY[yu]\nif ui then if Y%1000 ==0 then end\nY=Y+1\nreturn ui(ty,rt)end\nQ(\"unexpected type '\"..yu..\"'\")end\nfunction json.encode(rt)Y=1\nreturn(BN(rt))end\nlocal NM\nlocal function VB(...)local rt={}for ty=1,select(\"#\",...)do\nrt[select(ty,...)]=true end\nreturn rt end\nlocal Mq=VB(\" \",\"\\t\",\"\\r\",\"\\n\")\nlocal LZ=VB(\" \",\"\\t\",\"\\r\",\"\\n\",\"]\",\"}\",\",\")local YU=VB(\"\\\\\",\"/\",'\"',\"b\",\"f\",\"n\",\"r\",\"t\",\"u\")\nlocal JK=VB(\"true\",\"false\",\"null\")local OP={[\"true\"]=true,[\"false\"]=false,[\"null\"]=nil}\nlocal function qw(ui,yu,ty,rt)local op=2000*R.T(U/2000)if U<op and yu>=op then end\nU=yu\nfor pl=yu,#ui do if\nty[ui:sub(pl,pl)]~=rt then return pl end end\nreturn\n#ui+1 end\nlocal function er(rt,ty,yu)local ui=1\nlocal op=1\nfor pl=1,ty-1 do op=op+1\nif rt:sub(pl,pl)==\"\\n\"then ui=ui+1\nop=1 end end\nQ(string.format(\"%s at line %d col %d\",yu,ui,op))end\nlocal function KL(rt)local ty=R.Y\nif rt<=0x7f then return string.char(rt)elseif rt<=0x7ff then return string.char(ty(rt/64)+192,\nrt%64+128)elseif rt<=0xffff then return\nstring.char(\nty(rt/4096)+224,ty(rt%4096/64)+128,rt%64+128)elseif rt<=0x10ffff then\nreturn string.char(ty(rt/262144)+240,ty(\nrt%262144/4096)+128,ty(rt%4096/64)+128,\nrt%64+128)end\nQ(string.format(\"invalid unicode codepoint '%x'\",rt))end\nlocal function UI(rt)local n1=I(rt:sub(1,4),16)local n2=I(rt:sub(7,10),16)\nif n2 then return\nKL(\n(n1-0xd800)*0x400+ (n2-0xdc00)+0x10000)else return KL(n1)end end\nlocal function GH(ty,rt)local ui=\"\"local op=rt+1\nlocal yu=op\nwhile op<=#ty do local pl=ty:byte(op)\nif pl<32 then\ner(ty,op,\"control character in string\")elseif pl==92 then ui=ui..ty:sub(yu,op-1)op=op+1\nlocal lk=ty:sub(op,op)\nif\nlk==\"u\"then\nlocal kj=ty:match(\"^[dD][89aAbB]%x%x\\\\u%x%x%x%x\",op+1)or\nty:match(\"^%x%x%x%x\",op+1)or\ner(ty,op-1,\"invalid unicode escape in string\")ui=ui..UI(kj)op=op+#kj else if not YU[lk]then\ner(ty,op-1,\"invalid escape char '\"..lk..\"' in string\")end\nui=ui..ZX[lk]end\nyu=op+1 elseif pl==34 then ui=ui..ty:sub(yu,op-1)return ui,op+1 end\nop=op+1 end\ner(ty,rt,\"expected closing quote for string\")end\nlocal function we(rt,ty)local yu=qw(rt,ty,LZ)local ui=rt:sub(ty,yu-1)local op=I(ui)\nif not op then er(rt,ty,\n\"invalid number '\"..ui..\"'\")end\nreturn op,yu end\nlocal function CV(rt,ty)local yu=qw(rt,ty,LZ)local ui=rt:sub(ty,yu-1)\nif not JK[ui]then er(rt,ty,\"invalid literal '\"..ui..\"'\")end\nreturn OP[ui],yu end\nlocal function DF(rt,ty)local yu={}local ui=1\nty=ty+1\nwhile 1 do local op\nty=qw(rt,ty,Mq,true)if rt:sub(ty,ty)==\"]\"then ty=ty+\n1\nbreak end\nop,ty=NM(rt,ty)yu[ui]=op\nui=ui+1\nty=qw(rt,ty,Mq,true)local pl=rt:sub(ty,ty)ty=ty+1\nif pl==\"]\"then break end\nif pl~=\",\"then\ner(rt,ty,\"expected ']' or ','\")end end\nreturn yu,ty end\nlocal function IO(rt,ty)local yu={}ty=ty+1\nwhile 1 do local ui,op\nty=qw(rt,ty,Mq,true)if rt:sub(ty,ty)==\"}\"then\nty=ty+1\nbreak end\nif rt:sub(ty,ty)~='\"'then\ner(rt,ty,\"expected string for key\")end\nui,ty=NM(rt,ty)ty=qw(rt,ty,Mq,true)\nif\nrt:sub(ty,ty)~=\":\"then er(rt,ty,\"expected ':' after key\")end\nty=qw(rt,ty+1,Mq,true)op,ty=NM(rt,ty)yu[ui]=op\nty=qw(rt,ty,Mq,true)local pl=rt:sub(ty,ty)ty=ty+1\nif pl==\"}\"then break end\nif pl~=\",\"then\ner(rt,ty,\"expected '}' or ','\")end end\nreturn yu,ty end\nlocal RT={['\"']=GH,[\"0\"]=we,[\"1\"]=we,[\"2\"]=we,[\"3\"]=we,[\"4\"]=we,[\"5\"]=we,[\"6\"]=we,[\"7\"]=we,[\"8\"]=we,[\"9\"]=we,[\"-\"]=we,[\"t\"]=CV,[\"f\"]=CV,[\"n\"]=CV,[\"[\"]=DF,[\"{\"]=IO}function Q(rt)O(rt)end\nNM=function(rt,ty)local yu=rt:sub(ty,ty)local ui=RT[yu]\nif ui then return ui(rt,ty)end\ner(rt,ty,\"unexpected character '\"..yu..\"'\")end\nfunction json.decode(rt)U=0\nif W(rt)~=\"string\"then\nQ(\"expected argument of type string, got \"..W(rt))end\nlocal ty,yu=NM(rt,qw(rt,1,Mq,true))yu=qw(rt,yu,Mq,true)\nif yu<=#rt then er(rt,yu,\"trailing garbage\")end\nreturn ty end\nreturn json",
+      "filter": {
+        "args": [],
+        "signature": "onStart()",
+        "slotKey": "-3"
+      },
+      "key": "1"
+    },
+    {
+      "code": "\nfunction P()I=_G['tonumber']T=_G['tostring']W=_G['type']\nE=_G['table']E.E=E['concat']E.W=E['insert']E.U=E['remove']E.I=E['sort']\nR=_G['math']R.O=R['max']R.P=R['min']R.A=R['abs']R.S=R['sin']R.D=R['cos']\nR.F=R['tan']R.GH=R['asin']R.J=R['acos']R.K=R['atan']R.L=R['atan2']\nR.T=R['ceil']R.Y=R['floor']R.Z=R['exp']R.X=R['fmod']R.C=R['deg']\nR.V=R['rad']R.R=R['huge']R.B=R['log']R.N=R['pi']R.M=R['pow']\nR.q=R['random']R.w=R['sqrt']A=_G['utils']A.e=A['round']A.r=A['sign']\nA.t=A['clamp']A.yu=A['smoothstep']A.i=A['map']if S==nil then S={}\nS.o=_G['constants']['epsilon']S.pl=_G['constants']['rad2deg']\nS.k=_G['constants']['deg2rad']end\nD=_G['axisCommandId']D.j=D['longitudinal']D.h=D['lateral']D.g=D['vertical']\nF='axisCommands'G=_G['axisCommandType']G.f=G['byTargetSpeed']\nG.d=G['byThrottle']H.sa=H['getWorldPosition']H.zx=H['isSeated']\nH.cv=H['isFrozen']H.bn=H['freeze']H.m=H['getWorldVelocity']J._=J['print']\nJ.QQ=J['playSound']J.WQ=J['stopSound']J.EQ=J['isPlayingSound']\nJ.RQ=J['showHelper']J.TQ=J['createWidget']J.YQ=J['createWidgetPanel']\nJ.UQ=J['createData']J.IQ=J['updateData']J.OQ=J['addDataToWidget']\nJ.PQ=J['removeDataFromWidget']J.AQ=J['destroyWidget']J.SQ=J['destroyWidgetPanel']\nJ.DQ=J['getControlDeviceForwardInput']J.FQ=J['getControlDeviceYawInput']\nJ.GQ=J['getControlDeviceLeftRightInput']J.HQ=J['getArkTime']J.JQ=J['getActionKeyName']\nJ.KQ=J['getMouseWheel']J.LQ=J['getMouseDeltaX']J.ZQ=J['getMouseDeltaY']\nJ.XQ=J['getMousePosX']J.CQ=J['getMousePosY']J.VQ=J['getScreenWidth']\nJ.BQ=J['getScreenHeight']J.NQ=J['getThrottleInputFromMouseWheel']\nJ.MQ=J['showScreen']J.qQ=J['setScreen']J.wQ=J['lockView']J.bn=J['freeze']\nJ.eQ=J['setWaypoint']J.rQ=J['getCameraWorldForward']\nK.tQ=K['getPointOnScreen']L=_G['Navigator']L.yQ=L['toggleBoosters']\nL.uQ=L['update']L.iQ=L['setEngineTorqueCommand']\nL.oQ=L['setEngineForceCommand']L.pQ=L['setBoosterCommand']L.lQ=Z\nZ.kQ=Z['isRemoteControlled']Z.jQ=Z['isAnyLandingGearExtended']\nZ.hQ=Z['deployLandingGears']Z.gQ=Z['retractLandingGears']\nZ.fQ=Z['isAnyHeadlightSwitchedOn']Z.dQ=Z['switchOnHeadlights']\nZ.sQ=Z['switchOffHeadlights']Z.aQ=Z['getControlMode']\nZ.zQ=Z['cancelCurrentControlMasterMode']Z.xQ=Z['getAtmosphereDensity']\nZ.getWidgetData=Z['getWidgetData']Z.cQ=Z['setEngineThrust']Z.vQ=Z['getThrottle']\nZ.bQ=Z['setTimer']Z.nQ=Z['hideWidget']Z.mQ=Z['showWidget']\nZ._Q=Z['setAxisCommandValue']X=_G['AxisCommandManager']\nX.QW=X['activateGroundEngineAltitudeStabilization']\nX.WW=X['deactivateGroundEngineAltitudeStabilization']X.EW=X['updateTargetGroundAltitudeFromActionStart']\nX.RW=X['updateTargetGroundAltitudeFromActionLoop']X.TW=X['setupCustomTargetSpeedRanges']\nX.YW=X['getTargetSpeed']X.UW=X['setTargetGroundAltitude']\nX.IW=X['getTargetGroundAltitude']X.OW=X['getAxisCommandType']\nX.PW=X['composeAxisAccelerationFromTargetSpeed']X.AW=X['composeAxisAccelerationFromThrottle']\nX.SW=X['getCurrentToTargetDeltaSpeed']X.DW=X['getTargetSpeedCurrentStep']\nX.FW=X['updateCommandFromActionStart']X.GW=X['updateCommandFromActionLoop']\nX.HW=X['updateCommandFromActionStop']X.JW=X['setTargetSpeedCommand']\nX.KW=X['setThrottleCommand']X.LW=X['getThrottleCommand']X.ZW=X['resetCommand']end\nfunction C()V.XW=V['getName']V.sa=V['getWorldPosition']\nV.CW=V['getForward']V.VW=V['getUp']V.BW=V['getRight']\nV.NW=V['getWorldForward']V.MW=V['getWorldUp']V.qW=V['getWorldRight']\nV.wW=V['getMaxThrustAlongAxis']V.eW=V['getWorldAngularVelocity']\nV.m=V['getWorldVelocity']V.rW=V['getWorldAirFrictionAngularAcceleration']\nV.tW=V['getFrictionBurnSpeed']V.yW=V['getWorldAcceleration']V.uW=V['getVelocity']\nV.iW=V['getMaxBrake']V.oW=V['getCurrentBrake']V.pW=V['getMaxSpeed']\nV.lW=V['getMass']V.kW=V['getTotalMass']V.jW=V['getPvPTimer']\nV.hW=V['isInPvPZone']B.gW.fW=B.gW['getWorldVertical']\nB.gW.dW=B.gW['getAltitude']B.gW.sW=B.gW['getElementNameById']\nB.gW.aW=B.gW['getElementDisplayNameById']B.gW.zW=B.gW['getElementTypeById']\nB.gW.xW=B.gW['getElementMassById']B.gW.cW=B.gW['getElementMaxHitPointsById']\nB.gW.vW=B.gW['getElementIdList']B.gW.bW=B.gW['getGravityIntensity']\nB.gW.nW=B.gW['getCoreStress']B.gW.mW=B.gW['getCoreStressRatio']\nB.gW._W=B.gW['getMaxCoreStress']B.gW.QE=B.gW['g']\nif B.WE~=nil then B.WE.EE=B.WE['isActive']\nB.WE.RE=B.WE['getShieldHitpoints']B.WE.TE=B.WE['getMaxShieldHitpoints']\nB.WE.YE=B.WE['startVenting']B.WE.UE=B.WE['stopVenting']B.WE.IE=B.WE['isVenting']\nB.WE.OE=B.WE['getVentingCooldown']B.WE.PE=B.WE['getVentingMaxCooldown']\nB.WE.AE=B.WE['getResistances']B.WE.SE=B.WE['setResistances']\nB.WE.DE=B.WE['getResistancesCooldown']B.WE.FE=B.WE['getResistancesMaxCooldown']\nB.WE.GE=B.WE['getResistancesPool']B.WE.HE=B.WE['getResistancesRemaining']\nB.WE.JE=B.WE['getStressRatio']B.WE.KE=B.WE['getStressRatioRaw']\nB.WE.LE=B.WE['getStressHitpoints']B.WE.ZE=B.WE['getStressHitpointsRaw']end\nif B.XE~=nil then B.XE.activate=B.XE['activate']\nB.XE.deactivate=B.XE['deactivate']B.XE.toggle=B.XE['toggle']\nB.XE.CE=B.XE['getBaseAltitude']B.XE.VE=B.XE['getTargetAltitude']\nB.XE.BE=B.XE['setTargetAltitude']B.XE.NE=B.XE['getFieldStrength']\nB.XE.ME=B.XE['getFieldPower']B.XE.qE=B.XE['getPulsorCount']\nB.XE.wE=B.XE['getCompensationRate']B.XE.EE=B.XE['isActive']end\nif B.eE~=nil then B.eE.rE=B.eE['activateWarp']\nB.eE.tE=B.eE['getStatus']B.eE.yE=B.eE['getDistance']\nB.eE.uE=B.eE['getDestinationName']B.eE.iE=B.eE['getAvailableWarpCells']\nB.eE.oE=B.eE['getRequiredWarpCells']end\nif B.pE~=nil then\nfor RT,TY in ipairs(B.pE)do TY.lE=TY['clear']TY.kE=TY['clearValue']\nTY.jE=TY['getNbKeys']TY.hE=TY['hasKey']TY.gE=TY['getKeyList']\nTY.fE=TY['setStringValue']TY.dE=TY['getStringValue']TY.sE=TY['setIntValue']\nTY.aE=TY['getIntValue']TY.zE=TY['setFloatValue']TY.xE=TY['getFloatValue']end end\nif B.cE~=nil then\nfor RT,TY in ipairs(B.cE)do TY.vE=TY['getOperationalState']\nTY.bE=TY['getWidgetDataId']TY.nE=TY['getRange']TY.mE=TY['getIdentifyRanges']\nTY._E=TY['getConstructIds']TY.QR=TY['getIdentifiedConstructIds']\nTY.WR=TY['getSortMethod']TY.ER=TY['setSortMethod']TY.RR=TY['getTargetId']\nTY.TR=TY['getConstructCoreSize']TY.YR=TY['getConstructDistance']\nTY.UR=TY['isConstructAbandoned']TY.IR=TY['getThreatRateFrom']\nTY.OR=TY['hasMatchingTransponder']TY.PR=TY['getConstructName']\nTY.AR=TY['getConstructSize']TY.SR=TY['getConstructKind']TY.DR=TY['getConstructs']end end\nN.FR=N['axisCommandManager']end",
+      "filter": {
+        "args": [],
+        "signature": "onStart()",
+        "slotKey": "-3"
+      },
+      "key": "2"
+    },
+    {
+      "code": "\ndefaultPOS=1 --export: Your Default Target Location or Home Base. '::pos{0,2,24.1067,88.1581,-0.0886}'. make sure the POS has '' around it.\n\nspaceCapableOverride=false --export: (Space Capable Ship Override) true/false -- (average ships do not need this) is your ship space capable with a gyro? Space capability is auto detected from rear facing engines. if you use a gyro to get to space, the auto detection may not work, so set this to true if the ship says your not space capable when using AP, when you really are.\n\nhoverHeight=10 --export: (Hover Height) 0-50 default hover height to goto when unlocking parking mode (G key)\n\nthrottleBurnProtection=true --export: (Auto Throttle Burn Protection) true/false -- takes over the throttle/braking when you are going to exceed your ships burn speed in atmo. (only when already in atmo, it does not prevent you from coming in to atmo too fast if manually transitioning from space to atmo)\nmaxPitch=35 --export: (Max Pitch) set between 5-80, 35 is default.\n\nmaxRoll=45 --export: (Max Roll) set between 5-80, 45 is default.\n\nwingStallAngle=35 --export: (Wing Stall Angle) 25-60. what angle do a majority of your wings stall? 25-60. Ailerons 30, Wings 55, Stabilizers 70. Set slightly below the stall angle of your main lift source. or split the difference if a mix. if you notice your ship \"skids\" in atmo, your wings are stalling, reduce this number.\n\nshieldManage=true --export: (Auto Shield Management) true/false , let the ship handle shield control on off/resistance management/venting.\n\nmaxSpaceSpeed=0 --export: (Max Space Speed) in km/h (max speed you want to go in space, not ships capable max speed) 0 for ships max capable speed, or if your selected speed exceeds ships capability, ships max speed will be used.\n\nradarOn=false --export: (Radar Widget) true/false -- if radar attached, start with radar widget open (open close widget with /radar command)\n\nautoAGGAdjust=true --export: when AGG is active, have the AP automatically control it or not. either way it will try to land in the bubble and catch you.\n\npitchSpeedFactor=0.8 --export: This factor will increase/decrease the player input along the pitch axis<br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\nyawSpeedFactor=1 --export: This factor will increase/decrease the player input along the yaw axis<br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\nrollSpeedFactor=1.5 --export: This factor will increase/decrease the player input along the roll axis<br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\nbrakeSpeedFactor=3 --export: When braking, this factor will increase the brake force by brakeSpeedFactor *velocity<br>Valid values: Superior or equal to 0.01\n\nbrakeFlatFactor=1 --export: When braking, this factor will increase the brake force by a flat brakeFlatFactor *velocity direction><br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\nautoRoll=false --export: [Only in atmosphere]<br>When the pilot stops rolling,  flight model will try to get back to horizontal (no roll)\n\nautoRollFactor=2 --export: [Only in atmosphere]<br>When autoRoll is engaged, this factor will increase to strength of the roll back to 0<br>Valid values: Superior or equal to 0.01\n\nturnAssist=true --export: [Only in atmosphere]<br>When the pilot is rolling, the flight model will try to add yaw and pitch to make the construct turn better<br>The flight model will start by adding more yaw the more horizontal the construct is and more pitch the more vertical it is\n\nturnAssistFactor=2 --export: [Only in atmosphere]<br>This factor will increase/decrease the turnAssist effect<br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\ntorqueFactor=2 --export: Force factor applied to reach rotationSpeed<br>(higher value may be unstable)<br>Valid values: Superior or equal to 0.01\n\nM={GR=0,HR=0,JR=0,KR=0,LR=false,ZR=false,XR=false,CR=false,VR=false,BR=false,NR=false,MR=false,qR=false}function q()M.MR=false end\nfunction w()M.MR=true end\nfunction e()M.NR=false end\nfunction r()\nM.NR=true end\nfunction t()M.qR=false end\nfunction y()M.qR=true end\nfunction u()if M.MR then o.wR()else\np:eR()end end\nfunction l()local TY=j\nlocal RT=M\nTY.rR=0\nif not TY.tR and\nnot TY.yR then\nif not RT.MR then TY.uR=h.iR\nTY.tR=true else if H.zx()==false then TY.yR=true else\nO('not on Remote, follow disabled')end end else\nif not TY.tR and TY.yR then TY.yR=false elseif TY.tR and not TY.yR then TY.tR=false end end end\nfunction g()local RT=j\nRT.rR=0\nif not RT.oR then if RT.pR then f()RT.oR=true\nd()else\nO('Space thrust not detected: Orbital Hold Disabled')RT.oR=false end else RT.oR=false end end\nfunction s()local RT=j\nif not RT.lR and not RT.kR and not RT.jR then\nRT.hR='radial out'RT.lR=not RT.lR elseif RT.lR then RT.hR='radial in'RT.lR=not RT.lR\nRT.kR=not RT.kR elseif RT.kR then RT.hR='camera aim'RT.jR=not RT.jR\nRT.kR=not RT.kR else RT.hR='off'RT.jR=not\nRT.jR end end\nfunction a()local RT=j\nif RT.gR=='all'then RT.gR='primary'elseif RT.gR=='primary'then RT.gR='hybrid'elseif\nRT.gR=='hybrid'then RT.gR='locked'else RT.gR='all'end end\nfunction z()j.fR=not j.fR end\nfunction x()local RT=j\nif RT.dR=='none'then RT.dR='planets'elseif\nRT.dR=='planets'then RT.dR='moons'elseif RT.dR=='moons'then RT.dR='both'else RT.dR='none'end end\nfunction c()j.sR=not j.sR end\nfunction v()o.aR.zR=not o.aR.zR end\nfunction b()if n~=nil then n.rE()end end\nfunction m()if B.XE~=nil then\nB.XE.toggle()end end\nfunction _()if p.xR then p:eR(false)end\np:cR()end\nfunction QQ()N:yQ()end\nfunction WQ()\nif Z.fQ()==1 then Z.sQ()else Z.dQ()end end\nfunction EQ()N.FR:ZW(D.j)end\nfunction RQ()end\nfunction TQ()\nM.XR=true\nif not o.aR.vR then N.FR:ZW(D.g)N.FR:WW()N.FR:FW(D.g,1.0)\nj.bR=true end end\nfunction YQ()M.XR=false\nif not o.aR.vR then N.FR:ZW(D.g)N.FR:QW(UQ)end\nj.bR=false end\nfunction IQ()M.CR=true\nif not o.aR.vR then\nN.FR:ZW(D.g)N.FR:WW()N.FR:FW(D.g,-1.0)j.bR=true end end\nfunction OQ()M.CR=false\nif not o.aR.vR then\nN.FR:ZW(D.g)N.FR:QW(UQ)end\nj.bR=false end\nfunction PQ()M.VR=true\nif not o.aR.vR then N.FR:FW(D.h,-1.0)end\nj.nR=true end\nfunction AQ()M.VR=false\nif not o.aR.vR then\nN.FR:HW(D.h,1.0)end\nj.nR=false end\nfunction SQ()\nM.BR=true\nif not o.aR.vR then N.FR:FW(D.h,1.0)end\nj.nR=true end\nfunction DQ()M.BR=false\nif not o.aR.vR then else N.FR:HW(D.h,-1.0)end\nj.nR=false end\nfunction FQ()M.GR=M.GR-1 end\nfunction GQ()\nM.GR=0 end\nfunction HQ()M.GR=M.GR+1 end\nfunction JQ()M.GR=0 end\nfunction KQ()M.HR=M.HR-1 end\nfunction LQ()M.HR=0 end\nfunction ZQ()M.HR=M.HR+1 end\nfunction XQ()M.HR=0 end\nfunction CQ()\nM.JR=M.JR+1 end\nfunction VQ()M.JR=0 end\nfunction BQ()M.JR=M.JR-1 end\nfunction NQ()M.JR=0 end\nfunction MQ()N.FR:EW(-1.0)end\nfunction qQ()N.FR:RW(-1.0)end\nfunction wQ()N.FR:EW(1.0)end\nfunction eQ()N.FR:RW(1.0)end\nfunction rQ()\nN.FR:FW(D.j,5.0)j.mR=false end\nfunction tQ()N.FR:GW(D.j,1.0)j.mR=false end\nfunction yQ()N.FR:FW(D.j,-5.0)j.mR=false end\nfunction uQ()\nN.FR:GW(D.j,-1.0)j.mR=false end\nfunction iQ()local RT=p\nM.KR=1\nM.LR=true\nRT.xR=false\noQ()if M.NR then\nM.ZR=true else M.ZR=false end end\nfunction pQ()local RT=N.FR:OW(D.j)\nif(RT==G.f)then local TY=N.FR:YW(D.j)if\n(R.A(TY)>S.o)then N.FR:GW(D.j,-A.r(TY))end end end\nfunction lQ()if not M.NR then\nM.KR=0\nM.LR=false end end\nfunction kQ()if\n(B.gW~=nil and V~=nil)then h=jQ(V,B.gW)hQ()end end\nfunction onInput(RT)local YU=j\nlocal IO=p\nlocal TY=o\nlocal UI=gQ(RT,' ')local OP=UI[1]:lower()\nif\nOP:sub(1,1)~='/'then\nif TY.aR.vR then local PA=fQ._R.QT:WT()if PA~=nil and PA.ET~=nil and\nPA.ET.RT~=nil then if PA.ET.RT.TT~=nil then\nRT=PA.ET.RT.TT(RT)end\nPA.ET.RT.YT(RT,PA.ET.RT.UT)end end else\nif OP=='/togglemenu'or OP=='/mainmenu'then TY.wR()end\nif OP=='/scale'or OP=='/setscale'then\ndQ:IT(sQ.OT,I(UI[2])/100)end\nif OP=='/addpos'then\nif#UI<2 then\nO('No target supplied')elseif aQ.PT==nil then\nO('You must have a route open in the Main Menu before using this command')else zQ(UI[2])end end\nif OP=='/goto'then if#UI<2 then O('No target supplied')return end\nlocal PA=xQ(UI[2])\nif PA==nil then O('Invalid ::pos{...} string')else IO:AT(PA)oQ()if\nIO.ST==0 or IO.DT==IO.FT.GT then cQ=IO.FT.HT end\nJ._(\n[[Target Set to ]]..UI[2]..[[ near ]]..IO.FT.n..[[ ]]..IO.JT..[[ at ]]..IO.ST..[[ m ]])end end\nif OP=='/convert'then\nif T(UI[2])==nil then else J._(T(xQ(UI[2])))end end\nif OP=='/debug'then YU.KT=not YU.KT end\nif OP=='/setmaxspacespeed'or OP=='/setmsp'then if I(UI[2])==nil then else\ndQ:IT(sQ.LT,I(UI[2]))IO:ZT()\nJ._([[Max Space Speed set to ]]..IO.LT)end end\nif OP=='/setmaxpitch'or OP=='/setmp'then if I(UI[2])==nil then else\nIO.XT.CT=I(UI[2])J._([[Max Pitch set to ]]..IO.XT.CT)\ndQ:IT(sQ.CT,IO.XT.CT)end end\nif OP=='/setmaxroll'or OP=='/setmr'then if I(UI[2])==nil then else\nIO.XT.VT=I(UI[2])J._([[Max Roll set to ]]..IO.XT.VT)\ndQ:IT(sQ.VT,IO.XT.VT)end end\nif OP=='/shield'then IO.XT.BT=not IO.XT.BT\nif IO.XT.BT then\nO('Shield management enabled')else O('Shield management disabled')end\ndQ:IT(sQ.BT,IO.XT.BT)end\nif OP=='/space'then IO.XT.NT=not IO.XT.NT\nif not IO.XT.NT then\nO('Space function disabled')else O('Space function enabled')end\ndQ:IT(sQ.NT,IO.XT.NT)end\nif OP=='/sethover'then\nif I(UI[2])==nil then else IO:MT(I(UI[2]))J._([[Hover height set to ]]..IO.XT.qT)end end\nif OP=='/atp'then\nIO:wT()if IO.XT.eT then O('Auto throttle burn protection enabled')else\nO('Auto throttle burn protection disabled')end end\nif OP=='/alt'or OP=='/altitude'then\nif I(UI[2])==nil then else YU.uR=I(UI[2])J._(\n[[Altitude hold set to ]]..YU.uR)end end\nif OP=='/orbitalt'then\nif\nYU.rT then\nif I(UI[2])==nil then O('Error: did not enter a number')else\nYU.rR=I(UI[2])J._([[Orbit Alt set to ]]..YU.rR)d()end else O('Error: Engage orbital hold mode first.')end end\nif OP=='/radar'then vQ:tT()end\nif OP=='/radarbox'then vQ:yT()end\nif OP=='/unit'then TY.uT()end\nif OP=='/freeze'then if bQ().iT==true then\nH.bn(false)else H.bn(true)end\nO([[Frozen = ]]..T(bQ().iT))end\nif OP=='/aggalt'then if B.XE~=nil then\nif\nI(UI[2])==nil then O('Error: did not enter a number')else\nB.XE.BE(I(UI[2]))J._([[AGG Alt set to ]]..I(UI[2]))end end end\nif OP=='/agg'then if B.XE~=nil then B.XE.toggle()end end\nif OP=='/inatmo'then O(YU.oT)O(B.WE.EE())end end end\nfunction nQ()\nif(B.gW~=nil and V~=nil)then h=jQ(V,B.gW)mQ=bQ()_Q=QW()WW=EW()\nlocal RT=j\nN:uQ()o:uQ()vQ:uQ()RW:uQ()TW()\nif p.xR or RT.yR or RT.oR then\nYW={pT=0,lT=0,kT=0,jT=0,hT=0,gT=0,fT=0,dT=0,sT=0,aT=0}else\nYW={pT=-J.getAxisValue(0),lT=-J.getAxisValue(1),kT=J.getAxisValue(2),dT=J.getAxisValue(3),fT=\n-J.getAxisValue(4),hT=J.getAxisValue(5),jT=J.getAxisValue(6),gT=J.getAxisValue(7),sT=J.getAxisValue(8),aT=J.getAxisValue(9)}end end end\nfunction TW()local PA=j\nlocal RT=YW\nlocal IO=p\nlocal YU=_Q\nlocal OP=h\nPA.zT,PA.xT,PA.cT=UW()PA.vT=false\nIW()\nlocal UI=OP.iR\nlocal TY=IO.ST\nif IO.bT then Z.hQ()end\nif PA.yR then local AS=OW.dist(OP.nT,mQ.mT)local SD=\nmQ._T:len()*3.6\nlocal DF=20+SD- (20-R.P(AS-50,20))if SD==0 then DF=20 end\nif AS>200 then PA.QY=true\nN.FR:UW(40)if IO.bT then\nIO:cR(false)end end\nif PA.QY then\nN.FR:KW(D.j,PW(DF))if OP.WY*3.6 >DF+10 then M.KR=1 else M.KR=0 end end\nif PA.QY==true and AS<50 and SD<30 then\nN.FR:KW(D.j,PW(0))if not IO.bT then IO:cR(true)end\nPA.QY=false end end\nif PA.mR and(J.KQ()~=0 or PA.oR)then\nif not M.LR then M.KR=0 end\nPA.mR=false end\nif IO.xR then M.KR=0\nN.FR:UW(40)end\nif OP.EY>0 then PA.oT=true else PA.oT=false end\nif\nIO.XT.eT then\nif\nnot IO.xR and not IO.bT and not PA.oR and not M.LR then local AS=A.e(OP.RY.GR)\nif OP.EY>=0.05 or\n(PA.oT and OP.TY*3.6 <-100)then\nif\nOP.WY*3.6 > (OP.YY*3.6)or PA.mR then PA.mR=true\nif AW()=='cruise'then SW()end\nif OP.EY<0.05 and AS>5 then else N.FR:KW(D.j,PW((\nOP.YY*3.6)-100))end end\nif PA.mR then\nif OP.WY*3.6 > (OP.YY*3.6)-50 then DW=32\nM.KR=1 else DW=33\nM.KR=0 end end end else PA.mR=false end end\nif B.WE~=nil and IO.XT.BT==true then local HJ=B.WE.GE()\nlocal GH=B.WE.AE()local FG=B.WE.DE()local DF=B.WE.RE()local SD=B.WE.TE()\nlocal AS=((DF/SD)*100)\nif B.WE.ZE()==0 then HJ=HJ/4\nif\n(\nGH[1]==HJ and GH[2]==HJ and GH[3]==HJ and GH[4]==HJ)or FG~=0 then else B.WE.SE(HJ,HJ,HJ,HJ)end else local JK=B.WE.KE()\nif\n(\nGH[1]== (HJ*JK[1])and GH[2]== (HJ*JK[2])and GH[3]== (HJ*JK[3])and GH[4]==\n(HJ*JK[4]))or FG~=0 then else B.WE.SE(HJ*JK[1],HJ*JK[2],\nHJ*JK[3],HJ*JK[4])end end\nif DF==0 and B.WE.OE()==0 then B.WE.YE()end\nif\nOP.UY==true and B.WE.EE()==false then B.WE.activate()elseif OP.UY==false and\nB.WE.EE()==true then B.WE.deactivate()end end\nif not IO.xR then PA.IY='Off'end\nif M.GR~=0 and not IO.xR then PA.uR=UI end\nif B.XE~=nil then if\nYU.OY==true and IO.XT.PY==true and IO.JT=='surface'then PA.AY=true else PA.AY=false end else\nPA.AY=false end\nif\nIO.xR or PA.tR then FW()end\nif not PA.oR or PA.IY~='Orbit'then PA.SY=false end\nif PA.oR or PA.IY=='Orbit'then local AS=OP.DY.FY-OP.DY.GY\nlocal GH=OP.DY.HT\nlocal DF=OP.HY.JY\nlocal HJ=OP.HY.KY*3.6\nlocal KL=OP.LY.ZY.iR\nlocal JK=OP.LY.XY.iR\nlocal SD=OP.LY.CY\nlocal FG=OP.LY.VY\nDW=0\nM.KR=0\nif PA.IY=='Orbit'then if R.A(GW())>2 then\nDW=0.1\nM.KR=1 end end\nif\nnot PA.oT and UI>=PA.BY and not PA.SY then if OP.WY*3.6 >=HJ then DW=1\nM.KR=1 end end\nif not PA.SY and OP.TY*3.6 <-400 then DW=2\nM.KR=1 end\nif KL>GH and JK>GH then PA.SY=true else PA.SY=false end\nif\nAW()=='cruise'then SW()end\nif PA.SY then\nif KL<PA.BY-100 then if FG<5 then HW=true end end\nif(KL<PA.BY-100 and HW==true)or\n(JK<PA.BY-100 and JW==true)then KW='2'N.FR:KW(D.j,0.1)else JW=false\nHW=false\nKW='3'N.FR:KW(D.j,0)end\nif KL>PA.BY+100 then if FG<5 then LW=JK\nZW=true end end\nif ZW then if\nLW>JK+50 then ZW=false end end\nif KL>PA.BY+100 and\nZW==true then DW='apoDwn'M.KR=1 else LW=JK+1000\nZW=false end\nif JK<PA.BY-100 then if SD<5 then JW=true end end\nif\nJK>PA.BY+100 then if SD<5 then XW=KL\nCW=true end end\nif CW then\nif XW>KL+50 then CW=false end end\nif JK>PA.BY+100 and CW==true then DW=3\nM.KR=1 else\nXW=KL+1000\nCW=false end else\nlocal ZX={x=R.A(VW.x),y=R.A(VW.y),z=R.A(VW.z)}local LZ=false\nif\n(ZX.x<0.008 and ZX.y<0.008 and ZX.z<0.008)then LZ=true end\nif Z.xQ()>0.05 then KW='4'\nN.FR:KW(D.j,PW())else\nif DF>PA.BY-100 and UI<PA.BY-5 then KW='5'N.FR:KW(D.j,0)elseif DF< (\nPA.BY-100)then KW='6'if LZ or OP.TY*3.6 <0 then\nN.FR:KW(D.j,PW(HJ))else N.FR:KW(D.j,0.1)end else KW='7'\nN.FR:KW(D.j,PW(HJ))end end end end\nif(IO.xR or PA.tR or PA.oR)and PA.oT and\nBW()>IO.XT.NY then PA.MY=true else PA.MY=false end\nif IO.xR then if M.ZR then M.ZR=false end\nlocal FG=OP.DY\nlocal HJ=IO.FT\nlocal GH=NW(IO.DT)if\nPA.mR==true then PA.mR=false end\nd()local SD=false\nif not IO.qY then\nif IO.JT=='space'then if\nOW.dist(IO.DT,OP.nT)<10000 then IO.wY()end end\nif IO.JT=='surface'then if MW and GH<1000 then IO.wY()end end end\nif PA.IY~='Orbit'then DW=4\nM.KR=0 end\nif PA.AY then PA.uR=YU.eY else\nif FG.rY then PA.uR=R.O(R.O(FG.HT+1500,\nTY+1000),FG.tY*0.5)else PA.uR=R.O(\nFG.HT+3000,TY+1000)end end\nif\nHJ.b~=FG.b and not PA.pR then\nO('Ship not space capable, shutting down AP')IO:eR(false)end\nif\nFG.b==HJ.b then MW=true else MW=false end\nif not PA.pR then\nif not MW or\nTY> (HJ.FY-HJ.GY)then\nJ._('point on other planet, ship currently set to not space capable.')IO:eR(false)end end\nlocal AS=false\nif PA.IY=='reEntry'then AS=true end\nif MW and IO.JT=='surface'then if\nqW()>18 then SD=true end else if\nqW()>80 and OW.dist(FG.GT,OP.nT)<FG.GY*2 then SD=true end end\nif(R.A(OP.yY)+R.A(OP.uY))<3 then PA.iY=true else\nPA.iY=false end\nif not PA.oY then\nif\n\nMW and PA.oT and not SD and not PA.AY and IO.JT=='surface'or not PA.pR then PA.IY='Atmo Travel'elseif\n(not MW or IO.JT=='space')and PA.oT and PA.pY then PA.IY='Transition'elseif\n\n(\n(\n(not MW or IO.JT=='space')and not SD and not PA.lY)or(MW and UI>PA.BY+1000 and not PA.lY)and not\nYU.kY)or PA.IY=='standby'then PA.IY='Transfer'PA.jY=false elseif PA.AY and YU.kY then PA.lY=false\nPA.IY='agg'elseif\n\n\n(not PA.oT and(\nOP.hY.gY*1.5 >=GH)and\n(\n(UI<PA.BY+5000 and MW)or AS or(MW and PA.SY)))and not PA.AY and FG.rY and IO.JT=='surface'then PA.jY=false\nPA.IY='reEntry'elseif\n\n(\n(SD and MW and UI<PA.BY+2000)or(SD and not MW)or PA.jY)or(MW and UI<PA.BY+2000 and not HJ.rY)and not\nPA.AY and PA.pR then PA.jY=true\nPA.IY='Orbit'elseif PA.lY and not PA.oT then PA.IY='Space Braking'end end\nif B.XE~=nil then\nif YU.OY==true and IO.JT=='surface'then\nif HJ.rY and not YU.kY or\nnot MW then if YU.fY~=HJ.tY then B.XE.BE(HJ.tY)end elseif\nMW and YU.kY then\nif TY==0 then if YU.fY~=R.O(R.O(TY+500,1000),HJ.HT)then\nB.XE.BE(R.O(R.O(TY+500,1000),HJ.HT))end else if YU.fY~=R.O(TY+500,1000)then B.XE.BE(R.O(\nTY+500,1000))end end end end end\nif PA.IY=='agg'then\nlocal XC={x=R.A(VW.x),y=R.A(VW.y),z=R.A(VW.z)}local ZX=false\nif\n(XC.x<0.005 and XC.y<0.005 and XC.z<0.005)or OP.WY*3.6 <4000 or\n(OP.dY>0.5 and not MW)then ZX=true end\nlocal LZ=qW()local KL=OP.HY.KY*3.6\nlocal JK=(\n(OW.dist(HJ.GT,OP.nT)-HJ.GY)-YU.eY)\nif\nLZ>=0.5 and LZ<5 and ZX then KW='agg 1'N.FR:KW(D.j,PW(300))end\nif LZ>=5 and ZX then KW='agg 2'N.FR:KW(D.j,PW(KL))end end\nlocal DF=OW.dist(OP.nT,HJ.GT)if HJ.rY then\nDF=A.e(DF- (HJ.FY*1.05))else DF=DF- (HJ.GY*1.5)end\nif\nPA.IY=='Transfer'or PA.IY=='Space Braking'then\nlocal JK={x=R.A(VW.x),y=R.A(VW.y),z=R.A(VW.z)}local KL=false\nif IO.JT=='surface'then if\n\n(JK.x<0.008 and JK.y<0.008 and JK.z<0.008)or OP.WY*3.6 <4000 or(OP.dY>0.5 and not MW and\nOP.WY*3.6 <IO.LT)then KL=true end end\nif IO.JT=='space'then if\n\n(JK.x<0.008 and JK.y<0.008 and JK.z<0.008)or OP.WY*3.6 <500 or(OP.dY>0.5 and not MW and OP.WY*3.6 <IO.LT)then KL=true end end\nif PA.AY and IO.JT~='space'then local LZ=(\n(OW.dist(HJ.GT,OP.nT)-HJ.GY)-YU.fY)if PA.AY and\nOP.hY.gY*1.5 >=LZ then PA.lY=true\nDW=9\nM.KR=1 end\nif\nPA.AY and MW and UI<=YU.fY+100 and not YU.kY then\nPA.sY=true\nKW='agg 5'N.FR:KW(D.j,0)DW=10\nM.KR=1 else PA.sY=false end end\nif\n(\nIO.JT=='surface'and OP.hY.gY*1.4 >=UI-PA.BY and MW and PA.IY~='Landing'and OP.WY*3.6 >1000)or\n(IO.JT=='surface'and OP.hY.gY*1.4 >=DF and not MW)then\nPA.lY=true\nDW=11\nM.KR=1 end\nif IO.JT=='space'and\nOP.hY.gY*1.4 >=OW.dist(IO.DT,OP.nT)-1000 then PA.lY=true\nif\nOW.dist(IO.DT,OP.nT)<1000 then if OP.WY*3.6 >110 then DW=11.1\nM.KR=1 end else DW=11.2\nM.KR=1 end end\nif\nwW()>50 and PA.IY~='Space Braking'and not PA.oT then DW=12\nM.KR=1 end\nif not PA.lY then\nif\nOP.WY*3.6 <IO.LT and KL or OP.WY*3.6 <3000 then KW='8'\nN.FR:KW(D.j,PW(IO.LT))elseif OP.WY*3.6 <IO.LT then KW='8.1'N.FR:KW(D.j,0.3)else KW='8.1.1'\nN.FR:KW(D.j,0)end\nif wW()>0.05 and KL and OP.WY*3.6 >=IO.LT then KW='8.2'N.FR:KW(D.j,A.t((\nwW()*0.1)-0.01,0,1))end\nif OP.EY>0.05 then KW='8.3'N.FR:KW(D.j,PW())end else\nif IO.JT==\n'surface'then\nif not PA.AY then if qW()>0.5 and OP.yY*3.6 <500 and KL then\nKW='9'N.FR:KW(D.j,PW(500,OP.yY))else KW='9.1'\nN.FR:KW(D.j,0)end else if qW()>0.5 and\nOP.yY*3.6 <500 and KL and UI>YU.fY+200 then\nKW='9.2'N.FR:KW(D.j,PW(500,OP.yY))else KW='9.3'\nN.FR:KW(D.j,0)end end else\nif not PA.lY then KW='9.4'N.FR:KW(D.j,PW(IO.LT))else KW='9.5'\nif wW()>10 then\nN.FR:KW(D.j,PW(IO.LT))DW=12.1\nM.KR=1 else N.FR:KW(D.j,PW(100,OP.yY))end end end end end\nif\n(IO.JT=='surface'and OP.hY.gY*1.4 >=DF and not MW)and OP.WY*3.6*1000 then PA.lY=true\nDW=11.5\nM.KR=1 end\nif\n(MW and PA.oT and\nPA.IY~='Orbit'and PA.IY~='Landing'and IO.JT~='space')or PA.IY=='reEntry'then\nif(GH<5000 and\nnot PA.oY)then KW='10'\nN.FR:KW(D.j,PW(R.P(A.e(GH/2),500),OP.yY))\nif OP.yY*3.6 >R.P(A.e(GH/2),500)+100 and\nPA.IY=='reEntry'then DW=13\nM.KR=1 end end\nif PA.IY=='reEntry'then if GH<300 then PA.oY=true end end\nif\nPA.oT and not IO.sY then KW='11'\nN.FR:KW(D.j,PW((OP.YY*3.6)-150))if R.A(GW())>5 then DW=13.1\nM.KR=1 end\nif OP.WY*3.6 >\n(OP.YY*3.6)-100 then DW=14\nM.KR=1 end\nif OP.hY.gY*1.5 >=GH or\nGH<300 then PA.oY=true end end end\nif PA.IY=='reEntry'then\nif qW()>1 then\nif OP.TY*3.6 <-200 then KW='12'\nN.FR:KW(D.j,PW(1000,OP.yY))else KW='13'N.FR:KW(D.j,PW())end\nif OP.WY*3.6 >= (OP.YY*3.6)-300 then DW=15\nM.KR=1 end else PA.oY=true end end\nif\nPA.IY=='Orbit'and(MW and not HJ.rY or PA.AY)then if R.A(GW())>5 then DW=15.1\nM.KR=1 end\nif\n(OP.hY.gY*1.4 >= (GH))then PA.oY=true end end\nif\n(PA.IY=='reEntry'or(MW and UI<PA.BY+2000))and IO.JT~='space'then\nif PA.oY then PA.jY=false\nif GH>1000 then\nPA.oY=false end\nPA.IY='Landing'if PA.aY>GH then PA.aY=GH end\nKW='14'\nN.FR:KW(D.j,0)\nif\n((not PA.iY)and(OP.hY.gY*1.4 >= (PA.aY-150)))or(OP.TY*3.6 <-1000)then DW=16\nM.KR=1 end\nif TY==0 or IO.DT==HJ.GT then TY=HJ.HT end\nif B.XE~=nil then if\nYU.OY==true and IO.JT=='surface'then TY=YU.eY end end\nif PA.iY then\nif\n(OP.hY.gY*3 >= (UI-TY)+300)or(\nOP.TY*3.6 <-100 and(UI-TY)<400)or OP.WY*3.6 >1000 then DW=17\nM.KR=1 end\nif UI<TY+500 and OP.TY*3.6 <-75 then DW=18\nM.KR=1 end end\nif UI<=TY and OP.TY>=0 then IO:wY()end\nif PA.iY and GH>300 then\nPA.zY=true end end end\nif IO.JT=='space'then\nif OW.dist(IO.DT,OP.nT)<=1500 then IO:wY()end end\nif PA.xY then KW='turn'if\nR.A(eW())>90 and OP.WY<30 then N.FR:KW(D.j,0)else PA.xY=false end end end\nif PA.cY and UI<0 and PA.oT then if M.GR~=0 or PA.bR then PA.vY=UI end\nif not\nPA.bR and not IO.bT then\nif(UI<PA.vY and OP.TY*3.6 <5)or(\nOP.TY*3.6 <-5)then PA.bY=true\nN.FR:WW()\nN.FR:ZW(D.g)N.FR:FW(D.g,1.0)else PA.bY=false\nN.FR:ZW(D.g)N.FR:QW(UQ)N.FR:UW(\n-1)end else N.FR:WW()end end\nif IO.bT then N.FR:JW(D.j,0)N.FR:KW(D.j,0)\nif OP.TY*3.6 <-20 then\nN.FR:UW(UI)N.FR:QW()N.FR:ZW(D.g)N.FR:FW(D.g,1.0)else\nN.FR:ZW(D.g)N.FR:WW()N.FR:UW(-1)end\nM.KR=1 end\nif M.ZR then M.KR=1 end end\nfunction rW()local RT=J.HQ()\nfor TY,YU in pairs(tW)do\nfor UI,IO in ipairs(YU)do IO.nY=IO.mY\nIO.mY=B.gW.xW(IO._Y)-\nj.QU[TY][IO.WU][1]if(IO.mY~=IO.nY)then IO.EU=\n(IO.mY/IO.RU)*100\nIO.TU=IO.YU\nIO.YU=R.Y(IO.mY/ ((IO.nY-IO.mY)/\n(RT-IO.UU)))IO.UU=RT end end end end\nfunction yW()end\nfunction uW()local RT=j\nif RT.KT then\niW=\n[[<div class=\"debugInfo\" style=\"font-size: 0.9vh; color: ivory; text-shadow: 0.2vh 0.2vh 1vh black;\">\n        SAGA's BASIC DEBUG CRAP DONT JUDGE ME =) <br>\n        \n        Last Dist  = ]]..T(oW.aY)..[[<br>\n        Proj Distance = ]]..T(NW(oW.DT))..[[<br>\n        T Distance = ]]..T(OW.dist(oW.DT,h.nT))..[[<br><br>\n\n        targetLocation = ]]..T(oW.JT)..[[<br>\n        targetAlt = ]]..T(pW(oW.DT))..[[<br>\n        atmo? = ]]..T((\noW.FT.FY-oW.FT.GY))..[[<br>\n        Target Angle = ]]..eW()..[[<br>\n        Aim Target   = ]]..RT.IU..[[<br>\n        SpcVector   = ]]..T(lW)..[[<br>\n        AP Mode      = ]]..T(RT.IY)..[[<br>\n        BrakeCtrl = ]]..T(DW)..[[<br>\n        Spd Control =]]..T(KW)..[[<br>\n        Brake Trig   = ]]..T(RT.oY)..[[<br><br>\n\n        Samebody   = ]]..T(MW)..[[<br>\n        Vel World Angle = ]]..kW()..[[<br>\n        Vel to T Angle = ]]..GW()..[[<br>\n        Spc to T Angle = ]]..wW()..[[<br>\n        world T Angle = ]]..qW()..[[<br>\n        Target Altitude = ]]..T(RT.uR)..[[<br><br>\n        \n        atmo = ]]..h.EY..[[<br>\n\n        Target Pitch = ]]..T(A.e(RT.OU))..[[<br>\n        Speed = ]]..T(A.e(h.WY),0.01)..[[<br>\n        Max S = ]]..T(A.e(h.PU*3.6),0.01)..[[<br>\n        Vert Speed = ]]..T(A.e(h.TY),0.01)..[[<br>\n        Forward Speed = ]]..T(A.e(h.yY),0.01)..[[<br>\n        Lateral Speed = ]]..T(A.e(h.uY),0.01)..[[<br><br>\n\n        Burn Spd = ]]..T(A.e(\nh.YY*3.6))..[[<br><br>\n\n        gravity = ]]..T(h.dY)..[[<br>\n        Altitude = ]]..T(A.e(h.iR))..[[<br>\n        ClosestBody = ]]..T(jW(h.nT).n)..[[<br>\n        TargetBody = ]]..T(oW.FT.n)..[[<br>\n        atmoAlt = ]]..T(jW(h.nT).FY-\njW(h.nT).GY)..[[<br><br>\n\n        OrbitSpd = ]]..T((hW().KY*3.6))..[[<br>\n        targetOrbit = ]]..T(RT.BY)..[[<br>\n        Orbit Status = ]]..T(RT.SY)..[[<br>\n        Apoapsis = ]]..T(gW().ZY.iR)..[[<br>\n        Periapsis = ]]..T(gW().XY.iR)..[[<br>\n        T to Periapsis = ]]..T(gW().VY)..[[<br>\n        T to Apoapsis = ]]..T(gW().CY)..[[<br>\n        hold = ]]..I(fW())..[[<br><br>\n\n        aggAlt = ]]..T(_Q.eY)..[[<br>\n        aggTarget = ]]..T(_Q.fY)..[[<br>\n        aggStr = ]]..T(_Q.AU)..[[<br><br>\n        </div>]]end end\nfunction onUnitStart(RT,UI,YU,TY,IO)J=RT\nZ=UI\nV=YU\nK=TY\nH=IO\nP()J.RQ(false)dW()\nif B.gW==nil then\nO(\"Core not found, did you link it to this control unit?\")else sW()C()aW()h=jQ(V,B.gW)mQ=bQ()_Q=QW()WW=EW()\ndQ:SU(B.pE,'SagaConf','SagaActiveConf')aQ:SU(B.pE,'SagaRoutes','SagaActiveRoutes')\nvQ:SU(B.cE)p:SU()zW:SU()xW()cW()oQ()vW()o:SU()B.DU:FU()\nN.FR.axisCommands[D.j].throttleMouseStepScale=1\nN.GU={1000,5000,10000,20000,30000}N.FR:TW(D.j,N.GU)\nN.FR:UW(0)Z.bQ('DEBUGHUD',0.1)end end\nfunction sW()h={}_Q={}WW={}mQ={}N=L.new(J,B.gW,Z)OW=vec3()VW=vec3()\nbW=require('atlas')nW()mW=0\nIW()end\nfunction vW()\nJ._('HUD/Autopilot by Sagacious, Mayumi and CodeInfused')J._('v'.._W())\nJ._('Discord: https://discord.gg/jTu8W8tXph')zW:QQ(QE.HU)end\nfunction cW()local OP=j\nlocal YU='primary'local IO='secondary'local RT='tertiary'\nlocal TY='thrust analog longitudinal'local UI='off'\nOP.JU=V.wW(YU,{vec3(V.CW()):unpack()})\nOP.KU=V.wW(IO,{vec3(V.CW()):unpack()})\nOP.LU=V.wW(IO,{vec3(V.CW()):unpack()})\nOP.ZU=V.wW(TY,{vec3(V.CW()):unpack()})\nif p.XT.NT==false then if OP.ZU[3]>0 then OP.pR=true else OP.pR=false\nO('longitudinal Space Thrust not detected - space transfers/orbit disabled')end else\nOP.pR=p.XT.NT end\nif UI=='off'then\nif(OP.JU[1]>0 and OP.KU[1]>0)then OP.XU=true\nOP.gR='hybrid'\nO('Atmo Engine tags detected, advanced Atmo engine control enabled')else OP.XU=false\nO('Atmo Engine tags not detected, advanced Atmo engine control disabled')end\nif(OP.JU[3]>0 and OP.KU[3]>0)then OP.CU=true\nOP.gR='hybrid'\nO('Space Engine tags detected, advanced Space engine control enabled')else OP.CU=false\nO('Space Engine tags not detected, advanced Space engine control disabled')end else OP.gR=UI end end\nfunction WE(TY,RT)local id=RT.RR()local AS=RT.YR(id)local YU=vec3(TY.rQ())\nlocal SD=vec3(TY.VU())local PA=(AS*EE+SD)local UI,IO,OP=PA:BU()local DF='::pos{0,0,'..UI..','..IO..','..OP..'}'TY.eQ(DF)\nreturn DF end\nfunction RE()if B.DU~=nil then B.DU:NU()end end\np=(function()local RT={}\nRT.xR=false\nRT.XT={LT=maxSpaceSpeed,CT=maxPitch,VT=maxRoll,NY=wingStallAngle,qT=hoverHeight,NT=spaceCapableOverride,BT=shieldManage,eT=throttleBurnProtection,MU=autoAGGAdjust,fR=true,bT=true}\nfunction RT:SU()RT:qU(V.sa())RT.wU=true\ndQ.eU[sQ.LT]=RT.XT.LT\ndQ.eU[sQ.CT]=RT.XT.CT\ndQ.eU[sQ.VT]=RT.XT.VT\ndQ.eU[sQ.NY]=RT.XT.NY\ndQ.eU[sQ.qT]=RT.XT.qT\ndQ.eU[sQ.NT]=RT.XT.NT\ndQ.eU[sQ.BT]=RT.XT.BT\ndQ.eU[sQ.eT]=RT.XT.eT\ndQ.eU[sQ.fR]=RT.XT.fR\ndQ.eU[sQ.MU]=RT.XT.MU\ndQ.eU[sQ.bT]=RT.XT.bT\ndQ.eU[sQ.rU]=RT.xR\nTE:tU('ConfigDBChanged',RT.ZT,RT)\nRT:ZT()RT:yU()RT:cR(RT.XT.bT)end\nfunction RT:ZT()RT.XT.LT=dQ:uU(sQ.LT)RT.XT.CT=dQ:uU(sQ.CT)\nRT.XT.VT=dQ:uU(sQ.VT)RT.XT.NY=dQ:uU(sQ.NY)RT.XT.qT=dQ:uU(sQ.qT)\nRT.XT.NT=dQ:uU(sQ.NT)RT.XT.BT=dQ:uU(sQ.BT)RT.XT.eT=dQ:uU(sQ.eT)\nRT.XT.fR=dQ:uU(sQ.fR)RT.XT.MU=dQ:uU(sQ.MU)RT.XT.bT=dQ:uU(sQ.bT)\nRT:MT(RT.XT.qT)RT:iU()end\nfunction RT:yU()local TY=dQ:oU(sQ.rU)if TY then RT:eR(TY)end\nlocal YU=dQ:oU(sQ.pU)\nif W(YU)=='table'then if YU.x~=nil then RT:AT(YU)else if aQ:lU()==YU[3]then\nRT:kU(YU[1],YU[2])end end end end\nfunction RT:eR(TY)if TY==nil then TY=not RT.xR end\nRT.xR=TY\nif RT.xR then RT:cR(false)\nzW:QQ(QE.jU)RT:iU()else f()zW:QQ(QE.hU)end\ndQ:gU(sQ.rU,RT.xR)end\nfunction RT:fU(TY)if TY==nil then TY=not RT.XT.BT end\nRT.XT.BT=TY\ndQ:IT(sQ.BT,TY)end\nfunction RT:wT(TY)\nif TY==nil then TY=not RT.XT.eT end\nRT.XT.eT=TY\ndQ:IT(sQ.eT,TY)end\nfunction RT:dU(TY)if TY==nil then TY=not RT.XT.NT end\nRT.XT.NT=TY\ndQ:IT(sQ.NT,TY)cW()end\nfunction RT:sU(TY)if TY==nil then\nTY=not RT.XT.fR end\nRT.XT.fR=TY\ndQ:IT(sQ.fR,TY)end\nfunction RT:kU(TY,YU)if YU==nil then YU=1 end\nRT.aU=TY\nRT.zU=YU\nlocal UI=aQ:xU(TY,YU)if UI~=nil then\nRT:qU(UI)dQ:gU(sQ.pU,{RT.aU,RT.zU,aQ.cU.n})RT.qY=RT.zU==\naQ:vU(TY)end end\nfunction RT:AT(TY)RT:qU(TY)RT.qY=true\ndQ:gU(sQ.pU,TY)end\nfunction RT:iU()local YU=RT.XT.LT\nlocal TY=h.PU\nif YU==0 then RT.LT=(TY*3.6)-1 else RT.LT=YU end end\nfunction RT:wY()\nif not RT.qY then if RT.zU~=nil then RT.zU=\nRT.zU+1\nRT:kU(RT.aU,RT.zU)end\nzW:QQ(QE.bU)oQ()else RT:eR(false)RT:cR(true)zW:QQ(QE.nU)end end\nfunction RT:mU()RT.aU=nil\nRT.zU=nil\nRT:eR(false)end\nfunction RT:qU(TY)\nRT.DT=vec3(TY)RT.FT=jW(RT.DT)RT.ST=pW(RT.DT)RT.JT=YE(RT.FT,RT.ST)\nRT.qY=false end\nfunction RT:MT(TY)RT.XT.qT=TY\nif\nnot RT.bT then N.FR:UW(RT.XT.qT)end end\nfunction RT:cR(TY)if TY==nil then TY=not RT.bT end\nRT.bT=TY\nlocal YU=j\ndQ:IT(sQ.bT,TY)\nif RT.bT then YU.tR=false\nYU.oR=false\nYU.sR=true\nM.ZR=false\nM.KR=1\nZ.hQ()if\nAW()=='cruise'then SW()end\nN.FR:KW(D.j,0)N.FR:JW(D.j,0)\nN.FR:UW(-1)B.DU:_U()else N.FR:ZW(D.g)N.FR:UW(p.XT.qT)\nN.FR:QW()Z.gQ()B.DU:QI()M.KR=0 end end\nreturn RT end)()function YE(TY,RT)\nif TY.rY and RT<TY.FY-TY.GY then return'surface'elseif\nnot TY.rY and RT<TY.HT+5000 then return'surface'else return'space'end end\nfunction fW()\nd()local YU=j\nlocal RT=(YU.BY-h.HY.JY)local TY=20000+h.WY\nlocal UI=(A.yu(RT,-TY,TY)-\n0.5)*2*p.XT.CT\nif YU.oT then UI=p.XT.CT end\nreturn UI end\nfunction FW()local YU=j\nlocal RT=p\nlocal TY=h\nif\nRT.xR or YU.tR or YU.oR or YU.IY=='Orbit'then local UI=TY.iR\nlocal PA=(YU.uR-UI)local AS=500+TY.WY\nYU.OU=\n(A.yu(PA,-AS,AS)-0.5)*2*p.XT.CT\nif PA<0 and YU.oT then\nYU.OU=YU.OU/6 end\nlocal OP=TY.RY.GR\nlocal IO=0.1\nif R.A(YU.OU-OP)>IO then if\n(UE==nil)then UE=pid.new(0.02,0,0.1)end\nUE:inject(YU.OU-OP)local SD=UE:get()IE=SD end end end\nfunction AW()if Z.aQ()==0 then return'travel'else return'cruise'end end\nfunction SW()Z.zQ()end\nfunction oQ()local RT=j\nRT.IU='none'RT.jY=false\nRT.oY=false\nRT.lY=false\nRT.MY=false\nRT.aY=10000000\nRT.zY=false\nRT.iY=false\nRT.IY='standby'RT.xY=true\nM.ZR=false end\nfunction f()local TY=j\nlocal RT=p\nRT.xR=false\noQ()TY.tR=false\nTY.oR=false\nTY.yR=false\nTY.kR=false\nTY.lR=false\nTY.jR=false\nOE='none'end\nfunction d()local UI=j\nlocal YU=h.DY\nlocal RT=p.FT\nlocal TY=h.WI/2500\nif UI.IY=='Orbit'then\nif MW and RT.rY then UI.BY=(RT.FY-\nRT.GY)+1500+TY elseif not MW and YU.rY then UI.BY=(YU.FY-\nYU.GY)+5000+TY elseif\n(not MW and not YU.rY)or(MW and not RT.rY)then\nUI.BY=YU.HT+3000+TY end elseif UI.rR~=0 then UI.BY=UI.rR else\nif YU.rY and UI.rR==0 then UI.BY=(YU.FY-YU.GY)+3000+\nTY else UI.BY=YU.HT+3000+TY end end end\nRW=(function()local RT={}RT.EI={}RT.RI={}RT.TI={}RT.YI={}function RT:uQ(TY,YU)while#RT.YI>0 do\nE.U(RT.YI)()end end\nfunction RT:UI(YU,TY)if YU==nil then YU=true end\nfor UI,IO in\npairs(TY)do\nif YU then IO.deactivate()E.W(RT.YI,IO.activate)else\nIO.activate()E.W(RT.YI,IO.deactivate)end end end\nfunction RT:_U()RT:UI(true,RT.EI)end\nfunction RT:QI()\nRT:UI(false,RT.EI)end\nfunction RT:II()RT:UI(true,RT.RI)end\nfunction RT:OI()\nRT:UI(false,RT.RI)end\nfunction RT:FU()RT:UI(true,RT.TI)end\nfunction RT:NU()\nRT:UI(false,RT.TI)end\nreturn RT end)()\nfunction PE(RT,TY,YU)local AS=j\nlocal PA=p\nlocal SD=h\nlocal aimStrength=0.3 --export: Aim Strength -- 0.05 to ~3 (no real limit but beyond these values has less/no effect or may cause problems) if your ship often swings past where it's trying to aim and wobbles back and forth, reduce this. if you want it to snap at a point faster/stronger(smaller nimble ships) increase it.\n\nlocal IO=\nRT*pitchSpeedFactor*SD.PI+TY*rollSpeedFactor*SD.AI+YU*yawSpeedFactor*SD.SI\nAE=0\nlocal OP=SD.DI:cross(SD.AI):normalize()local UI=SD.DI:cross(\n-SD.PI):normalize()if\n(SE==nil)then SE=pid.new(0.02,0,0.2)DE=pid.new(0.1,0,0.1)\nFE=pid.new(0.1,0,0.1)end\nif\nSD.WY*3.6 <100 and\n(AS.oT or(\nnot SD.DY.rY and SD.iR<SD.DY.HT+1000))and not PA.xR and PA.XT.fR then AS.IU='Flat'VW=\nSD.DI:cross(SD.SI)+IO else VW=IO end\nif SD.DI:len()>0.01 and Z.xQ()>0.0 then local DF=1.0\nif autoRoll==true and SD.FI>\nDF and TY==0 then\nlocal GH=A.t(0,SD.FI-30,SD.FI+30)if(GE==nil)then\nGE=pid.new(autoRollFactor*0.01,0,autoRollFactor*0.1)end\nGE:inject(GH-SD.GI)\nlocal HJ=GE:get()VW=VW+HJ*SD.AI end\nlocal FG=20.0\nif\nturnAssist==true and SD.FI>FG and RT==0 and YU==0 then local GH=turnAssistFactor*0.1\nlocal KL=turnAssistFactor*0.025\nlocal LZ=((SD.FI-\nFG)/ (180-FG))*180\nlocal ZX=0\nif LZ<90 then ZX=LZ/90 elseif LZ<180 then ZX=(180-LZ)/90 end\nZX=\nZX*ZX\nlocal HJ=-SD.HI*KL*(1.0-ZX)local JK=GH*ZX\nVW=VW+\nJK*SD.PI+HJ*SD.SI end end\nif PA.xR or AS.tR or AS.oR then\nlocal DF=A.i(A.t(SD.WY,80,150),80,150,0,1)\nif PA.xR and SD.WY>80 then if not AS.oT or AS.tR then AE=0 elseif R.A(GW())<2 or\nR.A(GW())>170 then AE=0 else\nAE=A.t(GW()*2,-p.XT.VT,p.XT.VT)*DF end end end\nif AS.oR or AS.IY=='Orbit'then\naimStrength=A.t(aimStrength-0.1,0.2,0.4)AS.IU='Orbit Hold'\nif not AS.SY then\nif\nSD.iR<AS.uR and SD.TY<0 and AS.oT then AS.IU='Orbit Atmo Pitch'VW=-\nUI:rotate((AS.OU)*S.k,OP):cross(SD.AI)if AS.IY=='Orbit'then\nVW=((HE(PA.DT)):rotate(\n(AS.OU)*S.k,OP)):cross(SD.AI)end elseif SD.HY.JY< (AS.BY-100)or\nSD.HY.JY> (AS.BY+100)then AS.IU='Orbit Pitch'\nVW=-UI:rotate(\n(fW())*S.k,OP):cross(SD.AI)\nif AS.IY=='Orbit'then\nVW=(HE(PA.DT)):rotate((fW())*S.k,OP):cross(SD.AI)if R.A(GW())<30 and R.A(GW())>1 and SD.WY>50 then\nAS.IU='Orbit T2'\nVW=((JE((HE(PA.DT))).JI)):rotate(((fW())*S.k)*1.5,OP):cross(SD.AI)end end else AS.IU='Orbit Flat'VW=SD.DI:cross(SD.SI)KE=VW+\nSD.KI:cross(-SD.AI)if AS.IY=='Orbit'then\nVW=(HE(PA.DT)):cross(SD.AI)\nif R.A(GW())<30 and R.A(GW())>1 then VW=\n((JE((HE(PA.DT))).JI)):cross(SD.AI)+IE*SD.PI end end end\nif\n(R.A(GW())>80 or SD.WY<10)and AS.IY=='Orbit'then VW=\n((HE(PA.DT)):project_on_plane(SD.AI)):cross(SD.AI)+IO\nVW=VW+\nSD.DI:cross(SD.SI)end else VW=SD.KI:cross(-SD.AI)+IO\nif AS.IY=='Orbit'then\nVW=(HE(PA.DT)):cross(SD.AI)end end\nVW=VW+\n-OP:rotate(AE*S.k,SD.AI):cross(SD.PI)+IO\nVW=vec3{A.t(VW.x,-\naimStrength,aimStrength),A.t(VW.y,-aimStrength,aimStrength),A.t(VW.z,-\naimStrength,aimStrength)}end\nif AS.tR then AS.IU='Alt Hold'VW=-\nUI:rotate((AS.OU)*S.k,OP):cross(SD.AI)+IO\nVW=VW+-OP:rotate(AE*S.k,SD.AI):cross(SD.PI)end\nif PA.xR then if\nAS.IY=='agg'then VW=(HE(PA.DT)):cross(SD.AI)VW=VW+\nSD.DI:cross(SD.SI)end\nif\nAS.IY=='reEntry'or AS.IY=='Space Braking'then AS.IU='Target'\nVW=((HE(PA.DT))):cross(SD.AI)VW=VW+SD.DI:cross(SD.SI)end\nif AS.IY=='Atmo Travel'then\nif R.A(eW())>90 then LE=0 else LE=(AS.OU)*S.k end\nif\n(R.A(GW())>90 and SD.WY>50)or SD.WY<20 then AS.IU='TargetFlat'\nVW=((HE(PA.DT)):project_on_plane(SD.AI)):cross(SD.AI)VW=VW+SD.DI:cross(SD.SI)elseif R.A(GW())<30 and\nR.A(GW())>1 and SD.WY>50 then AS.IU='T2'\nVW=\n((JE((HE(PA.DT))).JI)):rotate(R.P(\nLE*1.5,90),OP):cross(SD.AI)+IE*SD.PI else AS.IU='Pitch Target'\nVW=((HE(PA.DT)):rotate(LE,OP)):cross(SD.AI)end\nVW=VW+\n-OP:rotate(AE*S.k,SD.AI):cross(SD.PI)end\nif MW and PA.JT=='surface'then\nif AS.oY and AS.aY<600 then AS.IU='Brake Landing'\nVW=(HE(PA.DT)):cross(SD.AI)VW=(VW/3)+ZE(PA.DT):cross(-SD.SI)\nif(\nSD.iR-pW(PA.DT))<200 or R.A(eW())>90 then\nAS.IU='Flat'VW=(HE(PA.DT)):cross(SD.AI)VW=VW+\nSD.DI:cross(SD.SI)end\nif(SD.iR-pW(PA.DT))<100 then PA:eR(false)PA:cR(true)end end end\nif\nAS.IY=='Transfer'or(PA.JT=='space'and not AS.oT)or\n(AS.IY=='Space Braking'and(SD.DY.b~=PA.FT.b or\nOW.dist(SD.nT,PA.FT.GT)>200000))then\nif R.A(wW())>\n60 or\n(SD.WY*3.6 <=3000 and PA.JT=='surface')or\n(SD.WY*3.6 <500 and PA.JT=='space')then AS.IU='Target'\nVW=ZE(PA.DT):cross(SD.AI)else AS.IU='TCross'\nVW=JE(ZE(PA.DT)).JI:cross(SD.AI)end\nif AS.oT then VW=VW+\n-OP:rotate(AE*S.k,SD.AI):cross(SD.PI)end end\nif lW~='ninety'then\nVW=\nvec3{A.t(VW.x,-aimStrength,aimStrength),A.t(VW.y,-aimStrength,aimStrength),A.t(VW.z,\n-aimStrength,aimStrength)}+IO else VW=VW+IO end end\nif AS.MY and SD.WY>55 and not AS.oY then AS.IU='Stall Protect'VW=-\nSD.KI:cross(SD.AI)+IO\nVW=VW+-\nOP:rotate(AE*S.k,SD.AI):cross(SD.PI)end\nif AS.lR then VW=SD.DI:cross(SD.AI)\nVW=\nvec3{A.t(VW.x,-aimStrength,aimStrength),A.t(VW.y,\n-aimStrength,aimStrength),A.t(VW.z,-aimStrength,aimStrength)}+IO end\nif AS.kR then VW=SD.DI:cross(-SD.AI)\nVW=\nvec3{A.t(VW.x,-aimStrength,aimStrength),A.t(VW.y,\n-aimStrength,aimStrength),A.t(VW.z,-aimStrength,aimStrength)}+IO end\nif AS.jR then\nif AS.oT then VW=vec3(J.rQ()):cross(-SD.AI)VW=VW+-\nOP:rotate(AE*S.k,SD.AI):cross(SD.PI)\nVW=vec3{A.t(VW.x,-aimStrength,aimStrength),A.t(VW.y,\n-aimStrength,aimStrength),A.t(VW.z,-aimStrength,aimStrength)}else VW=vec3(J.rQ()):cross(-SD.AI)\nVW=vec3{A.t(VW.x,-aimStrength,aimStrength),A.t(VW.y,\n-aimStrength,aimStrength),A.t(VW.z,-aimStrength,aimStrength)}end end\nif AS.yR then VW=(HE(mQ.mT)):cross(SD.AI)VW=VW+-\nOP:rotate(AE*S.k,SD.AI):cross(SD.PI)end\nreturn VW end\nfunction XE(RT,TY,YU)local Mq=j\nlocal HJ=YW\nlocal DF=p\nlocal NM=1\nlocal JK=0\nlocal VB=1\nN:iQ('torque',TY,NM,'airfoil','','',VB)N:oQ('brake',YU)local BN=''local CV=vec3()local FG=false\nlocal UI='primary'\nlocal SD='secondary'local GH='tertiary'local LZ='thrust analog longitudinal'local KL='thrust analog lateral'\nlocal XC='thrust analog vertical'local ZX='vertical airfoil'local IO='lateral airfoil'\nlocal OP=N.FR:OW(D.j)==G.f\nlocal PA=N.FR:OW(D.h)==G.f\nlocal AS=N.FR:OW(D.g)==G.f\nif\n(OP)then BN=BN..' , '..LZ\nCV=CV+N.FR:PW(D.j)else if HJ.dT~=0 then\nN.FR:KW(D.j,HJ.dT)end\nlocal qw=N.FR:AW(LZ,D.j)\nif\n(\n(h.EY>=0.1 and Mq.XU)or(not Mq.oT and Mq.CU)or\n(Mq.CU and Mq.XU))and h.LI>0 then\nif Mq.gR=='primary'then N:oQ(SD..' , '..GH,vec3(),NM)if Mq.oT then Z.cQ('primary',\nMq.JU[1]*h.LI)else\nZ.cQ('primary',Mq.JU[3]*h.LI)end elseif Mq.gR=='all'then N:oQ(LZ,qw,NM)elseif\nMq.gR=='locked'then N:oQ(SD..' , '..GH,qw,NM)if Mq.oT then\nZ.cQ('primary',Mq.JU[1])else Z.cQ('primary',Mq.JU[3])end elseif\nMq.gR=='hybrid'then local yu=0\nlocal ui=0\nlocal er=0\nlocal op=0\nlocal rt=0\nlocal ty=0\nlocal we=0\nif\nMq.oT and Mq.LU[1]>0 or not Mq.oT and Mq.LU[3]>0 then op=h.LI*3.9\nrt=\n(A.i(A.t(op,300,330),300,330,0,30))/100\nty=\n(A.i(A.t(op,330,360),330,360,0,30))/100\nwe=\n(A.i(A.t(op,360,390),360,390,0,30))/100\nyu=(\n(A.i(A.t(op,0,100),0,100,0,70))/100)+rt\nui=\n((A.i(A.t(op,100,200),100,200,0,70))/100)+ty\ner=(\n(A.i(A.t(op,200,300),200,300,0,100))/100)+we else op=h.LI*2.6\nrt=(A.i(A.t(op,200,230),200,230,0,30))/100\nty=(A.i(A.t(op,230,260),230,260,0,30))/100\nyu=\n((A.i(A.t(op,0,100),0,100,0,70))/100)+rt\nui=(\n(A.i(A.t(op,100,200),100,200,0,70))/100)+ty end\nif Mq.oT then Z.cQ('primary',Mq.JU[1]*yu)\nZ.cQ('secondary',Mq.KU[1]*ui)Z.cQ('tertiary',Mq.LU[1]*er)else\nZ.cQ('primary',Mq.JU[3]*yu)Z.cQ('secondary',Mq.KU[3]*ui)\nZ.cQ('tertiary',Mq.LU[3]*er)end end else N:oQ(LZ,qw,NM)end end\nif(PA)then\nif Mq.nR then BN=BN..' , '..KL else N:oQ(KL,vec3(),JK,'','','',VB)CV=\nCV+N.FR:PW(D.h)end else local qw=N.FR:AW(KL,D.h)if not Mq.nR then qw=vec3()end\nN:oQ(KL,qw,NM)\nif DF.xR and Mq.oT then\nlocal we=h.DI:cross(h.AI):normalize()local er=vec3()if GW()<0 then er=-we*20 end\nif GW()>0 then er=we*20 end\nN:oQ(IO,er,NM,'','','',VB)end end\nif(AS)then if Mq.bR or Mq.bY then BN=BN..' , '..XC else BN=BN\nN:oQ(XC,vec3(),JK,'','','',VB)end\nCV=CV+N.FR:PW(D.g)else\nlocal qw=N.FR:AW(XC,D.g)if not Mq.bR and not Mq.bY then qw=vec3()end\nN:oQ(XC,qw,NM,'airfoil','ground','',VB)\nif\n(DF.xR and Mq.oT)or(Mq.tR)or(Mq.oR and Mq.oT)then\nif Mq.IY=='Landing'then N:oQ(ZX,h.DI*20,NM,'airfoil','','',VB)elseif(\nh.iR<Mq.uR or h.TY<-10)then\nN:oQ(ZX,-h.DI*20,NM,'airfoil','','',VB)elseif(Mq.oR and Mq.oT)then\nN:oQ(ZX,-h.DI*20,NM,'airfoil','','',VB)else N:oQ(ZX,-h.DI*5,NM,'airfoil','','',VB)end end end\nif\n(N.FR:YW(D.j)==0 or N.FR:YW(D.j)< (h.WY*3.6)-10)then FG=true end\nif(CV:len()>S.o)then if\n(\nM.KR~=0 or FG or R.A(h.KI:dot(h.AI))<0.95)then BN=BN..', brake'end\nN.FR:GW(D.j,0)N:oQ(BN,CV,JK,'','','',VB)end\nN:pQ('rocket_engine')end\nfunction hQ()local SD=j\nlocal PA=YW\nlocal OP=p\npitchSpeedFactor=R.O(pitchSpeedFactor,0.01)\nyawSpeedFactor=R.O(yawSpeedFactor,0.01)rollSpeedFactor=R.O(rollSpeedFactor,0.01)\ntorqueFactor=R.O(torqueFactor,0.01)brakeSpeedFactor=R.O(brakeSpeedFactor,0.01)\nbrakeFlatFactor=R.O(brakeFlatFactor,0.01)autoRollFactor=R.O(autoRollFactor,0.01)\nturnAssistFactor=R.O(turnAssistFactor,0.01)local UI=M.GR+PA.lT+J.DQ()\nlocal RT=M.HR+PA.pT+J.FQ()local TY=M.JR+PA.kT-J.GQ()local YU=M.KR+PA.fT\nlocal IO=PE(UI,RT,TY)local AS=torqueFactor*(IO-h.ZI)AS=AS-h.XI\nlocal DF=-YU*(\nbrakeSpeedFactor*h.CI+brakeFlatFactor*h.KI)if not SD.sR then\nif M.GR==0 and M.JR==0 and M.HR==0 then AS=vec3()end end\nif SD.SY and SD.oR and not SD.oY then\nlocal FG=A.t(((\nhW().JY-SD.BY)*0.0001)*4,0.01,5)\nDF=vec3(A.t(DF.x,-FG,FG),A.t(DF.y,-FG,FG),A.t(DF.z,-FG,FG))end\nif\n\n\nOP.xR and(DW==12.1 or DW==13.1 or\n((DW==0.1)and h.TY*3.6 >-100))and h.WY*3.6 <h.YY*3.6-50 then local FG=2\nDF=vec3(A.t(DF.x,-FG,FG),A.t(DF.y,-FG,FG),A.t(DF.z,-FG,FG))end\nif OP.bT==true then DF=DF*5 end\nif SD.tR then DF=-M.KR*h.AI*((h.yY+h.uY)*3.6)end\nXE(IO,AS,DF)end\nfunction QW()\nif B.XE~=nil then local UI=B.XE\nlocal RT=false\nlocal TY=h.iR\nlocal YU=UI.CE()if\nTY>YU-100 and TY<YU+100 and UI.EE()==1 then RT=true end\nreturn\n{OY=UI.EE(),AU=UI.NE(),VI=UI.wE(),BI=UI.ME(),NI=UI.qE(),fY=UI.VE(),eY=YU,kY=RT}else return\n{OY=0,AU=0,VI=0,BI=5,NI=5,eY=9001,fY=9001,eY=9001,kY=false}end end\ndQ=(function()local RT={}RT.MI={}RT.qI='_'RT.eU={}RT.wI=nil\nRT.cU=nil\nRT.pE=nil\nfunction RT:SU(UI,YU,TY)RT.wI=YU\nRT.eI=TY\nRT.pE=UI\nlocal IO=0\nfor OP,PA in ipairs(UI)do if RT.cU==nil then RT.cU=PA end\nlocal AS=PA.gE()\nif\nE.rI(RT.eI,AS)then RT.cU=PA\nIO=2 elseif E.rI(RT.wI,AS)and IO<2 then RT.cU=PA\nIO=1 end end\nRT:tI()RT:yI()end\nfunction RT:uI(TY)RT:iI()\nif RT.cU~=nil then RT.cU.kE(RT.eI)RT:oI(false)end\nRT.cU=TY\nRT.cU.sE(RT.eI,1)RT:yI()RT:pI()RT:oI()\nTE:lI('ConfigDBChanged')end\nfunction RT:uU(YU,TY)\nif YU==nil then O('Config:getValue(nil) error')return end\nif RT.MI[YU]~=nil then return RT.MI[YU]end\nif RT.eU[YU]~=nil then return\nRT.eU[YU]end\nreturn TY end\nfunction RT:oU(TY,YU)return RT:uU(RT.qI..TY,YU)end\nfunction RT:IT(TY,YU,UI)\nRT:kI(TY,YU,UI)end\nfunction RT:gU(TY,YU,UI)RT:kI(RT.qI..TY,YU,UI)end\nfunction RT:kI(YU,TY,UI)if UI==nil then UI=true end\nRT.MI[YU]=TY\nif UI then RT:oI()end\nTE:lI('ConfigChange')TE:lI('ConfigChange'..YU)end\nfunction RT:oI(TY)if RT.cU==nil then return end\nif TY==nil then TY=true end\nlocal UI={}for OP,IO in\npairs(RT.MI)do local PA=OP:find(RT.qI)~=nil\nif not PA or TY then UI[OP]=IO end end\nlocal YU=CE(UI)\nRT.cU.fE(RT.wI,YU)end\nfunction RT:yI()if RT.cU==nil then return end\nlocal UI=RT.cU.dE(RT.wI)\nif UI==''then return end\nlocal YU,TY=load('return '..UI)\nif YU==nil then\nO('Error loading config from databank, resetting to default!')O(UI)O(TY)RT.cU.kE(RT.wI)else RT.MI=YU()end end\nfunction RT:iI()local TY={}for UI,YU in pairs(RT.MI)do local IO=UI:find(RT.qI)~=nil\nif IO then TY[UI]=YU end end\nRT.jI=TY end\nfunction RT:pI()for TY,YU in pairs(RT.jI)do RT.MI[TY]=YU end end\nfunction RT:tI()\nfor TY,YU in pairs(RT.pE)do if YU~=RT.cU then YU.kE(RT.eI)end end end\nfunction RT:hI(TY)local YU=TY.gE()\nfor UI,IO in ipairs(YU)do if\nIO~=RT.wI and IO~=RT.eI then TY.kE(IO)end end end\nreturn RT end)()\nsQ={LT='ms',CT='mp',VT='mr',NY='ws',qT='hh',NT='sc',BT='sm',eT='bp',fR='sf',bT='lm',MU='ag',gI='se',fI='mu',dI='rb',sI='rw',vR='mv',aI='uv',OT='hs',zI='mk',xI='rd',cI='ud',rU='ap',pU='cd'}VE={YT=nil,vI=nil}function VE:new(RT)local TY={}setmetatable(TY,self)\nself.__index=self\nTY.YT=RT\nreturn TY end\nfunction VE:bI()local RT='dead'\nif\nself.vI~=nil then RT=coroutine.status(self.vI)end\nif RT=='suspended'then coroutine.resume(self.vI)elseif RT=='dead'then\nself.vI=coroutine.create(self.YT)coroutine.resume(self.vI)end end\nfunction jQ(TY,RT)\nlocal PA=getRoll(vec3(RT.fW()),vec3(TY.NW()),vec3(TY.qW()))local SD=vec3(TY.m())local AS=vec3(TY.NW())\nlocal YU=vec3(TY.MW())local UI=vec3(TY.qW())local IO=vec3(RT.fW())\nlocal OP=vec3(TY.sa())\nlocal DF={DI=IO,SI=YU,AI=AS,PI=UI,CI=SD,KI=SD:normalize(),ZI=vec3(TY.eW()),XI=vec3(TY.rW()),WY=SD:len(),GI=PA,FI=R.A(PA),HI=A.r(PA),yY=SD:dot(AS),uY=SD:dot(\n-UI),TY=SD:dot(-IO),WI=TY.kW(),nT=OP,EY=Z.xQ(),YY=TY.tW(),PU=TY.pW(),dY=RT.bW(),maxBrake=TY.iW(),nI=TY.oW(),LI=Z.vQ(),mI=TY.jW(),UY=TY.hW(),DY=jW(OP),iR=pW(OP),RY=BE(AS,YU,UI,IO,SD)}DF.hY=NE(DF)DF.LY=ME(DF)DF.HY=qE(DF)return DF end\nfunction NE(RT)local TY=0\nlocal YU=j\nlocal IO=RT.maxBrake\nif(IO==nil)then IO=5000000 end\nif YU.oT then IO=IO/A.t(RT.WY/\n100,0.1,1)end\nlocal OP=50000*2000/\n3600\nlocal c2=OP*OP\nlocal UI=RT.WY\nif UI>0 then\nlocal bt=(IO*-1)/ (RT.WI+TY)local LZ=0\nlocal ZX=0\nlocal k1=OP*R.GH(UI/OP)\nlocal k2=c2*R.D(k1/OP)/bt\nlocal JK=(OP*R.GH(0/OP)-k1)/bt\nlocal PA=k2-c2*R.D(\n(bt*JK+k1)/OP)/bt\nLZ=\nLZ+PA\nZX=ZX+JK\nlocal KL=R.Y(ZX/60)ZX=ZX-60*KL\nlocal GH=R.Y(ZX+0.5)local DF='00'..GH\nlocal GH=DF:sub(-2,-1)local SD='00'..KL\nlocal KL=SD:sub(-2,-1)local FG=KL..':'..GH\nlocal su=R.Y(LZ/200000)\nlocal HJ=R.Y(LZ)/1000\nlocal AS=R.Y(HJ)/200\nreturn{gY=A.e(LZ),_I=HJ,QO=AS,WO=FG}else return\n{gY=0,_I=0,QO=0,WO=\"00m:00s\"}end end\nfunction BE(UI,up,YU,TY,RT)\nif RT:len()<20 then wE=0 else wE=-R.C(eE(up,RT,UI))end\nreturn{HR=getRoll(TY,UI,YU),GR=rE(TY,UI,YU),JR=wE}end\nfunction rE(RT,TY,YU)local UI=RT:cross(YU):normalize_inplace()local IO=R.J(A.t(UI:dot(-TY),\n-1,1))if\nUI:cross(-TY):dot(YU)<0 then IO=-IO end\nreturn IO*S.pl end\nfunction getRoll(RT,TY,YU)local UI=RT:cross(TY):normalize_inplace()local IO=R.J(A.t(UI:dot(YU),\n-1,1))if\nUI:cross(YU):dot(TY)<0 then IO=-IO end\nreturn IO*S.pl end\nfunction PW(TY,RT)local YU=j\nlocal AS=h.WY*3.6-20\nif TY==nil then TY=(h.YY*3.6)-100 end\nif RT~=nil then AS=RT*3.6-20 end\nlocal PA=(TY-AS)local SD=200\nlocal UI=70\nlocal IO=70\nlocal OP=A.t((A.yu(PA,-SD,SD)-0.5)*2,0,100)return OP end\nTE=(function()local RT={}RT.EO={}function RT:tU(UI,YU,TY)if RT.EO[UI]==nil then RT.EO[UI]={}end\nE.W(RT.EO[UI],{YT=YU,UT=TY})end\nfunction RT:lI(TY)\nif RT.EO[TY]~=nil then for YU,UI in\nipairs(RT.EO[TY])do UI.YT(UI.UT)end end end\nreturn RT end)()\nfunction dW()\nB={gW=nil,eE=nil,WE=nil,XE=nil,RO=nil,TO=nil,pE={},YO={},TI={},DU=nil,cE={},UO=nil}\nfor RT,TY in pairs(Z)do\nif\nW(TY)==\"table\"and W(TY.export)==\"table\"and TY.getClass then local YU=TY.getClass():lower()TY.IO=RT\nTY.OO=YU\nif\nYU:find(\"coreunit\")then B.gW=TY elseif YU:find(\"radar\")then E.W(B.cE,TY)elseif YU:find(\"warpdriveunit\")then B.eE=TY elseif\nYU:find(\"databankunit\")then E.W(B.pE,TY)elseif YU:find(\"shieldgenerator\")then B.WE=TY elseif YU:find(\"weapon\")then\nE.W(B.YO,TY)elseif YU:find(\"gyrounit\")then B.RO=TY elseif YU:find(\"antigravitygeneratorunit\")then B.XE=TY elseif\nYU:find(\"combatdefense\")then B.TO=TY elseif YU:find('manualswitchunit')then E.W(B.TI,TY)else end end end end\nfunction aW()B.DU=RW\nfor RT,TY in ipairs(B.pE)do TY.PO=TY.getLocalId()\nTY.n=B.gW.sW(TY.PO)end\nE.I(B.pE,function(RT,TY)return RT.PO<TY.PO end)\nfor RT,TY in ipairs(B.TI)do local YU=B.gW.sW(TY.getLocalId())\nif\nYU:lower():find('door')then E.W(B.DU.EI,TY)elseif YU:lower():find('forcefield')then\nE.W(B.DU.RI,TY)else E.W(B.DU.TI,TY)end end\nfor RT,TY in ipairs(B.cE)do\nTY.AO=(TY.IO=='slot21'or TY.IO=='slot14')end end\nfunction bQ()\nreturn{mT=vec3(H.sa()),iT=H.cv(),SO=H.zx(),_T=vec3(H.m())}end\nvQ=(function()local RT={}RT.DO={}RT.FO={}RT.GO={}\nRT.HO=nil\nRT.cE={}RT.JO=nil\nRT.KO=nil\nRT.LO=nil\nfunction RT:SU(TY)RT.cE=TY\nRT:ZO()\ndQ.eU[sQ.dI]=true\ndQ.eU[sQ.sI]=radarOn\nRT.XO={[tE.CO]=0,[tE.VO]=0,[tE.BO]=0}RT.NO={[tE.CO]={},[tE.VO]={},[tE.BO]={}}RT.MO={}RT.qO={}\nRT.wO={}RT.eO={}RT.rO={}RT.tO={}RT.yO={}\nTE:tU('ConfigDBChanged',RT.ZT,RT)RT:ZT()end\nfunction RT:ZT()RT:yT(dQ:uU(sQ.dI))RT:tT(dQ:uU(sQ.sI))end\nfunction RT:uQ()\nif RT.uO then for TY,YU in ipairs(RT.GO)do YU:bI()end end\nRT:iO()RT:ZO()end\nfunction RT:ZO()\nif RT.HO~=\nnil then if RT.HO.vE()==1 then return else RT.HO=nil end end\nfor TY,YU in pairs(RT.cE)do if YU.vE()==1 and YU~=RT.HO then RT.HO=YU\nif RT.KO~=nil then\nJ.PQ(RT.LO,RT.KO)RT.LO=RT.HO.bE()J.OQ(RT.LO,RT.KO)end end end end\nfunction RT:yT(TY)if TY==nil then TY=not RT.uO end\nRT.uO=TY\ndQ:IT(sQ.dI,RT.uO)end\nfunction RT:tT(TY)if RT.HO==nil then return end\nif\nTY==nil then TY=RT.KO==nil end\nif RT.KO~=nil then J.AQ(RT.KO)\nJ.SQ(RT.JO)RT.KO=nil end\nif TY then RT.JO=J.YQ(\"RADAR\")\nRT.KO=J.TQ(RT.JO,\"radar\")RT.LO=RT.HO.bE()J.OQ(RT.LO,RT.KO)end\ndQ:IT(sQ.sI,TY)end\nfunction RT:iO()if RT.HO==nil then return end\nRT.MO=RT.HO.DR(0,1,nil,nil,nil,nil,nil)RT.qO=RT.HO.DR(0,0,{['constructKind']=5})\nRT.wO=RT.HO.DR(0,0,{['constructKind']=6})RT.eO=RT.HO.DR(0,0,{['constructKind']=4})\nRT.rO=RT.HO.DR(0,0,{['isAbandoned']=true})RT.tO=RT.HO.DR(0,0,{['isMatching']=true})\nRT.yO=RT.HO.DR(0,0,{['constructKind']=7})end\nfunction RT:oO()if RT.HO==nil then return end\nlocal TY=RT.HO._E()local YU=0\nif#TY>2500 then return end\nfor UI,IO in ipairs(TY)do\nif RT.FO[IO]==nil then local OP={}OP.PO=IO\nOP.n=RT.HO.PR(IO)\nOP.WU=RT.HO.AR(IO)OP.pO=RT.HO.SR(IO)OP.gY=RT.HO.YR(IO)\nOP.lO=RT.HO.TR(IO)OP.kO=RT.HO.UR(IO)==1\nOP.IR=RT.HO.IR(IO)\nRT.DO[#RT.DO+1]=OP\nRT.FO[OP.PO]=OP\nYU=YU+1\nif YU%10 ==0 then coroutine.yield()end end\nif UI%50 ==0 then coroutine.yield()end end end\nreturn RT end)()tE={BO='static',VO='dynamic',CO='abandoned'}\naQ=(function()local RT={}RT.wI=nil\nRT.cU=\nnil\nRT.pE=nil\nRT.jO=nil\nRT.hO={}RT.PT=nil\nfunction RT:SU(TY,YU)RT.wI=YU\nRT.pE=TY\nTE:tU('ConfigDBChanged',RT.ZT,RT)RT:ZT()end\nfunction RT:ZT()for IO,OP in pairs(RT.pE)do\nOP.n=B.gW.sW(OP.PO)end\nRT.cU=nil\nlocal UI=0\nlocal YU=dQ:uU(sQ.xI)if YU~=nil then\nfor IO,OP in\npairs(RT.pE)do if OP.n==YU then RT.cU=OP\nUI=3\nbreak end end end\nif RT.cU==nil then\nfor IO,OP in pairs(RT.pE)do if\nRT.cU==nil then RT.cU=OP end\nlocal PA=OP.gE()if E.rI(RT.wI,PA)and UI<=1 then\nRT.cU=OP\nUI=1 end end end\nlocal TY=dQ:uU(sQ.cI)\nif TY~=nil then for IO,OP in pairs(RT.pE)do\nif OP.n==TY then RT.jO=OP\nbreak end end end\nRT:yI()end\nfunction RT:uI(TY)RT.cU=TY\nlocal YU=B.gW.sW(RT.cU.PO)dQ:IT(sQ.xI,YU)\nRT:yI()end\nfunction RT:gO(TY)RT.jO=TY\nlocal YU=B.gW.sW(RT.jO.PO)dQ:IT(sQ.cI,YU)end\nfunction RT:oI()\nTE:lI('RoutesUpdated')if RT.cU==nil then return end\nRT.cU.fE(RT.wI,CE(RT.hO))end\nfunction RT:yI()if RT.cU==nil then return end\nRT.hO={}local TY=RT.cU.dE(RT.wI)\nif TY~=''then local UI,YU=load(\n'return '..TY)\nif UI==nil then\nO('Error loading routes from databank')O(TY)O(YU)else local IO=UI()if IO~=nil then RT.hO=IO\nE.I(RT.hO,function(OP,PA)return OP.n<PA.n end)end end end\nTE:lI('RoutesUpdated')end\nfunction RT:fO()\nif RT.PT~=nil then RT.dO=true\nRT.hO[RT.PT].sO=true end\nif p.aU~=nil then RT.aO=true\nRT.hO[p.aU].zO=true end end\nfunction RT:xO()local TY=false\nlocal YU=false\nE.I(RT.hO,function(UI,IO)return UI.n<IO.n end)\nfor UI,IO in ipairs(RT.hO)do if IO.cO==true then IO.cO=nil\nRT.PT=UI end\nif IO.sO==true then IO.sO=\nnil\nRT.PT=UI\nTY=true end\nif IO.zO==true then IO.zO=nil\np.aU=UI\nYU=true\ndQ:gU(sQ.pU,{p.aU,p.zU,RT.cU.n})end end\nif RT.dO and not TY then RT.PT=nil end\nif RT.aO and not YU then p:mU()end\nRT.dO=false\nRT.aO=false\nRT:oI()end\nfunction RT:vO()\nlocal TY={n='Route '..(#RT.hO+1),p={},cO=true}RT:fO()E.W(RT.hO,TY)RT:xO()return TY end\nfunction RT:bO(TY,YU)E.W(RT.hO[TY].p,YU)RT:oI()end\nfunction RT:nO(TY)RT:fO()E.U(RT.hO,TY)RT:xO()end\nfunction RT:mO(YU,TY)if\nRT.hO[YU]==nil then return end\nif RT.hO[YU].p==nil then return end\nif\nRT.hO[YU].p[TY]==nil then return end\nif p.aU==YU and p.zU>=TY then p.zU=p.zU-1 end\nE.U(RT.hO[YU].p,TY)RT:oI()end\nfunction RT:_O(YU,TY)if RT.hO[YU]==nil then return end\nRT:fO()RT.hO[YU].n=TY\nRT:xO()end\nfunction RT:QP(UI,YU,TY)\nif RT.hO[UI]==nil then return end\nif RT.hO[UI].p==nil then return end\nif\nRT.hO[UI].p[YU]==nil then return end\nRT.hO[UI].p[YU].n=TY\nRT:oI()end\nfunction RT:WP(YU,TY,UI)if RT.hO[YU]==nil then return end\nif RT.hO[YU].p==nil then return end\nlocal OP=#RT.hO[YU].p\nlocal IO=E.U(RT.hO[YU].p,TY)if\nUI>OP then UI=OP end\nif UI<1 then UI=1 end\nE.W(RT.hO[YU].p,UI,IO)\nif\np.aU==YU then if p.zU==TY then p.zU=UI elseif p.zU==UI then p.zU=TY end end\nRT:oI()return UI end\nfunction RT:vU(TY)if RT.hO[TY]==nil then return 0 end\nif RT.hO[TY].p==nil then return 0 end\nreturn#RT.hO[TY].p end\nfunction RT:xU(YU,TY)if RT.hO[YU]==nil then return end\nif RT.hO[YU].p==nil then return end\nif RT.hO[YU].p[TY]==nil then return end\nlocal PA=RT.hO[YU].p[TY]local OP=0\nlocal IO=0\nif PA.s~=nil and PA.s~=0 then OP=PA.s end\nif PA.b~=nil and\nPA.b~=0 then IO=PA.b end\nlocal UI=yE({EP=PA.c.x,RP=PA.c.y,iR=PA.c.z,b=IO,s=OP})return UI end\nfunction RT:TP(YU,TY)if RT.hO[YU]==nil then return end\nif RT.hO[YU].p==nil then return end\nif RT.hO[YU].p[TY]==nil then return end\nlocal AS=RT.hO[YU].p[TY]local PA=0\nlocal OP=0\nif AS.s~=nil then PA=AS.s end\nif AS.b~=nil then OP=AS.b end\nlocal IO=E.E({PA,OP,AS.c.x,AS.c.y,AS.c.z},',')local UI='::pos{'..IO..'}'return UI end\nfunction RT:lU()if RT.cU==nil then return end\nreturn RT.cU.n end\nreturn RT end)()\nzW=(function()local RT={}RT.xR=false\nRT.YP=nil\nRT.UP={}\nfunction RT:SU()dQ.eU[sQ.gI]=RT.xR\ndQ.eU[sQ.fI]={}TE:tU('ConfigDBChanged',RT.ZT,RT)RT:ZT()end\nfunction RT:ZT()RT.xR=dQ:uU(sQ.gI)RT.UP={}local TY=dQ:uU(sQ.fI)for YU,UI in pairs(TY)do\nRT.UP[UI]=true end end\nfunction RT:QQ(YU,TY)if not RT.xR then return end\nif YU.IP~=nil and RT.UP[YU.IP]then return end\nif YU.OP==nil then O('Invalid sound file')return end\nif\nJ.EQ()==0 then J.QQ(YU.OP)RT.YP=YU elseif TY or\n(RT.YP~=nil and RT.YP.PP<=YU.PP)then J.QQ(YU.OP)RT.YP=YU end end\nfunction RT:AP(TY,YU)if YU==nil then YU=RT.UP[TY]==true end\nRT.UP[TY]=uE(YU,nil,true)dQ:IT(sQ.fI,E.SP(RT.UP))end\nreturn RT end)()\niE={DP='ms',FP='mb',GP='ud',jU='ae',hU='ad',HU='st',nU='dr',bU='wr'}\nQE={DP={OP='SagaHUD/UI_Select.mp3',PP=0,IP=iE.DP},FP={OP='SagaHUD/UI_Back.mp3',PP=0,IP=iE.FP},GP={OP='SagaHUD/UI_Switch.mp3',PP=0,IP=iE.GP},jU={OP='SagaHUD/AutopilotEnabled.mp3',PP=1},hU={OP='SagaHUD/AutopilotDisabled.mp3',PP=1},HU={OP='SagaHUD/Startup.mp3',PP=1},nU={OP='SagaHUD/DestinationReached.mp3',PP=2},bU={OP='SagaHUD/WaypointReached.mp3',PP=1}}\noE={HP='Loading',JP={['atmo']={['xs']={35.03,100},['s']={182.67,400},['m']={988.67,1600},['l']={5480,12800}},['space']={['xs']={35.03,100},['s']={182.67,400},['m']={988.67,1600},['l']={5480,12800}},['rocket']={['xs']={173.42,400},['s']={886.72,800},['m']={4720,6400},['l']={25740,50000}}},KP={['atmo']={['xs']=50,['s']=163,['m']=1315,['l']=10461},['space']={['xs']=50,['s']=187,['m']=1496,['l']=15933},['rocket']={['xs']=366,['s']=736,['m']=6231,['l']=68824}},LP={['atmospheric fuel tank']='atmo',['space fuel tank']='space',['rocket fuel tank']='rocket'}}\nfunction xW()local UI=oE\nlocal atmoTankHandling=0 --export: (Atmospheric Fuel Tank Handling) 0-5-- Skill level of person who deployed tanks, or highest talents applied to construct with reapply Talents.\n\nlocal spaceTankHandling=0 --export: (Space Fuel Tank Handling) 0-5-- Skill level of person who deployed tanks, or highest talents applied to construct with reapply Talents.\n\nlocal rocketTankHandling=0 --export: (Rocket Fuel Tank Handling) 0-5-- Skill level of person who deployed tanks, or highest talents applied to construct with reapply Talents.\n\nlocal fuelTankOptimization=0 --export: Mining and Inventory > Stock Control >(Fuel Tank Optimization) 0-5-- Skill level of person who deployed tanks, or highest talents applied to construct with reapply Talents.\n\nlocal containerOptimization=0 --export: Mining and Inventory > Stock Control >(Container Optimization) 0-5-- Skill level of person who deployed tanks, or highest talents applied to construct with reapply Talents.\nlocal RT=\n(((100- (5*fuelTankOptimization))/100))-1\nlocal YU=\n(((100-\n(5*containerOptimization))/100))-1\npE={['atmo']=(4- (4*(R.A(RT)+R.A(YU)))),['space']=(6- (6*(R.A(RT)+R.A(YU)))),['rocket']=(0.8- (0.8*(R.A(RT)+R.A(YU))))}local TY=J.HQ()tW={['atmo']={},['space']={},['rocket']={}}\nlE=B.gW.vW()\nfor IO=1,#lE,1 do\nkE={_Y=lE[IO],n=B.gW.sW(lE[IO]),pO=B.gW.aW(lE[IO]),mY=B.gW.xW(lE[IO]),ZP=B.gW.cW(lE[IO])}kE.XP=UI.LP[kE.pO:lower()]\nif kE.XP~=nil then\nif kE.ZP>=\nUI.KP[kE.XP]['l']then kE.WU='l'elseif kE.ZP>=UI.KP[kE.XP]['m']then kE.WU='m'elseif kE.ZP>=\nUI.KP[kE.XP]['s']then kE.WU='s'elseif kE.ZP>=UI.KP[kE.XP]['xs']then kE.WU='xs'end\nif kE.WU then\nif kE.XP=='atmo'then kE.UU=TY\nkE.EU=0\nkE.nY=1\nkE.YU=0\nkE.TU=0\nkE.RU=\n\nUI.JP['atmo'][kE.WU][2]*(1+ (0.2*atmoTankHandling))*pE['atmo']E.W(tW['atmo'],kE)elseif(kE.XP=='space')then kE.UU=TY\nkE.EU=0\nkE.nY=1\nkE.YU=0\nkE.TU=0\nkE.RU=UI.JP['space'][kE.WU][2]*(1+\n(0.2*spaceTankHandling))*pE['space']E.W(tW['space'],kE)elseif(kE.XP=='rocket')then kE.UU=TY\nkE.EU=0\nkE.nY=1\nkE.YU=0\nkE.TU=0\nkE.RU=UI.JP['rocket'][kE.WU][2]*(1+\n(0.2*rocketTankHandling))*pE['rocket']E.W(tW['rocket'],kE)end else\nO(\"Could not determine tank size for [\"..(kE.pO)..\"] [\"..(kE.ZP)..\"]\")end end end end\nfunction jE()local RT=oE\nlocal TY=J.HQ()local ii=0\nfor YU,UI in pairs(tW)do\nfor IO,OP in ipairs(UI)do OP.n=OP.n\nOP.nY=OP.mY\nOP.mY=\nB.gW.xW(OP._Y)-RT.JP[YU][OP.WU][1]\nif(OP.mY~=\nOP.nY)then\nOP.EU=A.e((OP.mY/OP.RU)*100,0.1)OP.TU=OP.YU\nOP.YU=R.Y(OP.mY/\n((OP.nY-OP.mY)/ (TY-OP.UU)))OP.UU=TY end\nii=ii+1\nif ii>5 then coroutine.yield()end end end end\nfunction hE()local RT=coroutine.status(gE)if RT~=\"dead\"then\nlocal TY,YU=coroutine.resume(gE)elseif RT==\"dead\"then gE=coroutine.create(jE)\nlocal TY,YU=coroutine.resume(gE)end end\ngE=coroutine.create(jE)\nfunction EW()\nif B.eE~=nil then local IO=B.eE.tE()\nif IO==1 then\nIO='No Warpdrive'elseif IO==2 then IO='Broken'elseif IO==3 then IO='Warping'elseif IO==4 then IO='Parent Warping'elseif IO==5 then IO='Not Seated'elseif IO==6 then\nIO='Warp Cooldown'elseif IO==7 then IO='PvP Cooldown'elseif IO==8 then IO='Moving Docked Ship'elseif IO==9 then IO='No Container Linked'elseif\nIO==10 then IO='Planet Too Close'elseif IO==11 then IO='Destination Not Set'elseif IO==12 then\nIO='Destination Too Close'elseif IO==13 then IO='Destination Too Far'elseif IO==14 then IO='Not Enough Cells'elseif IO==15 then IO='Ready'end\nlocal TY=B.eE.yE()local UI=B.eE.uE()if IO=='Destination Not Set'then\nUI='No Destination'end\nlocal YU=B.eE.iE()local RT=B.eE.oE()return\n{CP=IO,VP=TY,BP=UI,NP=YU,MP=RT}else\nreturn{CP='Ready',VP=42000,BP='No Destination',NP=42,MP=42}end end\nfunction uE(RT,TY,YU)if RT then return TY else return YU end end\nfunction O(YU,RT,TY,UI)if RT~=nil and\nUI~=nil and UI>RT then return end\nif TY=='unit'or\nTY=='export'or TY=='__index'then return end\nif UI==nil then UI=0 end\nls=string.rep(' - ',UI)UI=UI+1\nif\nW(YU)==\"table\"then if TY==nil then J._(ls..'[table]')else\nJ._(ls..'['..TY..'] [table]')end\nfor IO,OP in pairs(YU)do O(OP,RT,IO,UI)end else local IO=''\nif W(YU)==\"function\"then IO=\"[function]\"elseif W(YU)==\"thread\"then IO=\"[thread]\"elseif\nW(YU)==\"boolean\"then IO=uE(YU,\"TRUE\",\"FALSE\")elseif W(YU)==\"nil\"then IO=\"[nil]\"else IO=YU end\nif TY==nil then J._(ls..IO)else\nJ._(ls..'['..TY..'] '..T(IO))end end end\nfunction fE(TY,RT)if TY==nil then return'NaN'end\nif RT==nil then RT=false end\nlocal YU=R.A(TY)\nif YU<\nuE(RT,1000,10000)then return A.e(TY)..' m'elseif YU<200000 then local km=TY/1000\nif km>10 then return\nA.e(km,1)..' km'else return A.e(km,0.1)..' km'end else local su=TY/200000\nif su>10 then return A.e(su,1)..' su'else\nreturn A.e(su,0.1)..' su'end end end\nfunction dE(RT)local TY=T(RT)if RT==nil then return RT end\nwhile true do\nTY,k=string.gsub(TY,\"^(-?%d+)(%d%d%d)\",'%1 %2')if(k==0)then break end end\nreturn TY end\nfunction gQ(TY,RT)if TY==nil then return TY end\nlocal IO={}local YU=\"(.-)\"..RT\nlocal PA=1\nlocal OP,UI,AS=TY:find(YU,1)while OP do if OP~=1 or AS~=\"\"then E.W(IO,AS)end\nPA=UI+1\nOP,UI,AS=TY:find(YU,PA)end\nif PA<=#TY then AS=TY:sub(PA)\nE.W(IO,AS)end\nreturn IO end\nfunction sE(RT)return(RT:gsub(\"^%l\",string.upper))end\nfunction aE(RT)if W(RT)~='number'then return RT end\nlocal TY=R.Y(RT/86400)local YU=R.Y(\nRT/60/60%24)local UI=R.Y(RT/60%60)\nlocal RT=R.Y(RT%60)if RT<0 or YU<0 or UI<0 then return\"0s\"end\nif TY>0 then return\nTY..\"d \"..YU..\"h\"elseif YU>0 then return YU..\"h \"..UI..\"m\"elseif UI>0 then return\nUI..\"m \"..RT..\"s\"else return RT..\"s\"end end\nfunction zE(RT)local TY=jW(RT)return TY.b end\nfunction jW(RT)local YU=R.R\nlocal TY=nil\nfor UI,IO in pairs(bW[mW])do\nlocal OP=OW.dist(RT,IO.GT)if OP<YU then YU=OP\nTY=IO end end\nreturn TY,YU end\nfunction xE(RT)\nlocal PA=' *([+-]?%d+%.?%d*e?[+-]?%d*)'\nlocal OP,IO,YU,UI,TY=string.match(RT,'::pos{'..PA..','..PA..','..PA..','..PA..','..PA..'}')OP=I(OP)IO=I(IO)YU=I(YU)UI=I(UI)TY=I(TY)\nreturn{EP=YU,RP=UI,iR=TY,b=IO,s=OP}end\nfunction xQ(RT)local TY=xE(RT)return yE(TY)end\nfunction yE(RT)\nif RT.iR==nil then return nil end\nif RT.b==nil or RT.b==0 then return vec3(RT.EP,RT.RP,RT.iR)end\nlocal TY=S.k*A.t(RT.EP,-90,90)\nlocal UI=S.k*(RT.RP%360)local YU=R.D(TY)local IO=bW[RT.s][RT.b]return\nvec3(IO.GT)+ (IO.GY+RT.iR)*vec3(\nYU*R.D(UI),YU*R.S(UI),R.S(TY))end\nfunction nW()\nfor RT,TY in pairs(bW)do\nfor YU,UI in pairs(TY)do UI.b=YU\nUI.GT=vec3(UI['center'])\nUI.dY=UI['gravity']UI.qP=UI['GM']UI.n=UI['name'][1]UI.wP=UI['type'][1]\nUI.GY=UI['radius']UI.FY=UI['atmosphereRadius']UI.eP=UI['satellites']\nUI.rY=UI['hasAtmosphere']UI.HT=UI[\"surfaceMaxAltitude\"]\nUI.rP=UI[\"surfaceMinAltitude\"]local IO={}for OP,PA in ipairs(UI['ores'])do E.W(IO,PA)end\nUI.tP=IO\nif\nUI['hasAtmosphere']then UI.tY=UI['atmosphereRadius']-UI.GY end end end\nfor RT,TY in pairs(bW)do\nfor YU,UI in pairs(TY)do if UI.eP~=nil then\nfor IO,OP in pairs(UI.eP)do bW[RT][OP].yP=YU end end end end end\nfunction UW()local RT=h.nT\nlocal TY=h.KI\nfor YU,UI in pairs(bW[mW])do local AS=200000\nif UI.rY then AS=UI.FY*1.2 else\nAS=UI.GY*1.4 end\nlocal OP=UI.GT-RT\nlocal PA=OP:dot(TY)local IO=PA^2- (OP:len2()-\nAS^2)\nif IO>=0 then local SD=R.w(IO)local FG=PA+SD\nlocal DF=PA-\nSD\nif DF>0 then return UI,FG,DF elseif FG>0 then return UI,FG,nil end end end\nreturn nil,nil,nil end\nfunction cE(RT)local UI=h.nT\nlocal IO=jW(UI)local OP=200000\nif IO.rY==1 then OP=IO.FY*1.05 else\nOP=IO.GY*1.2 end\nlocal TY,PA,YU=UW(UI,RT,OP)local AS=PA\nif\nYU~=nil and PA~=nil then AS=R.P(YU,PA)end\nif AS~=nil then return TY,AS else return nil,nil end end\nfunction pW(RT)local TY=0\nif RT==nil then\nif B.gW.dW()==0 then RT=h.nT\nlocal YU=jW(RT)TY=\nOW.dist(vec3(YU.GT),RT)-YU.GY else TY=B.gW.dW()end else RT=vec3(RT)local YU=jW(RT)\nTY=OW.dist(vec3(YU.GT),RT)-YU.GY end\nreturn A.e(TY)end\nfunction ME(RT)local ZX=jW(RT.nT)local OP=RT.nT\nlocal JK=RT.CI\nlocal KL=OP-ZX.GT\nlocal v2=JK:len2()\nlocal SD=KL:len()local mu=ZX.qP\nlocal FG=\n((v2-mu/SD)*KL-KL:dot(JK)*JK)/mu\nlocal GH=mu/ (2*mu/SD-v2)local BN=FG:len()local YU=FG:normalize()local pd=GH*(1-BN)\nlocal ad=GH*(1+BN)local TY=pd*YU+ZX.GT\nlocal IO=BN<=1 and-ad*YU+ZX.GT or nil\nlocal PA=R.w(GH*mu*(1-BN*BN))local VB=IO and\n2*R.N*R.w(GH^3/mu)\nlocal CV=R.J((FG:dot(KL))/ (BN*SD))if KL:dot(JK)<0 then CV=- (CV-2*R.N)end\nlocal AS=R.J(\n(R.D(CV)+BN)/ (1+BN*R.D(CV)))local LZ=AS\nif LZ<0 then LZ=LZ+2*R.N end\nlocal UI=LZ-BN*R.S(LZ)\nlocal DF=0\nlocal HJ=0\nlocal XC=0\nif VB~=nil then DF=UI/ (2*R.N/VB)HJ=VB-DF\nXC=HJ+VB/2\nif CV-\nR.N>0 then HJ=DF\nXC=HJ+VB/2 end\nif XC>VB then XC=XC-VB end end\nreturn\n{XY={uP=TY,iP=PA/pd,oP=A.e(R.w(mu/pd)),iR=A.e(pd-ZX.GY)},ZY={uP=IO,iP=PA/ad,oP=A.e(R.w(\nmu/ad)),iR=A.e(ad-ZX.GY)},pP=JK,lP=OP,kP=BN,jP=VB,hP=AS,gP=UI,VY=A.e(HJ),CY=A.e(XC),fP=CV}end\nfunction vE(RT,TY)local YU=RT+TY.GY\nif YU>0 then local UI=R.w(TY.qP/YU)return UI end\nreturn nil end\nfunction qE(RT)\nlocal TY=RT.LY.ZY.iR\nlocal IO=RT.LY.XY.iR\nlocal UI=RT.LY.CY\nlocal YU=RT.LY.VY\nlocal OP=0\nif UI<=YU then bE=TY\nOP=RT.LY.ZY.oP else bE=IO\nOP=RT.LY.XY.oP end\nreturn{JY=bE,KY=OP}end\nE=_G['table']\nfunction E.dP(RT)local TY={}if RT==nil then O(\"table.copy received NIL\")\nreturn TY end\nfor YU,UI in pairs(RT)do if W(UI)=='table'then TY[YU]=E.dP(UI)else\nTY[YU]=UI end end\nreturn\nsetmetatable(TY,getmetatable(RT))end\nfunction E.sP(RT)local TY=W(RT)local YU\nif TY=='table'then YU={}for IO,UI in pairs(RT)do if IO~='__index'then\nYU[E.sP(IO)]=E.sP(UI)end end else YU=RT end\nreturn YU end\nfunction E.aP(TY,RT)if RT==nil then return TY end\nfor YU,UI in pairs(RT)do E.W(TY,UI)end\nreturn TY end\nfunction E.rI(TY,RT,YU)if YU==nil then YU=false end\nlocal OP=false\nlocal UI=nil\nlocal IO=nil\nfor PA,AS in pairs(RT)do\nif\nW(AS)==\"table\"then OP=E.rI(TY,AS)if OP then break end elseif AS==TY then OP=true\nUI=AS\nIO=PA\nbreak end end\nreturn\nuE(YU,IO,OP)end\nfunction E.find(RT,TY)return E.rI(RT,TY,true)end\nfunction E.SP(RT)local TY={}for UI,YU in pairs(RT)do\nE.W(TY,UI)end\nreturn TY end\nfunction E.zP(RT)local TY=0\nfor YU,UI in\npairs(RT)do TY=TY+1 end\nreturn TY end\nfunction E.xP(RT)\nlocal TY=0\nfor YU,UI in ipairs(RT)do TY=TY+UI end\nreturn TY end\nfunction E.cP(RT)return E.xP(RT)/#RT end\nfunction E.vP(TY,RT)\nif W(TY)=='table'then\nfor UI,YU in pairs(RT)do\nif\nTY[UI]==nil then\nif W(YU)=='table'then if W(RT[UI])=='table'then TY[UI]={}end\nTY[UI]=E.vP(TY[UI],RT[UI])elseif RT[UI]~=nil then TY[UI]=RT[UI]end end end else\nO('Error: table.join received ['..W(TY)..'] instead of a table')O(TY)end\nreturn TY end\nfunction E.O(RT)local TY=-R.R\nfor YU,UI in pairs(RT)do if UI>TY then TY=UI end end\nreturn TY end\nfunction E.P(RT)local TY=R.R\nfor YU,UI in pairs(RT)do if UI<TY then TY=UI end end\nreturn TY end\nfunction E.bP(RT)local TY=0\nfor YU in pairs(RT)do TY=TY+1\nif RT[TY]==nil then return false end end\nreturn true end\nfunction eE(RT,TY,YU)\nTY=TY:project_on_plane(RT)YU=YU:project_on_plane(RT)return\nR.K(TY:cross(YU):dot(RT),TY:dot(YU))end\nfunction nE(RT,TY)return vec3(RT):cross(vec3(TY))end\nfunction NW(RT,TY)if TY==nil then TY=h.nT end\nlocal TY=TY:project_on_plane(h.DI)return\nA.e(vec3(TY-\n(RT:project_on_plane(h.DI))):len())end\nfunction ZE(RT,TY)local TY=TY\nif TY==nil then TY=h.nT end\nreturn vec3(TY-RT):normalize()end\nfunction mE(RT,TY)local TY=TY\nif TY==nil then TY=h.nT end\nreturn vec3(RT-TY):normalize()end\nfunction HE(RT)local YU=jW(h.nT)local TY=ZE(RT,h.nT)local PA=YU.GT\nlocal OP=h.nT-PA\nlocal UI=RT-PA\nlocal IO=UI:cross(OP):normalize()return(IO:cross(OP)):normalize()end\nfunction JE(RT)local UI=j\nlocal IO=p\nlocal TY=-h.KI:angle_between(RT)*S.pl\nlocal PA=(RT- (-h.KI))local YU=(PA+RT):normalize()local OP=\nPA+RT+PA\nif UI.IY=='Transfer'or UI.IY=='standby'then\nif h.WY*3.6 >=\nIO.LT then lW='ninety'\nOP=(RT:normalize()- (-h.KI:normalize()))elseif h.WY*3.6 > (IO.LT/3)and h.WY*3.6 <IO.LT then\nlW='main'\nOP=PA+ (RT+\n(PA*(20*(1-A.t(wW()/45,0,1)))))else lW='main2'OP=PA+RT+PA+PA end else lW='none'OP=PA+RT+PA end\nreturn{nP=TY,mP=PA,_P=YU,JI=OP}end\nfunction BW()if h.WY<1 then return 0 else return\nA.e(((h.AI):angle_between(h.KI))*S.pl)end end\nfunction kW()if h.WY<1 then return 0 else\nreturn A.e(\n((h.KI:project_on_plane(h.DI)):angle_between(h.KI))*S.pl)end end\nfunction _E()if j.IY=='Transfer'and h.WY>1 then\nreturn A.e(\nZE(JE(p.DT).JI):angle_between(ZE(h.AI))*S.pl,0.01)else return 0 end end\nfunction qW()local RT=j\nlocal TY=p\nlocal YU=h\nif MW then\nreturn A.e(\nZE(TY.FT.GT,TY.DT):angle_between(ZE(TY.FT.GT,YU.nT))*S.pl,0.01)else\nreturn A.e(\nZE(TY.DT,YU.DY.GT):angle_between(ZE(YU.nT,YU.DY.GT))*S.pl,0.01)end end\nfunction eW()\nreturn A.e(-\nR.C(eE(h.SI,-h.AI,ZE(p.DT):project_on_plane(h.DI))),0.01)end\nfunction GW()return\nA.e(-\nR.C(eE(h.SI,-\nh.KI:project_on_plane(h.DI),HE(p.DT):project_on_plane(h.DI))),0.01)end\nfunction wW()if h.WY<1 then return 0 else return\nA.e(h.KI:angle_between(-ZE(p.DT))*S.pl,0.01)end end\nfunction QR(RT)\nreturn{h.nT.x+RT.x,h.nT.y+RT.y,h.nT.z+RT.z}end\nfunction WR(RT)return{RT.x,RT.y,RT.z}end\nfunction ER()local TY=(jW(h.nT).GT)\nlocal DF=vec3(13771471,7435803,-128971)local FG=DF\nlocal IO=18000000\nlocal YU=400000\nlocal AS=OW.dist(DF,h.nT)-IO\nlocal PA=\nOW.dist(TY,h.nT)-YU\nlocal UI=false\nlocal RT=vec3()local OP=0\nlocal GH=0\nlocal SD=vec3()\nif\nAS<PA then FG=DF\nOP=IO\nGH=R.A(AS)else FG=TY\nOP=YU\nGH=R.A(PA)end\nif AS<0 or PA<0 then UI=true end\nif UI then SD=\n(ZE(FG,h.nT):normalize())*GH else SD=-\n(ZE(FG,h.nT):normalize())*GH end\nreturn{QA=K.tQ(QR(SD)),WA=GH}end\no={}\no.aR={aI=false,vR=false,zR=false,EA=240,RA=245,TA=235,YA=0,UA=nil,IA=nil}\nfunction o:SU()dQ.eU[sQ.OT]=1\ndQ.eU[sQ.aI]=self.aR.aI\ndQ.eU[sQ.vR]=self.aR.vR\nTE:tU('ConfigDBChanged',self.ZT,self)J.MQ(1)\nself.OA()self:ZT()fQ={}fQ.PA=RR:new{AA='aggInfo',SA=_Q}\nfunction fQ.PA:DA()\nself.SA=_Q\nlocal RT='orangered'local YU='Offline'local TY='orangered'if self.SA.OY==1 then\nRT='springgreen'YU='Online'end\nif self.SA.kY then TY='springgreen'end\nlocal UI={}UI[#UI+1]='AGG INFO'\nUI[#UI+1]='Status : <span style=\"color: '..RT..';\">'..YU..'</span>'UI[#UI+1]='Target Alt : '..self.SA.fY\nUI[#UI+1]=\n'Current Alt : '..self.SA.eY\nUI[#UI+1]='Pulsors : '..self.SA.NI\nUI[#UI+1]='Strength : '..A.e(self.SA.AU,0.01)..' %'\nUI[#UI+1]='Rate : '..A.e(self.SA.VI*100,0.01)..' %'\nUI[#UI+1]='Power : '..A.e(self.SA.BI*100,0.01)..' %'\nUI[#UI+1]='In Bubble : <span style=\"color: '..TY..';\">'..T(self.SA.kY)..'</span>'self.FA=#UI\nreturn E.E(UI,'<br>')end\nfQ.GA=RR:new{AA='controlsBox',HA=p,JA=j}\nfunction fQ.GA:DA()\nlocal RT={}\nRT[#RT+1]='Alt-1| Toggle AP - '..T(self.HA.xR)\nRT[#RT+1]='Alt-2| Altitude Hold - '..T(self.JA.tR)\nRT[#RT+1]='Alt-3| Orbital Hold - '..T(self.JA.oR)\nRT[#RT+1]='Alt-4| Radial Hold - '..T(self.JA.hR)\nRT[#RT+1]='Alt-5| Engine Mode - '..T(self.JA.gR)\nRT[#RT+1]='Alt-6| Slow Flat - '..T(self.HA.XT.fR)\nRT[#RT+1]='Alt-7| AR Mode - '..T(self.JA.dR)\nRT[#RT+1]='Alt-8| Rotation Damp. - '..T(self.JA.sR)RT[#RT+1]='Alt-9| Instructions'RT[#RT+1]=''\nRT[#RT+1]='Alt-Shift-1| Toggle Main Menu'\nRT[#RT+1]='Alt-Shift-2| Follow Mode - '..T(self.JA.yR)RT[#RT+1]=''\nRT[#RT+1]='G| Parking - '..T(self.HA.bT)RT[#RT+1]='Alt + Ctrl| Brake Lock - '..T(M.LR)self.FA=\n#RT\nreturn E.E(RT,'<br>')end\nfQ.gW=RR:new{AA='coreInfo',gW=B.gW,WE=B.WE,KA=h}\nfunction fQ.gW:DA()\nlocal YU=R.A((self.gW.mW()*100)-100)local RT=self.gW.nW()local TY=self.gW._W()if h.UY==1 then\nself.AA='coreInfo alert'end\nlocal UI='springgreen'if YU<=20 then UI='orangered'elseif YU<=50 then\nUI='goldenrod'end\nlocal IO={}\nIO[#IO+1]='Core : <span style=\"color:'..UI..';\">%'..YU..'</span>'\nIO[#IO+1]='Core Stress: <span style=\"color:'..UI..';\">'..(TY-RT)..'</span> / '..TY\nif self.WE~=nil then local DF=self.WE.RE()local FG=self.WE.TE()local GH=((DF/FG)*100)local SD='orangered'local HJ='springgreen'if GH<=20 then\nHJ='orangered'elseif GH<=50 then HJ='goldenrod'end\nif\nself.WE.EE()==1 then SD='springgreen'end\nlocal PA='<span style=\"color:'..SD..';\">Shield</span>'\nlocal AS='<span style=\"color: '..HJ..';\">'..GH..'%</span>'\nlocal OP='<span style=\"color: '..HJ..';\">'..DF..'</span> / '..FG\nIO[#IO+1]=PA..': '..AS\nIO[#IO+1]='Shield Health: '..OP end\nIO[#IO+1]='PvP Timer: '..h.mI\nself.FA=#IO\nreturn E.E(IO,' | ')end\nfQ.LA=RR:new{AA='debugInfo',JA=j,KA=h,HA=h,SA=p}\nfunction fQ.LA:DA()local RT={}self.KA=h\nself.SA=_Q\nself.HA=p\nself.JA=j\nRT[#RT+1]='DEBUG'RT[#RT+1]='Last Dist = '..T(self.JA.aY)RT[#RT+1]=\n'Proj Dist = '..T(NW(self.HA.DT))\nRT[#RT+1]=\n'T Dist = '..T(OW.dist(self.HA.DT,h.nT))RT[#RT+1]=''\nRT[#RT+1]='targetLocation = '..T(self.HA.JT)RT[#RT+1]='targetAlt = '..T(self.HA.ST)RT[#RT+1]=\n'atmo = '..T((self.HA.FT.FY-self.HA.FT.GY))\nRT[#RT+1]='Target Angle = '..eW()RT[#RT+1]='Aim Target = '..j.IU\nRT[#RT+1]='SpcVector = '..T(lW)RT[#RT+1]='AP Mode = '..T(j.IY)\nRT[#RT+1]='BrakeCtrl = '..T(DW)RT[#RT+1]='SpeedCtrl ='..T(KW)\nRT[#RT+1]='Brake Trig = '..T(j.oY)RT[#RT+1]=''RT[#RT+1]='TAV.x = '..T(VW.x)RT[#RT+1]=\n'TAV.y = '..T(VW.y)\nRT[#RT+1]='TAV.z = '..T(VW.z)RT[#RT+1]=''RT[#RT+1]='Samebody = '..T(MW)RT[#RT+1]=\n'Vel World Angle = '..kW()\nRT[#RT+1]='Vel to T Angle = '..GW()RT[#RT+1]='Spc to T Angle = '..wW()RT[#RT+1]='world T Angle = '..qW()\nRT[#RT+1]='Target Altitude = '..T(j.uR)RT[#RT+1]=''RT[#RT+1]='atmo = '..h.EY\nRT[#RT+1]=\n'Target Pitch = '..T(A.e(j.OU))RT[#RT+1]='Speed = '..T(A.e(h.WY),0.01)RT[#RT+1]='Max S = '..T(A.e(h.PU*3.6),0.01)RT[#RT+1]='Vert Speed = '..T(A.e(h.TY),0.01)RT[#RT+1]='Forward Speed = '..T(A.e(h.yY),0.01)RT[#RT+1]='Lateral Speed = '..T(A.e(h.uY),0.01)RT[#RT+1]=''RT[#RT+1]=\n'Burn Spd = '..T(A.e(h.YY*3.6))\nRT[#RT+1]=''RT[#RT+1]='gravity = '..T(h.dY)RT[#RT+1]='Altitude = '..T(A.e(h.iR))\nRT[#RT+1]='ClosestBody = '..T(h.DY.n)\nRT[#RT+1]='TargetBody = '..T(self.HA.FT.n)\nRT[#RT+1]='atmoAlt = '..T(h.DY.FY-h.DY.GY)RT[#RT+1]=''\nRT[#RT+1]='OrbitSpd = '..T(h.HY.KY*3.6)RT[#RT+1]='targetOrbit = '..T(j.BY)RT[#RT+1]='Orbit Status = '..T(j.SY)\nRT[#RT+1]='Apoapsis = '..T(h.LY.ZY.iR)RT[#RT+1]='Periapsis = '..T(h.LY.XY.iR)RT[#RT+1]=\n'T to Periapsis = '..T(h.LY.VY)RT[#RT+1]='T to Apoapsis = '..T(h.LY.CY)\nRT[#RT+1]='hold = '..I(fW())RT[#RT+1]=''RT[#RT+1]='aggAlt = '..T(_Q.eY)RT[#RT+1]=\n'aggTarget = '..T(_Q.fY)\nRT[#RT+1]='aggStr = '..T(_Q.AU)self.FA=#RT\nreturn E.E(RT,'<br>')end\nfQ.ZA=RR:new{AA='fuelInfo'}\nfunction fQ.ZA:DA()local RT={}\nRT[#RT+1]='Fuel Tanks'\nfor TY,YU in pairs(tW)do if#YU>0 then RT[#RT+1]=''RT[#RT+1]=TY end\nfor UI,IO in\nipairs(YU)do local OP='ivory'\nif IO.EU<=20 then OP='orangered'elseif IO.EU<=50 then OP='goldenrod'end\nRT[#RT+1]=IO.n..' - <span style=\"color: '..OP..';\">%'..IO.EU..'</span>'end end\nself.FA=#RT\nreturn E.E(RT,'<br>')end\nfQ.XA=RR:new{AA='infos',KA=h,HA=p,JA=j}\nfunction fQ.XA:DA()\nself.JA=j\nself.KA=h\nself.HA=p\nlocal TY={}local RT=self.KA.RY\nTY[#TY+1]='Yaw = '..A.e(RT.JR)TY[#TY+1]='Pitch = '..A.e(RT.GR)TY[#TY+1]='Roll = '..A.e(RT.HR)TY[#TY+1]=''TY[#TY+1]='Mass = '..A.e(self.KA.WI/1000,0.001)..' T'TY[#TY+1]=\n'Wing Stall Angle = '..self.HA.XT.NY\nTY[#TY+1]=\n'Velocity Angle = '..BW()TY[#TY+1]=''TY[#TY+1]='Burn Protection = '..T(self.JA.mR)TY[#TY+1]='Max Speed = '..T(A.e(self.HA.LT))TY[#TY+1]='Brake Dist = '..fE(self.KA.hY.gY,true)\nif self.HA.DT~=nil then\nlocal YU=self.KA.WY\nif YU>=1 then local UI=OW.dist(self.HA.DT,self.KA.nT)\nlocal IO=UI/YU\nTY[#TY+1]=''TY[#TY+1]='ETA = '..aE(IO)..' ('..A.e(YU)..' m/s)'else TY[#TY+1]=''\nTY[#TY+1]='ETA = \u221e (0 m/s)'end end\nself.FA=#TY\nreturn E.E(TY,'<br>')end\nfQ._R=RR:new{AA='mainMenu',VA=TR.CA,BA=4,NA=16,MA=4,qA=20}\nYR={wA='RouteList',eA='RouteListAll',rA='RouteListByPlanet',tA='EditRoute',yA='Autopilot',uA='Settings',iA='AutopilotConfig',oA='Databanks',pA='DatabanksConfig',lA='DatabanksRoute',kA='DatabanksUSB',jA='Scale',hA='HUD',gA='Sounds'}\nfunction fQ._R:SU()local TY=YR\nself.QT=UR\nself.fA={LT={'Maximum space travel speed','Set to 0 for automatic detection',maxSpaceSpeed..' Default'},CT={'How steep to pitch in atmo in degrees',\nmaxPitch..' Default'},VT={'How steep to roll in atmo in degrees',maxRoll..' Default'},NY={'Degrees from your trajectory your ship','stalls at, based on majority of airfoil','type used for lift (Ailerons 35,','Wings 50, Stabilizers 70)',\nwingStallAngle..' Default'},qT={'Hover height in meters',\nhoverHeight..' Default'},eT={'Will take over throttle/brakes to prevent','burning in atmosphere. Use brakes or','change throttle to take manual control again.'},BT={'Automatic shield state and resistance control'},dI={'Show radar contacts in the HUD'},sI={'Show the default radar widget'},fR={'levels the ship when','below 100km / hr and in atmo'},NT={'rarely used, only if engines are angled','in a way where space capability isnt','detected automatically correctly.'}}dQ.eU[sQ.zI]=self.QT.MI.dA\nTE:tU('ConfigDBChanged',self.ZT,self)self:ZT()self.QT.MI.sA=self.aA-self.BA*2\nself.QT.MI.zA=self.NA\nself.QT.MI.xA=self.MA\nself.QT.MI.qA=self.qA\nself.QT:cA('Routes',TY.wA)self.QT:cA('All Routes',TY.eA,TY.wA)\nself.QT:cA('Autopilot Controls',TY.yA)self.QT:cA('Settings',TY.uA)\nself.QT:cA('Autopilot Configuration',TY.iA,TY.uA)self.QT:cA('Databanks',TY.oA,TY.uA)\nself.QT:cA('Visual',TY.hA,TY.uA)\nself.QT:cA('Scale',TY.jA,TY.hA,{uU={YT=function()\nreturn(dQ:uU(sQ.OT)*100)..'%'end},RT={YT=IR,UT=sQ.OT,TT=function(YU)return\nA.t(I(YU),30,300)/100 end}})\nself.QT:cA('Config DB',TY.pA,TY.oA,{uU={YT=OR,UT='config'}})\nself.QT:cA('Route DB',TY.lA,TY.oA,{uU={YT=OR,UT='routes'}})\nself.QT:vA('Toggle on/off',TY.yA,{bA={YT=p.eR},uU={YT=function()return p.xR end}})self.QT:vA('New Route',TY.wA,{bA={YT=PR}})\nself.QT:cA('Route',TY.tA,TY.tA,{nA={YT=AR,UT=i}},true)\nself.QT:vA('Name',TY.tA,{RT={YT=SR},uU={YT=DR}},true)\nself.QT:vA('Add Current Position',TY.tA,{bA={YT=FR}},true)\nself.QT:vA('Add ::Pos Location',TY.tA,{RT={YT=zQ}},true)\nfor YU=0,27 do local IO=YU+3\nlocal UI=(IO*10)..'%'\nself.QT:vA(UI,TY.jA,{mA={YT=function(OP,IO)\nreturn dQ:uU(sQ.OT)==IO end,UT=IO/10},bA={YT=GR,UT={_A=sQ.OT,QS=IO/10}}})end\nTE:tU('ConfigChange'..sQ.OT,o.OA)\nTE:tU('RoutesUpdated',self.WS,self)\nself.QT:vA('Unit Widget',TY.hA,{bA={YT=function()o.uT()end},uU={YT=function()return o.aR.aI end}})\nif#B.cE>0 then\nself.QT:vA('Radar Boxes',TY.hA,{bA={YT=function()vQ.yT()end},uU={YT=function()\nreturn vQ.uO==true end},ES=self.fA.dI})\nself.QT:vA('Radar Widget',TY.hA,{bA={YT=function()vQ.tT()end},uU={YT=function()return vQ.KO~=nil end},ES=self.fA.sI})end\nself.QT:vA('Menu Action Legend',TY.hA,{bA={YT=function()self.QT:RS()end},uU={YT=function()return\nself.QT.MI.dA end}})local RT='MyDocuments/NQ/DualUniverse/audio/'\nself.QT:cA('Sounds',TY.gA,TY.uA)\nself.QT:vA('Enabled',TY.gA,{bA={YT=function()zW.xR=not zW.xR\ndQ:IT(sQ.gI,zW.xR)end},uU={YT=function()return\nzW.xR end}})\nself.QT:vA('Startup',TY.gA,{bA={YT=function()zW:AP(iE.HU)end},uU={YT=function()return\nzW.UP[iE.HU]==nil end},NR={YT=function()\nzW:QQ(QE.HU,true)end,TS='Preview'},ES=RT..QE.HU.OP})\nself.QT:vA('Autopilot on',TY.gA,{bA={YT=function()zW:AP(iE.jU)end},uU={YT=function()return\nzW.UP[iE.jU]==nil end},NR={YT=function()\nzW:QQ(QE.jU,true)end,TS='Preview'},ES=RT..QE.jU.OP})\nself.QT:vA('Autopilot off',TY.gA,{bA={YT=function()zW:AP(iE.hU)end},uU={YT=function()return\nzW.UP[iE.hU]==nil end},NR={YT=function()\nzW:QQ(QE.hU,true)end,TS='Preview'},ES=RT..QE.hU.OP})\nself.QT:vA('Destination reached',TY.gA,{bA={YT=function()zW:AP(iE.nU)end},uU={YT=function()return\nzW.UP[iE.nU]==nil end},NR={YT=function()\nzW:QQ(QE.nU,true)end,TS='Preview'},ES=RT..QE.nU.OP})\nself.QT:vA('Waypoint reached',TY.gA,{bA={YT=function()zW:AP(iE.bU)end},uU={YT=function()return\nzW.UP[iE.bU]==nil end},NR={YT=function()\nzW:QQ(QE.bU,true)end,TS='Preview'},ES=RT..QE.bU.OP})\nself.QT:vA('Menu select',TY.gA,{bA={YT=function()zW:AP(iE.DP)end},uU={YT=function()return\nzW.UP[iE.DP]==nil end},NR={YT=function()\nzW:QQ(QE.DP,true)end,TS='Preview'},ES=RT..QE.DP.OP})\nself.QT:vA('Menu back',TY.gA,{bA={YT=function()zW:AP(iE.FP)end},uU={YT=function()return\nzW.UP[iE.FP]==nil end},NR={YT=function()\nzW:QQ(QE.FP,true)end,TS='Preview'},ES=RT..QE.FP.OP})\nself.QT:vA('Menu up/down',TY.gA,{bA={YT=function()zW:AP(iE.GP)end},uU={YT=function()return\nzW.UP[iE.GP]==nil end},NR={YT=function()\nzW:QQ(QE.GP,true)end,TS='Preview'},ES=RT..QE.GP.OP})\nself.QT:vA('Max Space Speed',TY.iA,{RT={YT=function(YU)dQ:IT(sQ.LT,I(YU))p:ZT()end},uU={YT=function()return\np.XT.LT end},ES=self.fA.LT})\nself.QT:vA('Max Pitch',TY.iA,{RT={YT=function(YU)dQ:IT(sQ.CT,I(YU))p:ZT()end},uU={YT=function()return\np.XT.CT end},ES=self.fA.CT})\nself.QT:vA('Max Roll',TY.iA,{RT={YT=function(YU)dQ:IT(sQ.VT,I(YU))p:ZT()end},uU={YT=function()return\np.XT.VT end},ES=self.fA.VT})\nself.QT:vA('Wing Stall Angle',TY.iA,{RT={YT=function(YU)dQ:IT(sQ.NY,I(YU))p:ZT()end},uU={YT=function()return\np.XT.NY end},ES=self.fA.NY})\nself.QT:vA('Hover Height',TY.iA,{RT={YT=function(YU)dQ:IT(sQ.qT,I(YU))p:ZT()end},uU={YT=function()return\np.XT.qT end},ES=self.fA.qT})\nself.QT:vA('Shield Management',TY.iA,{bA={YT=p.fU},uU={YT=function()return p.XT.BT end},ES=self.fA.BT})\nself.QT:vA('Burn Protection',TY.iA,{bA={YT=p.wT},uU={YT=function()return p.XT.eT end},ES=self.fA.eT})\nself.QT:vA('Slow Flat',TY.iA,{bA={YT=p.sU},uU={YT=function()return p.XT.fR end},ES=self.fA.fR})\nself.QT:vA('Space Capable Override',TY.iA,{bA={YT=p.dU},uU={YT=function()return p.XT.NT end},ES=self.fA.NT})self.QT.YS=function(self)o.aR.vR=false end\nself:US()self:WS()end\nfunction fQ._R:ZT()self.QT.MI.dA=dQ:uU(sQ.zI)end\nfunction fQ._R:uQ()\nself.QT:IS()end\nfunction fQ._R:DA()local UI=''local RT=o.OS\nlocal TY=o.PS\nlocal YU=self.BA*o.aR.UA\nUI=UI..'<style>'..o.AS.SS..'></style>'\nUI=UI..'<svg style=\"position:absolute;top:'..YU..';left:'..YU..';\" height=\"100vh\" viewBox=\"0 0 '..RT..' '..TY..'\" preserveAspectRatio=\"xMidYMid\" overflow=\"visible\" xmlns=\"http://www.w3.org/2000/svg\">\\n'UI=UI..'<defs>'..o.AS.DS..'</defs>'\nUI=UI..'<g class=\"mainMenu\">'..self.QT:FS()..'</g>'UI=UI..'</svg>'self.FA=self.QT.FA\nreturn UI end\nfunction fQ._R:US()self.QT:GS(YR.pA)self.QT:GS(YR.lA)\nself.QT:GS(YR.kA)\nfor RT,TY in ipairs(B.pE)do\nself.QT:vA(TY.n,YR.pA,{bA={YT=HR,UT={wP='config',cU=TY}},mA={YT=function(YU,TY)\nreturn dQ.cU==TY end,UT=TY}})\nself.QT:vA(TY.n,YR.lA,{bA={YT=HR,UT={wP='route',cU=TY}},mA={YT=function(YU,TY)return aQ.cU==TY end,UT=TY}})\nself.QT:vA(TY.n,YR.kA,{bA={YT=HR,UT={wP='usb',cU=TY}}})end end\nfunction fQ._R:HS()self.QT:GS(YR.tA)local RT=aQ.hO[aQ.PT]==nil\nlocal TY=#\naQ.hO[aQ.PT].p==0\nif RT or TY then return end\nfor UI,YU in\npairs(aQ.hO[aQ.PT].p)do\nlocal IO={bA={YT=JR,UT=UI,TS='Set Destination'},MR={YT=KR,UT=UI,TS='Delete',JS=2},NR={YT=LR,UT=UI,TS='Print Coordinates'},KS={YT=ZR,UT=UI,TS='Change point order'},RT={YT=XR,UT=UI},mA={YT=function(OP,PA)return\np.zU==PA end,UT=UI}}self.QT:vA(YU.n,YR.tA,IO)end end\nfunction fQ._R:WS()self.QT:GS(YR.eA)\nfor TY,RT in ipairs(aQ.hO)do local UI=aQ:vU(TY)if UI==0 then\nUI='-'end\nlocal YU={bA={YT=CR,UT=TY,TS='Set Destination'},MR={YT=VR,UT=TY,TS='Delete',JS=2},NR={YT=BR,UT=TY,TS='Open'},uU=\n'( '..UI..' )',mA={YT=function(IO,OP)return p.aU==OP end,UT=TY}}self.QT:vA(RT.n,YR.eA,YU)end end\nNR={AA='radar',VA=TR.LS,aA=280}\nfQ.qO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.qO:DA()return MR(self,'Dynamic',vQ.qO)end\nfQ.eO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.eO:DA()return MR(self,'Static',vQ.eO)end\nfQ.rO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}\nfunction fQ.rO:DA()return MR(self,'Abandoned',vQ.rO)end\nfQ.yO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.yO:DA()return\nMR(self,'Alien',vQ.yO)end\nfQ.wO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.wO:DA()return MR(self,'Space',vQ.wO)end\nfQ.tO=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.tO:DA()return MR(self,'Friend',vQ.tO)end\nfQ.ZS=RR:new{AA=NR.AA,VA=NR.VA,aA=NR.aA}function fQ.ZS:DA()return MR(self,'Threat',vQ.qO)end\nfunction MR(self,TY,RT)\nlocal YU=TY\nlocal IO=RT\nself.FA=#IO+1\nlocal UI=0\nlocal OP={}\nOP[#OP+1]=TY..' - '..#IO\nfor PA,AS in ipairs(IO)do if YU=='Threat'then\nif IO[PA]['targetThreatState']==0 then goto continue end end\nlocal SD=AS['constructId']..' ['..AS['size']..'] '..AS['name']OP[#OP+1]='<div class=\"radarRow\">'\nOP[#OP+1]=\n'<div class=\"radarText\" style=\"left: 0.5vh; width: 5vh;\">'..AS['constructId']..'</div>'\nOP[#OP+1]='<div class=\"radarText\" style=\"left: 5.5vh; width: 2.5vh;\">['..AS['size']..']</div>'\nOP[#OP+1]='<div class=\"radarText\" style=\"left: 8vh; width: 15vh;\">'..AS['name']..'</div>'\nOP[#OP+1]='<div class=\"radarText\" style=\"right: 0.5vh;\">'..dE(R.T(AS['distance']))..'</div>'OP[#OP+1]='</div>'UI=UI+1\nif UI>=10 then break end::continue::end\nself.XS=UI>0\nreturn E.E(OP,'')end\nfQ.CS=RR:new{AA='warpInfo',VS=WW}\nfunction fQ.CS:DA()self.VS=WW\nlocal RT='ivory'\nif self.VS.CP~='Ready'then RT='orangered'else RT='springgreen'end\nlocal TY={}TY[#TY+1]='WARP DRIVE INFO'\nTY[#TY+1]='Status : <span style=\"color: '..RT..';\">'..self.VS.CP..'</span>'\nTY[#TY+1]='Distance : '..fE(self.VS.VP,true)TY[#TY+1]='Destination : '..self.VS.BP\nTY[#TY+1]=\n'Cells Available : '..self.VS.NP\nTY[#TY+1]='Cells Needed : '..self.VS.MP\nTY[#TY+1]='<span style=\"color: '..RT..';\">ENGAGE WARP - ALT-J</span>'\nself.FA=#TY\nreturn E.E(TY,'<br>')end\nfor RT,TY in pairs(fQ)do TY:SU()end end\nfunction o:ZT()self.aR.aI=dQ:uU(sQ.aI)self.aR.vR=dQ:uU(sQ.vR)\nself.BS()end\nfunction o.OA()o.OS=J.VQ()o.PS=J.BQ()local TY=\no.PS/1080*dQ:uU(sQ.OT)local RT=o.PS/1080\nif TY~=nil and\no.aR.UA~=TY then o.aR.UA=TY\no.aR.IA=RT\no.NS()end end\nfunction o.uQ()o.OA()local RT=''local TY=j\nif o.aR.zR then RT=RT..o.MS()else RT=RT..o.qS()local OP={}if\nTY.KT then E.W(OP,fQ.LA)fQ.LA.VA=TR.wS end\nE.W(OP,fQ.GA)fQ.GA.VA=TR.CA\nfQ.GA.aA=180\nif o.aR.vR then E.W(OP,fQ._R)end\nE.W(OP,fQ.ZA)fQ.ZA.VA=TR.wS\nfQ.ZA.aA=220\nE.W(OP,fQ.XA)fQ.XA.aA=150\nfQ.XA.VA=TR.wS\nE.W(OP,fQ.gW)fQ.gW.VA=TR.eS\nfQ.gW.aA=800\nif B.XE then E.W(OP,fQ.PA)\nfQ.PA.VA=TR.wS\nfQ.PA.aA=150 end\nif B.eE~=nil then E.W(OP,fQ.CS)\nfQ.CS.VA=TR.wS\nfQ.CS.aA=180 end\nif#vQ.qO>0 then TY.rS=true else\nTY.rS=false end\nif#vQ.eO>0 then TY.tS=true else TY.tS=false end\nif#vQ.rO>0 then TY.yS=true else TY.yS=false end\nif#vQ.yO>0 then\nTY.uS=true else TY.uS=false end\nif#vQ.wO>0 then TY.iS=true else TY.iS=false end\nif#vQ.tO>0 then TY.oS=true else TY.oS=false end\nif\nvQ.HO~=nil and vQ.uO then if TY.yS then E.W(OP,fQ.rO)end\nif TY.tS then E.W(OP,fQ.eO)end\nif TY.rS==true then E.W(OP,fQ.qO)end\nif TY.oS then E.W(OP,fQ.tO)end\nif TY.uS then E.W(OP,fQ.yO)end\nif TY.iS then E.W(OP,fQ.wO)end\nE.W(OP,fQ.ZS)end\nlocal YU='width:'..o.OS..'px; height:'..o.PS..'px;'\nRT=RT..'<div style=\"position:fixed; top:0; left:0; '..YU..'\">'local UI={}local IO={}\nfor PA,AS in ipairs(OP)do if IO[AS.VA]==nil then IO[AS.VA]=0 end\nif\nIO[AS.VA]>0 then IO[AS.VA]=IO[AS.VA]+AS.pS end\nIO[AS.VA]=\nIO[AS.VA]+AS.aA end\nfor PA,AS in ipairs(OP)do if AS.uQ~=nil then AS:uQ()end\nif UI[AS.VA]==nil then\nUI[AS.VA]=0 end\nRT=RT..AS:FS(UI[AS.VA],IO[AS.VA])UI[AS.VA]=UI[AS.VA]+AS.aA+AS.pS end\nRT=RT..'</div>'end\nJ.qQ(RT)end\nfunction o.wR(RT)if RT==nil then RT=not o.aR.vR end\no.aR.vR=RT\ndQ:IT(sQ.vR,o.aR.vR)end\nfunction o.uT(RT)\nif RT==nil then RT=not o.aR.aI end\no.aR.aI=RT\ndQ:IT(sQ.aI,o.aR.aI)o.BS()end\nfunction o.BS()if o.aR.aI then Z.mQ()else Z.nQ()end end\nfunction o.qS()\nlocal rt=j\nlocal er=p\nlocal AS=oE\nlocal ty=h\nlocal SD=WW\nlocal qw=ty.hY.gY\nlocal GH=A.e(ty.RY.GR)local VB=1\nhE()if ty.iR>100000 then rt.lS=false else rt.lS=true end\nlocal OP=0\nlocal YU=0\nlocal TY=100\nlocal UI=A.e(Z.vQ())local PA=0\nlocal IO=0\nlocal yu={}\nyu[#yu+1]=\n[[<div class=\"speedBar\" style=\"transform:translate(50vw,50vh)\">]]..o.kS.jS..[[\n    </div>]]\nyu[#yu+1]=[[<div class=\"throttleBar\" style=\"transform:translate(50vw,50vh)\">]]..o.kS.hS..[[\n    </div>]]\nif rt.lS then local ui=''local qw=A.e(ty.hY.gY*1.1)local op='ivory'\nif ty.DY.rY then\nlocal pl=A.e(\nOW.dist(ty.DY.GT,ty.nT)- (ty.DY.FY))ui=[[Atmo Dist = ]]..fE(pl,true)..[[<br>]]if qw>\npl and pl>0 then op='orangered'end else\nlocal pl=A.e(\nOW.dist(ty.DY.GT,ty.nT)- (ty.DY.GY*1.05))ui=[[Surf Dist ~ ]]..fE(pl,true)..[[<br>]]if qw>\npl and pl>0 then op='orangered'end end\nyu[#yu+1]=[[<div class=\"altBar\" style=\"transform:translate(50vw,50vh)\">]]..o.kS.gS..[[\n        </div>]]\nyu[#yu+1]=[[<div class=\"atmoAlert\" style=\"font-size: ]]..VB..[[vh; color: ivory; text-shadow: 0.2vh 0.2vh 1vh black;\">\n        Brake Dist = <span style=\"color: ]]..op..[[;\">]]..fE(qw,true)..[[<br></span>]]..ui..[[\n        </div>]]end\nyu[#yu+1]=[[<div class=\"atmoAlert\" style=\"transform:translate(27vw,1vh); font-size: ]]..VB..[[vh; color: ivory; text-align: right; text-shadow: 0.2vh 0.2vh 1vh black;\">\n    Vertical Speed: ]]..(A.e(ty.TY*3.6))..[[\n    </div>]]\nif er.xR then\nyu[#yu+1]=[[<div class=\"apAlert\" style=\"font-size: 2vh; color: ivory; text-align: center; text-shadow: 0.2vh 0.2vh 1vh black;\">\n    AUTOPILOT\n    </div>]]end\nif er.bT then\nyu[#yu+1]=[[<div class=\"apAlert\" style=\"font-size: 2vh; color: ivory; text-align: center; text-shadow: 0.2vh 0.2vh 1vh black;\">\n        PARKING MODE\n        </div>]]end\nif rt.mR then\nyu[#yu+1]=[[<div class=\"apAlert\" style=\"font-size: 2vh; color: ivory; text-align: center; text-shadow: 0.2vh 0.2vh 1vh black;\">\n        BURN PROTECTION\n        </div>]]end\nif M.KR>0 then\nyu[#yu+1]=[[<div class=\"brakeAlert\" style=\"font-size: 2vh; color: orangered; text-align: center; text-shadow: 0.2vh 0.2vh 1vh black;\">\n        BRAKE\n        </div>]]end\nlocal we=false\nif rt.zT~=nil then local ui=A.e(qw*1.2)local op=ty.TY*3.6\nif rt.zT.rY then\nlocal pl=A.e(\nOW.dist(ty.DY.GT,ty.nT)- (rt.zT.FY))\nif ui>pl and pl>0 and op<0 and ty.WY>ty.YY then we=true end else\nlocal pl=A.e(OW.dist(ty.DY.GT,ty.nT)- (rt.zT.GY*1.1))if ui>pl and pl>0 and op<0 then we=true end end\nif we then\nyu[#yu+1]=\n[[<div class=\"collision\" style=\"font-size: 1.5vh; color: ivory; text-align: center; text-shadow: 0.2vh 0.2vh 1vh black;\">\n                Collision Alert : ]]..T(rt.zT.n)..[[\n                </div>]]end\nif er.XT.eT then\nif not er.xR and not er.bT and not rt.oR then\nif we then rt.mR=true\nif\nAW()=='cruise'then SW()end\nif GH<5 then N.FR:KW(D.j,0)end end\nif rt.mR==true then if we then rt.fS=true\nDW=30\nM.KR=1 end end end end end\nif not we and rt.fS then DW=31\nrt.fS=false\nif not rt.dS then M.KR=0 end end\nyu[#yu+1]='<style>'..o.AS.sS..'></style>'\nlocal Mq=K.tQ(WR(er.DT))local HJ=QR(ty.AI*ty.WY)local NM=K.tQ(HJ)local DF=nE(VW,ty.AI)\nlocal JK=QR(DF*10)local XC=K.tQ(JK)local KL=QR(ty.KI*ty.WY)local CV=K.tQ(KL)local LZ=QR(\n- (ty.KI)*ty.WY)local BN=K.tQ(LZ)\nlocal ZX=nE((HE(er.DT)),ty.AI)local FG=QR(ZX*10)local RT=K.tQ(FG)\nfor ui,op in pairs(bW[mW])do\nlocal jh=K.tQ(WR(op.GT))\nlocal pl=A.t(A.e((OW.dist(op.GT,ty.nT))/200000),10,500)\nlocal lk=(R.A(A.i(pl,10,500,0.3,2)-2.4))local kj=o.aS.zS\nif\nty.DY.n~=op.n or(ty.DY.n~=op.n and OW.dist(ty.DY.GT,ty.nT)>\n100000)then\nif op.wP=='Planet'and\n(rt.dR=='planets'or rt.dR=='both')then kj=o.aS.zS\nyu[#yu+1]=\n[[<div class=\"planets\" style=\"transform:translate(]]..(jh[1]*100)..[[vw,]]..(jh[2]*100)..[[vh) scale(]]..lk..[[)\">]]..kj..[[</div>]]\nyu[#yu+1]=[[<div class=\"ptext\" style=\"transform:translate(]]..(jh[1]*100)..[[vw,]]..(jh[2]*100)..[[vh); font-size: 1vhx; text-shadow: 4px 4px 5px maroon;\">]]..T(op.n)..[[</div>]]elseif\nop.wP=='Moon'and(rt.dR=='moons'or rt.dR=='both')then kj=o.aS.xS\nyu[#yu+1]=[[<div class=\"planets\" style=\"transform:translate(]]..(jh[1]*100)..[[vw,]]..(jh[2]*100)..[[vh) scale(]]..lk..[[)\">]]..kj..[[</div>]]\nyu[#yu+1]=[[<div class=\"mtext\" style=\"transform:translate(]]..(jh[1]*100)..[[vw,]]..(jh[2]*100)..[[vh); font-size: 1vh; text-shadow: 4px 4px 5px midnightblue;\">]]..T(op.n)..[[</div>]]end end end\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..(Mq[1]*100)..[[vw,]]..(Mq[2]*100)..[[vh)\">]]..o.aS.cS..[[</div>]]\nyu[#yu+1]=[[<div class=\"dottext\" style=\"transform:translate(]]..(Mq[1]*100)..[[vw,]]..(Mq[2]*100)..[[vh)\">]]..o.kS.vS..[[</div>]]\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..(NM[1]*100)..[[vw,]]..(NM[2]*100)..[[vh)\">]]..o.aS.bS..[[</div>]]\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..(XC[1]*100)..[[vw,]]..(XC[2]*100)..[[vh)\">]]..o.aS.nS..[[</div>]]\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..(CV[1]*100)..[[vw,]]..(CV[2]*100)..[[vh)\">]]..o.aS.mS..[[</div>]]\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..(BN[1]*100)..[[vw,]]..(BN[2]*100)..[[vh)\">]]..o.aS._S..[[</div>]]\nyu[#yu+1]=[[<div class=\"dot\" style=\"transform:translate(]]..((ER().QA)[1]*100)..[[vw,]]..(\n(ER().QA)[2]*100)..[[vh); font-size: 1vh\">]]..o.aS.QD..fE(ER().WA,true)..[[</div>]]ER()return E.E(yu)end\nTR={eS='top',wS='topLeft',CA='topRight',LS='bottom',WD='bottomLeft',ED='bottomRight'}RR={VA=nil,aA=200,RD=35,pS=10,qA=0,BA=0,FA=0,NA=0,MA=0,XS=true}\nfunction RR:new(RT)RT=\nRT or{}setmetatable(RT,self)self.__index=self\nreturn RT end\nfunction RR:SU()end\nfunction RR:DA()end\nfunction RR:FS(TY,RT)\nif\nself.DA~=nil and W(self.DA)=='function'then if TY==nil then TY=0 end\nlocal JK=o.aR.UA\nlocal PA=o.aR.IA\nlocal IO=self:DA()if\nnot self.XS then return''end\nlocal FG={}if self.AA~=nil then FG={self.AA}end\nE.W(FG,'widget')local UI=' class=\"'..E.E(FG,' ')..'\"'local OP=RT*JK\nlocal GH=self.aA*JK\nlocal YU=self.FA*(self.NA+self.MA)-self.MA+self.qA\nlocal AS=(YU+self.BA*2)*JK\nlocal HJ=self.RD*JK\nlocal ZX=TY*JK\nlocal KL=HJ\nlocal LZ=''\nif self.VA==TR.eS then KL=4*JK\nZX=ZX+o.OS/2-GH/2\nLZ='top: '..KL..'px; left: '..ZX..'px;'elseif\nself.VA==TR.wS then ZX=ZX+HJ\nLZ='top: '..KL..'px; left: '..ZX..'px;'elseif self.VA==TR.CA then ZX=ZX+HJ\nZX=ZX+420*PA\nLZ='top: '..KL..'px; right: '..ZX..'px;'elseif self.VA==TR.LS then ZX=ZX+\no.OS/2-OP/2\nLZ='bottom: '..KL..'px; left: '..ZX..'px;'elseif self.VA==TR.WD then ZX=ZX+HJ\nLZ='bottom: '..KL..'px; left: '..ZX..'px;'elseif self.VA==TR.ED then ZX=ZX+HJ\nLZ='bottom: '..KL..'px; right: '..ZX..'px;'else LZ='top: 50%; left: '..ZX..'px;'end\nlocal DF=2\nlocal SD='width:'..(GH+DF)..'px;'if AS>0 then\nSD='width:'..(GH+DF)..'px; height:'..(AS+DF)..'px;'end\nreturn\n'<div'..UI..' style=\"'..LZ..SD..'\">'..IO..'</div>'end end\nUR={MI={sA=50,qA=20,zA=20,xA=0,JD=12,SD=0,DD=nil,dA=true},FA=0,AD={},OD={},gD=0,rD=0,kD={},uD={},cA=function(RT,IO,UI,TY,YU,OP)\nlocal PA={TS=IO,_A=UI,TD=TY,ET=YU,YD={UD=false,zO=false},ID=OP}E.W(RT.OD,PA)return PA end,vA=function(RT,UI,YU,TY,IO)\nlocal OP={TS=UI,PD=YU,ET=TY,YD={UD=false,zO=false},ID=IO}E.W(RT.AD,OP)return OP end,GS=function(TY,RT)for YU=\n#TY.AD,1,-1 do local UI=TY.AD[YU]if UI.PD==RT and UI.ID~=true then\nE.U(TY.AD,YU)end end\nfor YU=#\nTY.OD,1,-1 do local UI=TY.OD[YU]if UI.TD==RT and UI.ID~=true then\nE.U(TY.OD,YU)end end end,YS=function(RT)\nend,RS=function(RT)RT.MI.dA=not RT.MI.dA\ndQ:IT(sQ.zI,RT.MI.dA)end,KD=function(RT,YU,TY)if\nYU.ET~=nil and YU.ET.mA~=nil then\nYU.YD.zO=YU.ET.mA.YT(YU,YU.ET.mA.UT)end\nYU.YD.UD=TY end,hD=function(YU,TY,RT)\nYU.MI.SD=0\nYU.MI.DD=TY\nlocal UI=0\nfor IO,OP in ipairs(YU.OD)do\nif OP.TD==TY then if RT~=nil and OP._A==RT._A then\nYU.MI.SD=UI\nbreak end\nUI=UI+1 end end end,FS=function(RT)\nlocal TY={}RT.FA=0\nRT.FD=nil\nlocal YU=0\nfor UI,IO in ipairs(RT.OD)do if\nIO.TD==RT.MI.DD and IO._A~=RT.MI.DD then YU=YU+1 end end\nfor UI,IO in ipairs(RT.AD)do if IO.PD==RT.MI.DD then YU=YU+1 end end\nif YU-1 <RT.MI.SD then RT.MI.SD=YU-1 elseif RT.MI.SD<0 then RT.MI.SD=0 end\nTY[#TY+1]=RT:GD(RT:HD(RT.MI.DD))return E.E(TY)end,fD=function(RT,TY)\nlocal OP=0\nlocal UI=0\nlocal IO=W(TY)=='table'and TY._A~=nil\nlocal YU=\nW(TY)=='table'and TY.PD~=nil\nfor PA,AS in ipairs(RT.OD)do\nif AS.TD==RT.MI.DD and\nAS._A~=RT.MI.DD then OP=OP+1\nif IO and AS._A==TY._A then\nRT.MI.SD=OP\nreturn end end end\nif W(TY)==\n'number'then RT.MI.SD=OP+TY end end,GD=function(TY,RT)\nlocal we={}local GH={}if RT~=nil and RT._A~=nil then local er=TY:HD(RT._A)E.W(GH,1,er)\nwhile\ner.TD~=nil and er.TD~=er._A do er=TY:HD(er.TD)E.W(GH,1,er)end end\nlocal BN={}for er,rt in\nipairs(GH)do E.W(BN,rt.TS)end\nif#BN==0 then E.W(BN,'Main Menu')end\nlocal PA=E.E(BN,' > ')local Mq=o.aR.UA\nlocal CV=TY.MI.zA*Mq\nlocal OP=TY.MI.xA*Mq\nlocal HJ=CV+OP\nlocal AS=TY.MI.qA*Mq\nlocal JK=4*Mq\nlocal YU=R.Y(JK)\nlocal IO=R.Y(CV/2)local UI=R.Y(CV/2+CV)local VB=R.Y(AS-JK)\nwe[#we+1]='<text class=\"outlined\" x=\"'..JK..'\" y=\"'..(IO)..'\">'..PA..'</text>'\nwe[#we+1]='<rect class=\"separator\" x='..JK..'\" y=\"'..(VB)..'\" width=\"'..(TY.MI.sA*Mq)..'\" height=\"1\" />'local ZX=0\nlocal XC=TY.MI.JD\nif TY.MI.SD>TY.MI.JD then\nZX=TY.MI.SD-TY.MI.JD\nXC=TY.MI.SD end\nlocal qw=0\nlocal NM=0\nfor er,rt in ipairs(TY.OD)do\nif rt.TD==\nRT._A and rt._A~=RT._A then if qw<=XC and qw>=ZX then\nlocal ty=qw==TY.MI.SD\nif ty then TY.FD=rt end\nTY:KD(rt,ty)we[#we+1]=TY:LD(rt,NM)\nNM=NM+1 end\nqw=qw+1 end end\nlocal KL=0\nlocal LZ=0\nfor er,rt in ipairs(TY.AD)do\nif rt.PD==RT._A then local ty=KL+qw\nif ty<=XC and ty>=ZX then local yu=ty==\nTY.MI.SD\nif yu then TY.FD=rt end\nTY:KD(rt,yu)\nwe[#we+1]=TY:LD(rt,LZ+NM)LZ=LZ+1 end\nKL=KL+1 end end\nlocal DF=KL+qw\nlocal SD=NM+LZ\nTY.FA=TY.FA+SD\nif TY.MI.JD<DF then\nwe[#we+1]=TY:ZD(VB,DF,SD,ZX,XC)end\nlocal FG=0\nif TY.MI.dA then local ty=VB+HJ*TY.FA+HJ\nlocal rt,er=TY:XD(ty)FG=ty+er\nwe[#we+1]=rt else FG=VB+HJ*TY.FA+10*Mq end\nif TY.FD~=nil then we[#we+1]=TY:CD(FG,TY.MI.dA)end\nreturn E.E(we)end,ZD=function(OP,YU,IO,UI,TY,RT)\nlocal NM={}local BN=o.aR.UA\nlocal AS=OP.MI.zA*BN\nlocal GH=OP.MI.xA*BN\nlocal SD=AS+GH\nlocal KL=10*BN\nlocal CV=YU+GH/2+KL/2\nlocal ZX=-12*BN\nlocal XC=UI*SD-KL\nlocal LZ=5*BN\nlocal JK=2*BN\nlocal HJ=CV+TY/IO*XC\nlocal PA=CV+ (RT+1)/IO*XC\nlocal DF=PA-HJ\nlocal FG=5*BN\nlocal VB=10*BN\nNM[#NM+1]='<svg viewBox=\"0 0 100 100\" x=\"'..(ZX-VB/2)..'\" y=\"'..(CV-VB-FG)..'\" width=\"'..VB..'\" height=\"'..VB..'\">'NM[#NM+1]=o.aS.VD\nNM[#NM+1]='</svg>'\nNM[#NM+1]=\n'<svg viewBox=\"0 0 100 100\" x=\"'..(ZX-VB/2)..'\" y=\"'..(CV+XC+FG)..'\" width=\"'..VB..'\" height=\"'..VB..'\">'NM[#NM+1]=o.aS.BD\nNM[#NM+1]='</svg>'\nNM[#NM+1]='<rect class=\"separator\" x=\"'..(\nZX-JK/2)..'\" y=\"'..CV..'\" width=\"'..JK..'\" height=\"'..XC..'\"/>'\nNM[#NM+1]='<rect class=\"separator\" x=\"'..(ZX-LZ/2)..'\" y=\"'..HJ..'\" width=\"'..LZ..'\" height=\"'..DF..'\"/>'return E.E(NM)end,XD=function(TY,RT)\nlocal FG=TY.FD\nlocal GH={}qR={}\nif FG~=nil then qR.nA={}if FG._A~=nil then qR.bA={}end\nif FG.ET~=nil then if\nFG.ET.nA~=nil then qR.nA=FG.ET.nA end\nif FG.ET.bA~=nil then\nqR.bA=FG.ET.bA end\nif FG.ET.NR~=nil then qR.NR=FG.ET.NR end\nif\nFG.ET.MR~=nil then qR.MR=FG.ET.MR end\nif FG.ET.KS~=nil then\nqR.KS=FG.ET.KS end\nif FG.ET.RT~=nil then qR.RT=FG.ET.RT end end end\nlocal DF={{ND=qR.nA},{ND=qR.bA},{ND=qR.NR},{ND=qR.MR}}if qR.KS~=nil then DF[#DF+1]={ND=qR.KS}end\nif qR.RT~=nil then\nDF[#DF+1]={ND=qR.RT}end\nlocal SD=o.aR.UA\nlocal YU=TY.MI.zA*SD\nlocal UI=TY.MI.sA*SD\nlocal OP=TY.MI.xA*SD\nlocal PA=10*SD\nlocal AS=50*SD\nlocal IO=AS+12*SD\nfor JK,HJ in ipairs(DF)do\nlocal ZX=false\nif JK==3 and M.NR then ZX=true elseif JK==5 and M.NR then ZX=true elseif JK==4 and M.MR and not M.NR then\nZX=true end\nGH[#GH+1]=\n'<g class=\"menuLegend\" data-active=\"'..T(ZX)..'\">'\nlocal LZ=HJ.ND\nlocal XC=RT+PA*(JK-1)local KL=PA*0.55\nif JK<=5 then\nGH[#GH+1]=\n'<svg class=\"menuLegendGlyph\" viewBox=\"0 0 100 100\" x=\"'..AS..'\" y=\"'..(XC- (PA-KL))..'\" width=\"'..KL..'\" height=\"'..KL..'\">'local CV=o.aS.MD\nif JK>1 then CV=o.aS.qD end\nif JK==5 and qR.KS~=nil then\nCV=o.aS.wD end\nGH[#GH+1]=CV\nGH[#GH+1]='</svg>'end\nif JK==3 then\nGH[#GH+1]='<text class=\"menuLegendKey\" x=\"'..(AS-OP)..'\" y='..XC..'>alt +</text>'elseif JK==4 then\nGH[#GH+1]='<text class=\"menuLegendKey\" x=\"'..(AS-OP)..'\" y='..XC..'>shift +</text>'elseif JK==5 and qR.KS~=nil then\nGH[#GH+1]='<text class=\"menuLegendKey\" x=\"'..(AS-OP)..'\" y='..XC..'>alt +</text>'end\nif LZ~=nil then local CV='Open'if FG._A==nil then CV='Select'end\nif JK==1 then CV='Back'end\nif JK==#DF then CV='Lua chat input is active'end\nif LZ.TS~=nil then\nCV=LZ.TS end\nGH[#GH+1]='<text class=\"menuLegendText\" x=\"'..IO..'\" y='..XC..'>'..CV..'</text>'end\nGH[#GH+1]='</g>'end\nreturn E.E(GH),#DF*PA end,LD=function(TY,YU,RT)\nlocal ty={}local we=o.aR.UA\nlocal BN=YU.YD.UD\nlocal CV=YU.YD.zO\nlocal XC={}if BN then\nE.W(XC,'data-hover=\"true\"')end\nif CV then E.W(XC,'data-active=\"true\"')end\nlocal DF=' '..E.E(XC,' ')local OP=wR('menuOption')\nlocal Mq=TY.MI.sA*we\nlocal rt=TY.MI.zA*we\nlocal ZX=TY.MI.xA*we\nlocal SD=rt+ZX\nlocal HJ=TY.MI.qA*we\nlocal LZ=R.Y(5*we)local AS=1*we\nlocal qw=R.Y(SD*RT+HJ)\nlocal KL=R.Y(qw+rt/2)local IO=R.Y(qw+rt)local JK=0\nlocal FG=R.Y(ZX)local UI=R.Y(JK+Mq/2)\nlocal VB=R.Y(Mq)local GH=R.Y(Mq-ZX)ty[#ty+1]='<g'..OP..DF..'>'local er=0\nlocal NM=0\nif YU.PD==eR then er=R.Y(rt)local ui=R.Y(rt*0.75)\nlocal yu=R.Y((rt-ui)/2)\nty[#ty+1]='<svg viewBox=\"0 0 100 100\" x=\"'..(VB-ui)..'\" y=\"'..(qw+yu)..'\" width=\"'..ui..'\" height=\"'..ui..'\">'..o.aS.eD..'</svg>'end\nif BN then local yu=0.2\nlocal pl=(J.HQ()-TY.rD)/yu\npl=A.t(pl,0,1)NM=2*(1-pl)local op=pl*rt\nlocal ui=KL-op/2\nty[#ty+1]='<rect x=\"0\" y=\"'..ui..'\" width=\"'..(Mq-er)..'\" height=\"'..op..'\" />'\nif M.BR and TY.tD~=nil and not TY.yD then local lk=\n(J.HQ()-TY.uD.BR)/TY.tD.JS\nty[#ty+1]='<rect class=\"inputHold\" x=\"0\" y=\"'..ui..'\" width=\"'..((Mq-\ner)*lk)..'\" height=\"'..op..'\" />'end end\nif CV then LZ=LZ*2 end\nlocal PA=rR(JK+NM,qw+NM,VB-NM-er,IO-NM,LZ,AS)if CV or BN then ty[#ty+1]=PA end\nty[#ty+1]='<text x=\"'..FG..'\" y=\"'..KL..'\">'..YU.TS..'</text>'\nif YU.ET~=nil and YU.ET.RT~=nil and BN then\nlocal ui=R.Y(rt*0.6)local yu=R.Y((rt-ui)/2)\nty[#ty+1]='<svg viewBox=\"0 0 100 100\" x=\"'..(VB-er-ui-yu)..'\" y=\"'..(qw+yu)..'\" width=\"'..ui..'\" height=\"'..ui..'\">'ty[#ty+1]=o.aS.iD\nif J.HQ()/0.75%1 >0.5 then\nty[#ty+1]=o.aS.oD end\nty[#ty+1]='</svg>'er=er+ui+yu end\nif YU.ET~=nil and YU.ET.uU~=nil then local yu=nil\nif W(YU.ET.uU)=='table'then\nyu=YU.ET.uU.YT(YU,YU.ET.uU.UT)elseif W(YU.ET.uU)=='boolean'then yu=YU.ET.uU elseif W(YU.ET.uU)=='string'or\nW(YU.ET.uU)=='number'then yu=YU.ET.uU end\nif W(yu)=='boolean'then local op=R.Y(rt*0.6)local ui=R.Y((rt-op)/2)\nty[\n#ty+1]='<svg viewBox=\"0 0 100 100\" x=\"'..(VB-er-op-ui)..'\" y=\"'..(qw+ui)..'\" width=\"'..op..'\" height=\"'..op..'\">'ty[#ty+1]=uE(yu,o.aS.pD,o.aS.lD)\nty[#ty+1]='</svg>'elseif yu~=nil then\nty[#ty+1]='<text class=\"valueText\" x=\"'..(GH-er)..'\" y=\"'..KL..'\">'..yu..'</text>'end end\nty[#ty+1]='</g>'return E.E(ty)end,CD=function(YU,TY,RT)\nif\nYU.FD.ET==nil or YU.FD.ET.ES==nil then return end\nlocal UI=YU.FD\nlocal JK={}local HJ=o.aR.UA\nlocal IO=YU.MI.zA*HJ\nlocal SD=YU.MI.sA*HJ\nlocal OP=YU.MI.xA*HJ\nlocal PA=11*HJ\nlocal DF=10*HJ+TY\nlocal AS=10*HJ\nlocal GH=5*HJ\nJK[\n#JK+1]='<g class=\"menuTooltip\">'if RT then\nJK[#JK+1]='<rect class=\"separator\" x=\"'..GH..'\" y=\"'..TY..'\" width=\"'..(SD-GH*2)..'\" height=\"1\"/>'end\nlocal FG=YU.FD.ET.ES\nif W(YU.FD.ET.ES)=='string'then FG={YU.FD.ET.ES}end\nfor KL,LZ in ipairs(FG)do local ZX=DF+PA*(KL-1)\nJK[#JK+1]='<text class=\"menuTooltipText\" x=\"'..AS..'\" y=\"'..ZX..'\">'..LZ..'</text>'end\nJK[#JK+1]='</g>'return E.E(JK)end,IS=function(RT)\nlocal AS=M\nlocal OP=J.HQ()local PA=0.2\nlocal TY=(AS.XR and not RT.kD.XR)or(\nRT.tD==nil and AS.XR and OP-RT.uD.XR>PA)\nlocal UI=(AS.CR and not RT.kD.CR)or(RT.tD==nil and AS.CR and\nOP-RT.uD.CR>PA)\nlocal IO=(AS.BR and not RT.kD.BR)or(RT.tD==nil and AS.BR and\nOP-RT.uD.BR>PA)\nlocal YU=(AS.VR and not RT.kD.VR)or(RT.tD==nil and AS.VR and\nOP-RT.uD.VR>PA)RT.kD={XR=AS.XR,CR=AS.CR,VR=AS.VR,BR=AS.BR}local SD=RT.FD\nif TY then\nif AS.NR and\nSD~=nil and SD.ET~=nil and SD.ET.KS~=nil then\nSD.ET.KS.YT(true,SD.ET.KS.UT)else RT.MI.SD=RT.MI.SD-1 end\nRT.rD=J.HQ()RT.uD.XR=J.HQ()zW:QQ(QE.GP)end\nif UI then if\nAS.NR and SD~=nil and SD.ET~=nil and SD.ET.KS~=nil then SD.ET.KS.YT(false,SD.ET.KS.UT)else\nRT.MI.SD=RT.MI.SD+1 end\nRT.rD=J.HQ()\nRT.uD.CR=J.HQ()zW:QQ(QE.GP)end\nif YU then RT.uD.VR=J.HQ()zW:QQ(QE.FP)local DF=RT:HD(RT.MI.DD)if DF.jD~=\nnil then RT:hD(DF.jD,DF)elseif DF.TD~=nil then RT:hD(DF.TD,DF)else\nRT:hD(nil,DF)end\nif SD~=nil and SD.ET~=nil and\nSD.ET.nA~=nil then\nDF.ET.nA.YT(DF,DF.ET.nA.UT)SD.ET.nA.YT(SD,SD.ET.nA.UT)elseif DF.ET~=nil and\nDF.ET.nA~=nil then DF.ET.nA.YT(DF,DF.ET.nA.UT)end end\nif IO then RT.uD.BR=J.HQ()zW:QQ(QE.DP)local SD=RT.FD\nif SD~=nil then\nif SD.ET==nil and\nSD._A~=nil then RT:hD(SD._A)else\nif AS.NR and SD.ET.NR~=nil then if SD.ET.NR.JS~=\nnil then RT.tD=SD.ET.NR\nRT.yD=false else\nSD.ET.NR.YT(SD,SD.ET.NR.UT)end elseif AS.MR and SD.ET.MR~=nil then if\nSD.ET.MR.JS~=nil then RT.tD=SD.ET.MR\nRT.yD=false else\nSD.ET.MR.YT(SD,SD.ET.MR.UT)end elseif SD.ET.bA~=nil then if\nSD.ET.bA.JS~=nil then RT.tD=SD.ET.bA\nRT.yD=false else\nSD.ET.bA.YT(SD,SD.ET.bA.UT)end elseif SD._A~=nil then RT:hD(SD._A)elseif\nSD.ET.RT~=nil then\nO('Enter any text here in chat to input a new value')end end end elseif AS.BR and RT.tD~=nil then local DF=J.HQ()-RT.uD.BR\nif RT.tD.JS<DF and\nnot RT.yD then RT.yD=true\nRT.tD.YT(RT.FD,RT.tD.UT)end elseif RT.tD~=nil then RT.tD=nil end end,dD=function(RT,TY,YU)\nlocal UI=RT:HD(TY)if UI~=nil then UI.jD=YU end end,HD=function(RT,TY)if TY==nil then return\n{_A=nil,TD=nil}end\nfor YU,UI in ipairs(RT.OD)do if UI._A==TY then return UI end end end,WT=function(RT)local TY=0\nfor YU,UI in\nipairs(RT.OD)do if UI.TD==RT.MI.DD and UI.TD~=UI._A then\nif RT.MI.SD==TY then return UI end\nTY=TY+1 end end\nfor YU,UI in ipairs(RT.AD)do if UI.PD==RT.MI.DD then if RT.MI.SD==TY then return UI end\nTY=TY+1 end end end}\nfunction rR(x1,y1,x2,y2,RT,TY)if TY==nil then TY=1 end\nlocal YU={}\nYU[#YU+1]='<rect class=\"separator\" x=\"'..x1..'\" y=\"'..y1..'\" width=\"'..RT..'\" height=\"'..TY..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..x1..'\" y=\"'..y1..'\" width=\"'..TY..'\" height=\"'..RT..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..x1..'\" y=\"'..(y2-TY)..'\" width=\"'..RT..'\" height=\"'..TY..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..x1..'\" y=\"'..(y2-RT)..'\" width=\"'..TY..'\" height=\"'..RT..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..(x2-RT)..'\" y=\"'..y1..'\" width=\"'..RT..'\" height=\"'..TY..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..(x2-TY)..'\" y=\"'..y1..'\" width=\"'..TY..'\" height=\"'..RT..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..(x2-RT)..'\" y=\"'..(y2-TY)..'\" width=\"'..RT..'\" height=\"'..TY..'\" />'\nYU[#YU+1]='<rect class=\"separator\" x=\"'..(x2-TY)..'\" y=\"'..(y2-RT)..'\" width=\"'..TY..'\" height=\"'..RT..'\" />'return E.E(YU)end\nfunction zQ(RT)local TY=xE(RT)if TY.iR==nil then O('Invalid ::pos{...} string')else\ntR(TY)end end\nfunction FR()\nlocal RT={EP=A.e(h.nT.x,0.01),RP=A.e(h.nT.y,0.01),iR=A.e(h.nT.z,0.01)}tR(RT)end\nfunction tR(RT)local AS=yE(RT)\nlocal DF=RT.s\nlocal SD=RT.b\nlocal YU={x=RT.EP,y=RT.RP,z=RT.iR}local PA=jW(AS)local OP=pW(AS)\nlocal IO=YE(PA,OP)\nlocal UI=PA.n..' '..IO..' ['..R.T(OP)..'m]'if DF==0 then DF=nil end\nif SD==0 then SD=nil end\nlocal TY={n=UI,c=YU,s=DF,b=SD}\naQ:bO(aQ.PT,TY)fQ._R:HS()end\nfunction LR(RT,TY)local YU=TY\nlocal UI=aQ.PT\nlocal IO=aQ:TP(UI,YU)O(IO)end\nfunction CR(RT,TY)local YU=TY\np:kU(YU)end\nfunction JR(RT,TY)local YU=TY\nlocal UI=aQ.PT\np:kU(UI,YU)end\nfunction PR(RT,TY)aQ:vO()fQ._R:HS()fQ._R.QT:dD(YR.tA,YR.wA)\nfQ._R.QT:hD(YR.tA)end\nfunction SR(TY,RT)aQ:_O(aQ.PT,TY)end\nfunction XR(RT,TY)aQ:QP(aQ.PT,TY,RT)fQ._R:HS()end\nfunction DR(RT,TY)if aQ.PT~=\nnil and aQ.hO[aQ.PT]~=nil then\nreturn aQ.hO[aQ.PT].n end\nreturn'Invalid route id'end\nfunction BR(RT,TY)aQ.PT=TY\nfQ._R:HS()fQ._R.QT:dD(YR.tA,YR.eA)\nfQ._R.QT:hD(YR.tA)end\nfunction AR(RT,TY)\nfQ._R.QT:fD(aQ.PT-1)aQ.PT=nil end\nfunction VR(RT,TY)aQ:nO(TY)end\nfunction KR(RT,TY)\naQ:mO(aQ.PT,TY)fQ._R:HS()end\nfunction ZR(up,RT)\nlocal TY=aQ:WP(aQ.PT,RT,uE(up,RT-1,RT+1))fQ._R.QT:fD(TY+2)fQ._R:HS()end\nfunction HR(RT,TY)if TY.wP=='config'then dQ:uI(TY.cU)elseif TY.wP=='route'then aQ:uI(TY.cU)elseif\nTY.wP=='usb'then aQ:gO(TY.cU)end end\nfunction GR(RT,TY)dQ:IT(TY._A,TY.QS)end\nfunction IR(RT,TY)dQ:IT(TY,RT)end\nfunction OR(RT,TY)if TY=='config'and dQ.cU~=nil then return dQ.cU.n elseif\nTY=='routes'and aQ.cU~=nil then return aQ.cU.n end\nreturn'-'end\nfunction yR(RT,TY)end\nfunction o.MS()local RT=j\nlocal TY=uR\nlocal YU={}\nYU[#YU+1]='<style>'..o.AS.sD..'></style>'\nYU[#YU+1]=[[<div class=\"infoPanel\" style=\"transform:translate(2vw,2vh)\">]]..o.aS.aD..[[\n        </div>]]return E.E(YU)end\no.aS={eD='<path d=\"M0,0 L0,100 L100,50 Z\"/>',VD='<path class=\"menuLegendKey\" d=\"M50,0 L0,100 L100,100 Z\"/>',BD='<path class=\"menuLegendKey\" d=\"M0,0 L100,0 L50,100 Z\"/>',qD='<path class=\"menuLegendKey\" d=\"M0,0 L0,100 L100,50 Z\"/>',MD='<path class=\"menuLegendKey\" d=\"M0,50 L100,100 L100,0 Z\"/>',wD='<path class=\"menuLegendKey\" d=\"M0,0 L50,100 L-50,100 Z\"/><path class=\"menuLegendKey\" d=\"M50,0 L150,0 L100,100 Z\"/>',pD='<rect class=\"checkBox checked\" width=\"100\" height=\"100\" y=\"0\"/>',lD='<rect class=\"checkBox\" width=\"100\" height=\"100\" y=\"0\"/>',iD='<rect class=\"editableBg\" width=\"100\" height=\"100\"/>',oD='<rect class=\"editableGlyph\" width=\"80\" height=\"15\" x=\"10\" y=\"75\"/>',mS=[[\n        <svg viewBox=\"0 0 100 100\">\n        <circle style=\"stroke-width: 4px; stroke: rgb(20, 220, 40); fill: none;\" cx=\"75\" cy=\"75\" r=\"33.333\" transform=\"matrix(1, 0, 0, 0.999999, -24.999976, -24.999961)\" bx:origin=\"0.331 0.224\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 83.333 50 L 100 50\" bx:origin=\"-2.677 0\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 60.767 50 L 77.433 50\" transform=\"matrix(-1, 0, 0, -1, 77.435763, 100.000003)\" bx:origin=\"-1.323 0\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 101.733 31.6 L 118.4 31.6\" transform=\"matrix(0, 1, -1, 0, 81.598635, -18.398635)\" bx:origin=\"-3.104 0\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 64.933 31.6 L 81.6 31.6\" transform=\"matrix(0, -1, 1, 0, 18.399367, 81.599368)\" bx:origin=\"-0.896 0\"/>\n        <circle style=\"fill: rgb(46, 139, 87); fill-opacity: 0; stroke: rgb(20, 220, 40); stroke-width: 2px;\" cx=\"50\" cy=\"50\" r=\"2.5\" bx:origin=\"0.5 0.5\"/>\n        </svg>\n    ]],_S=[[\n        <svg viewBox=\"125 125 150 150\">\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 150 150 L 250 250\" bx:origin=\"0.5 0.5\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 150 150 L 250 250\" transform=\"matrix(0, 1, -1, 0, 400.000012, 0)\" bx:origin=\"0.5 0.5\"/>\n        <circle style=\"stroke-width: 4px; stroke: rgb(20, 220, 40); fill: none;\" cx=\"200\" cy=\"200\" r=\"50\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 250 200 L 275 200\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 125 200 L 150 200\" transform=\"matrix(-1, 0, 0, -1, 275.000008, 400.000012)\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 249.725 200.275 L 274.725 200.275\" transform=\"matrix(0, 1, -1, 0, 400.275006, 0.274988)\" bx:origin=\"-1.989 0\"/>\n        <path style=\"fill: rgb(46, 139, 87); stroke-width: 4px; stroke: rgb(20, 220, 40);\" d=\"M 250.275 200.275 L 275.275 200.275\" transform=\"matrix(0, -1, 1, 0, -0.275, 400.275006)\" bx:origin=\"-2.011 0\"/>\n        </svg>\n    ]],bS=[[\n        <svg viewBox=\"-0 0 100 100\">\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 4px; stroke: rgb(255, 255, 255);\" d=\"M 61.25 56.25 L 106.25 56.25\" transform=\"matrix(0, -1, 1, 0, -6.25036, 106.249645)\" bx:origin=\"-0.111119 0\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 4px; stroke: rgb(255, 255, 255);\" d=\"M 55 50 L 100 50\" bx:origin=\"-0.111119 0\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 4px; stroke: rgb(255, 255, 255);\" d=\"M 55 50 L 100 50\" transform=\"matrix(0, 1, -1, 0, 99.999644, 0.000355)\" bx:origin=\"-0.111119 0\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 4px; stroke: rgb(255, 255, 255);\" d=\"M 55 50 L 100 50\" transform=\"matrix(-1, 0, 0, -1, 99.999293, 100.000003)\" bx:origin=\"-0.111119 0\"/>\n        </svg>\n    ]],cS=[[\n        <svg viewBox=\"-62.5 -62.5 125 125\">\n        <path d=\"M 62.5 0 A 62.5 62.5 0 0 1 0 62.5 A 62.5 62.5 0 0 1 -62.5 0 A 62.5 62.5 0 0 1 0 -62.5 A 62.5 62.5 0 0 1 62.5 0 Z\" style=\"fill: none; stroke-dasharray: 65; stroke: rgb(246, 0, 254); stroke-width: 6px;\"/>\n        <path d=\"M 5 0 A 5 5 0 0 1 0 5 A 5 5 0 0 1 -5 0 A 5 5 0 0 1 0 -5 A 5 5 0 0 1 5 0 Z\" style=\"fill: rgb(246, 0, 254); stroke: rgb(246, 0, 254);\"/>\n        </svg>\n    ]],nS=[[\n        <svg viewBox=\"-3.175 0 106.391 103.181\">\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(21, 0, 255);\" d=\"M 22.767 1.724 L 76.628 1.715\" transform=\"matrix(-1, 0, 0, -1, 99.718166, 3.439)\" bx:origin=\"0.5 -5363.962451\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(21, 0, 255); stroke-width: 3px;\" d=\"M 34.86 15.167 L 65.007 15.161\" transform=\"matrix(0, 1, -1, 0, 65.187944, -34.859944)\" bx:origin=\"1.658538 1.046562\"/>\n        <path d=\"M 52.5 50 C 52.5 51.381 51.38 52.5 50 52.5 C 48.619 52.5 47.5 51.381 47.5 50 C 47.5 48.619 48.619 47.5 50 47.5 C 51.38 47.5 52.5 48.619 52.5 50 Z\" style=\"stroke: rgb(21, 0, 255); fill: rgb(21, 0, 255);\" bx:origin=\"0 0\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(21, 0, 255);\" d=\"M 23.09 98.285 L 76.951 98.276\" transform=\"matrix(0.707107, -0.707107, 0.707107, 0.707107, -20.694729, 50.010377)\" bx:origin=\"0.5 -5363.962451\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(21, 0, 255); stroke-width: 3px;\" d=\"M 0.021 50 L 30.168 49.994\" transform=\"matrix(-0.707107, -0.707107, 0.707107, -0.707107, 50.035558, 120.725971)\" bx:origin=\"1.658538 1.046562\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(21, 0, 255);\" d=\"M 23.09 98.285 L 76.951 98.276\" transform=\"matrix(0.707107, 0.707107, -0.707107, 0.707107, 49.996057, -20.729293)\" bx:origin=\"0.5 -5363.962451\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(21, 0, 255); stroke-width: 3px;\" d=\"M 0.021 50 L 30.168 49.994\" transform=\"matrix(0.707107, -0.707107, 0.707107, 0.707107, -20.704741, 50.014894)\" bx:origin=\"1.658538 1.046562\"/>\n        </svg>\n    ]],zD=[[\n        <svg viewBox=\"-74.652 -64 148.511 131.373\" >\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(255, 60, 0);\" d=\"M -42.75 -62.99 L 42.25 -63\" transform=\"matrix(-1, 0, 0, -1, 0.01, -125.990009)\" bx:origin=\"0.503 0.5\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(255, 60, 0); stroke-width: 3px;\" d=\"M -17.6 -46.39 L 17.4 -46.4\" transform=\"matrix(0, 1, -1, 0, -46.390001, -46.400003)\" bx:origin=\"0.503 0.5\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(255, 60, 0);\" d=\"M 9.977 30.349 L 94.977 30.339\" transform=\"matrix(0.5, -0.866025, 0.866025, 0.5, 0.08732, 60.839247)\" bx:origin=\"0.503 0.5\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(255, 60, 0); stroke-width: 3px;\" d=\"M 20.751 22.051 L 55.751 22.041\" transform=\"matrix(-0.866025, -0.5, 0.5, -0.866025, 60.550264, 60.316404)\" bx:origin=\"0.503 0.5\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke-width: 5px; stroke: rgb(255, 60, 0);\" d=\"M -96.025 30.583 L -11.025 30.573\" transform=\"matrix(0.5, 0.866025, -0.866025, 0.5, -0.153671, 61.422167)\" bx:origin=\"0.503 0.5\"/>\n        <path style=\"fill: rgb(216, 216, 216); stroke: rgb(255, 60, 0); stroke-width: 3px;\" d=\"M -56.499 22.283 L -21.499 22.273\" transform=\"matrix(0.866025, -0.5, 0.5, 0.866025, -16.349816, -16.462319)\" bx:origin=\"0.503 0.5\"/>\n        <path d=\"M 5 0 A 5 5 0 0 1 0 5 A 5 5 0 0 1 -5 0 A 5 5 0 0 1 0 -5 A 5 5 0 0 1 5 0 Z\" style=\"stroke: rgb(255, 60, 0); fill: rgb(255, 60, 0);\"/>\n        </svg>\n    ]],zS=[[\n        <svg viewBox=\"0 0 100 100\" >\n        <circle style=\"fill: none; stroke: rgb(204, 204, 204); stroke-width: 10px;\" cx=\"50\" cy=\"50\" r=\"45\"/>\n        </svg>\n    ]],xS=[[\n        <svg viewBox=\"15.439 0.929 83.246 97.528\">\n        <path style=\"stroke: rgb(0, 0, 0); stroke-opacity: 0; fill: rgb(204, 204, 204);\" d=\"M 15.439 15.212 A 48.764 48.764 0 1 1 15.439 84.174 A 38.005 38.005 0 1 0 15.439 15.212 Z\" bx:shape=\"crescent 49.92 49.693 48.764 270 0.7 1@2724855a\"/>\n        </svg>\n    ]],QD=[[\n        <svg viewBox=\"5 5 493 475\">\n        <path fill=\"#FFF\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M335.4 412.27l63.28 32.9c14.98 13.03 11.24 21.9 21.65 29.96 10.26 9.43 16.8 10.96 22.9 2.08 4.85-10.1 3.88-20.2 5.4-31.2 7.08-6.8 12.9-10.2 18.74-17 6.38-7.1 6.1-14.1-3.75-19.1-8.2-3.3-15.96-5-25.8-2.1-6.26 2-12.92 3.1-21.24-.4l-68.28-31.7-194-67.3c-26.1-12.7-47.78-22.2-73.6-36.5-14.02-11.1-9.5-23.8-26.48-34.1-7.47-3.7-12.87-5.4-18.85 4.8-3.82 9-3.52 18.6-4.1 27.9-6.68 7.2-14.24 11.4-19.73 20.3-7.95 12.8 4.1 17 10.6 18.6 18.44 4.6 25.1-3.7 42.1-.3 33.05 15.4 66.4 31.4 98.3 47.1z\" stroke-linejoin=\"round\"/>\n        <path fill=\"#FFF\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M349.56 354.82l94.5-44.54c17.9-7.08 20.4 2.9 36.2 0 12.08-.14 22.07-4.86 21.24-16.23-6.1-9.03-11.8-14.7-22.48-24.57.56-10.54-1.4-20.67-5.4-30.8-4.17-5.97-11.67-8.6-22.9 2.08-11.38 8.6-7.78 20.12-22.07 32.05-23.3 11.6-44.54 21.8-70.35 34.6l-196.5 67.9c-22.75 12.1-43.42 23.3-69.5 33.3-21.24 5.3-20.4-7.7-46.2.9-7.37 5.8-7.23 14.2-1.26 20.4 6.93 6.8 11.8 11.1 17.9 17.1 1.94 8.6 2.22 16 3.33 26.3 4.16 12.6 13.33 11.9 21.23 5.8 3.47-4.3 7.77-8.2 10.4-12.9 3.6-6.2 7.64-13.3 12.5-19.1l62.85-33.3z\" stroke-linejoin=\"round\"/>\n        <path fill=\"#FFF\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M128.5 221.56c-19.14-18.6-32.5-50.9-34.37-85.75-2-38.4 18.22-76.5 48.54-98.3C176.64 13.6 233.43 7 268.75 8.8c23.92.02 77.2 12.42 96.02 26.43 33 24 50.68 58.04 51.9 96.85 1.82 38.98-14.6 68.68-34.7 87.2\"/>\n        <path fill=\"#FFF\" d=\"M130.4 215s-23.13 70.03 21.44 81.97l16.25 93.66c17.1 73.72 154.4 73.77 174.6 0l16.2-93.66c45.7-12.2 22.5-82 22.5-82z\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M129.66 112.27c-7.75 6.78-6.77 16.97-5.38 32.2 1.1 11.55 8.48 22.93 8.87 33.5 2.7 22.27-3.88 44.56-6.98 62.78-2.13 20.92 3.88 38.95 11.63 45.92 7.75 6.88 17.76 9.73 28.27 12.94 9.55 2.5 14.5 6.9 21.73 12.3 8.6 9.2 10.66 16.7 10.46 26m183.8-226.1c7.75 6.8 6.77 17 5.38 32.2-1.1 11.6-8.48 23-8.87 33.5-2.7 22.3 3.88 44.6 6.98 62.8 2.13 21-3.88 39-11.63 46-7.75 6.9-21.94 10.6-28.27 12.9-7.37 2.6-14.92 7.3-21.72 12.7-8.2 7.9-10.66 16.3-10.47 25.6\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M151.82 296.96c6.94 16.8 14.3 33.16 15 50.37-3.2 13.88-2.23 30.25 1.24 43.3 4.44 17.9 21.78 39.12 39.13 46.2 17.7 6.45 28.8 8.12 48.7 8.12\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"12.5\" d=\"M358.92 296.96c-6.94 16.8-14.3 33.16-14.98 50.37 3.2 13.87 2.22 30.25-1.25 43.3-4.5 17.9-22 38.5-39.4 45.58-17.4 7.1-28.5 8.8-48.3 8.8\"/>\n        <path stroke=\"#000\" stroke-width=\"1pt\" d=\"M251.9 245.7c-9.7 7.38-11.86 9.86-17.22 18.02-1.94 3.15-5.56 10.5-6.55 15.44-1 4.94-1.73 12.1-1.72 15.9.1 12.85 4.1 20.9 8.6 20.63 4-.5 9.1-4.7 16.8-14.1m7.1-55.7c9.7 7.3 11.9 9.8 17.2 18 2 3.1 5.6 10.5 6.6 15.4s1.8 12.1 1.7 15.9c0 12.8-4.1 20.9-8.5 20.6-4-.5-9.1-4.7-16.8-14.1m-89.5-112.3c13.5-2.4 26.5-3.9 40-5.4 17.6-4.5 26.5 15.6 21.7 30.8-6.1 13.4-14.7 25.2-24.5 36.6-7.6 8.6-16.7 9.9-25.4 7-7-2-13.4-6.3-20.4-16.3-3-8.6-5.6-13.1-9.5-23.7-3.02-9.9 1.7-24.6 18.3-29.2zm172.1 0c-13.4-2.4-26.5-3.9-39.9-5.4-17.6-4.5-26.5 15.6-21.6 30.8 6.1 13.4 14.7 25.2 24.6 36.6 7.7 8.6 16.8 9.9 25.4 7 7-2 13.5-6.3 20.4-16.3 3.1-8.6 5.7-13.1 9.6-23.7 3.1-9.9-1.7-24.6-18.3-29.2z\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"6.25\" d=\"M169.23 304.53c5.7 13.34 7.45 18.4 11.55 31.72 3.5 12.3 4.8 19.8 6.95 37.26m153.37-69.7c-5.7 13.4-7.46 18.4-11.57 31.7-3.5 12.3-4.78 19.8-6.94 37.3\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"5\" d=\"M193.52 335.73c14.7 9.03 40.16 10.42 62.95 10 25.4-.12 47.13-1.95 61.4-10.6m-119.2 24.15c16.23 10.2 35.33 13.7 57.32 12.88 22.8-.56 40.3-2.48 56-13.17\"/>\n        <path fill=\"none\" stroke=\"#000\" stroke-width=\"6.25\" d=\"M186.9 371.64c17.36 20.95 41.6 24.6 69.17 25.32 29.5 1.08 59.16-10.65 66.8-25.3\"/>\n        <path stroke=\"#000\" stroke-width=\"5\" d=\"M198.44 340.26l-.4 41.2m13.93-36.83l-.2 44.12m15.2-42.25l-.43 46.2m13.96-45.16l-.22 46.83m15.4-46.4v46.82m14.57-47.1l.2 46.8m12.92-48.1l.4 46m14.8-48.5l.2 44.1m13.53-49.6l.4 41.6\"/>\n      </svg>\n    ]],aD=[[\n        <svg viewBox=\"0 0 500 300\">\n        <rect width=\"500\" height=\"300\" style=\"stroke: rgb(0, 0, 0); fill: rgb(171, 171, 171);\"/>\n        <text style=\"fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 14px; white-space: pre;\" x=\"195.012\" y=\"12.711\" bx:origin=\"-2.298804 0.000011\">INSTRUCTIONS</text>\n        <text style=\"white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6px;\" x=\"58.856\" y=\"60.698\" transform=\"matrix(0.42815, 0, 0, 0.42815, -21.666808, -5.858888)\">Command List          <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>   <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/goto<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/convert<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/debug<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMaxSpaceSpeed /setMSP<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMaxPitch /setMP<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMaxRoll /setMR<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/shield <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/space <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setHover<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/atp<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/alt /altitude<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/orbitAlt<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/radar<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/unit<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/agg<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/aggAlt<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan></text>\n        <text style=\"white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6px;\" x=\"23.487\" y=\"213.779\" transform=\"matrix(0.549728, 0, 0, 0.549728, -9.379023, 53.990087)\">Alt-1 Toggle AP -- Toggle Autopilot<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-2 Altitude Hold -- Toggles Alt hold. /alt to set altitude or pressing w/s will set to surrent altitude. <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-3 Orbital Hold -- Toggle Orbital hold: Orbits in your current direction. /orbitAlt to set Altitude<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-4 Radial Hold -- Radial Out: Up, Radial In: Down, Camera Aim: aims where you look<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-5 Engine Mode -- All,Primary,Hybrid, Locked: See Advanced Engine control <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-6 Slow Flat -- Toggles auto leveling below 200km/h<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-7 AR Mode -- Planets,Moons,Vectors <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-8 Rotation Damp. -- Toggle rotation dampening (adjusters stop you from spinning or not) <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-9 Instructions -- toggle this Menu<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan> <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>Alt-Shift-2 Follow Mode -- Remote use only. Ship will follow you when you are more then 200m away <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>    <tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan>G - Parking -- land/lock brakes. No throttle control when parked.<tspan x=\"23.48699951171875\" dy=\"1em\">\u200b</tspan></text>\n        <text style=\"white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6px;\" x=\"339.597\" y=\"26.326\">Advanced Engine Setup</text>\n        <text style=\"fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10px; white-space: pre;\" x=\"343.189\" y=\"39.422\" transform=\"matrix(0.755404, 0, 0, 0.755404, 41.099927, 11.001836)\">You can have 3 groups of rear facing engines and the ship<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>will control the throttles to them independently.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>You can do this with same engine rarity or different.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>Significant fuel savings when using Freight/Military combo.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>Also its separate from space and Atmo<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>so 3 Atmo groups, 3 space Groups<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>You must tag the engine groups(lowercase):<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'primary' -- Main engine, largest or most fuel efficient.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'secondary' -- middle engines, next size down<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'tertiary' -- least fuel efficient or smallest engines<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>If you have 6 L atmo engines you can just do 3 groups of 2<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>even if they are all same rarity/type. the fuel savings will be<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>minimal in this case but the performance will be the same.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>If you only want 2 engine groups, just use:<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'primary'<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'secondary'<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>The ship will use your primary thrust to achieve the desired<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>speed first before kicking in the secondaries, and lastly the<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>tertiary engine group.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>                               Engine Modes (Alt-5)<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'All' - Use all engines equally, none of the above control.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'Primary' - use primary engines only, disables other groups<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'Hybrid' - The above mentioned advanced control<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan>'Locked' - Locks primaries to 100%, throttle controls others.<tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan><tspan x=\"343.1889953613281\" dy=\"1em\">\u200b</tspan></text>\n        <rect x=\"294\" y=\"28\" width=\"3\" height=\"250\" style=\"stroke: rgb(0, 0, 0);\"/>\n        <text style=\"white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6px;\" x=\"58.856\" y=\"60.698\" transform=\"matrix(0.42815, 0, 0, 0.42815, 50.255502, -5.858888)\">Description           <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>   <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- set target to temp point<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- converts a POS to world coords<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- toggles debug on and off <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- set Max Space Speed in km/h <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- set Max Pitch Degree <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--  set Max Roll Degree <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--enable or disable auto shield management<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--toggle if ship is space capable<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--set hover height when out of parking mode<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>-- enable or disable atmo Auto throttle <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>protection. prevents accelerating<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>past atmo burn speed<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--set specific altitude hold level. pressing <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>any movement keys after entering this will<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>override this to your current altitude.<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--set TargetOrbitAlt    <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--Toggle Radar Widget  <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--Toggle Control Unit Widget<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--Toggle AGG on/off<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>--set Agg Altitude </text>\n        <text style=\"white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6px;\" x=\"58.856\" y=\"60.698\" transform=\"matrix(0.42815, 0, 0, 0.42815, 155.591634, -5.858888)\">Usage Sample (commands not case sensitive)          <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>   <tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/goto ::pos{0,2,8.6408,80.3893,22354.4102}<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/convert ::pos{0,2,8.6408,80.3893,22354.4102}<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/debug<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMSP 20000<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMP 45<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setMR 35<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/shield<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/space<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/setHover 20<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/atp<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/alt 3000<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan><tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/orbitAlt 10000<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/radar<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/unit<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/aggalt 5000<tspan x=\"58.85599899291992\" dy=\"1em\">\u200b</tspan>/agg</text>\n      </svg>\n    ]]}\nfunction o.NS()local RT=o.aR\no.AS={DS=[[\n            ]]..iR('mainBg',{[0]='hsl('..RT.EA..','..(RT.YA*40)..'%,10%)',[100]='hsl('..RT.EA..','..(RT.YA*40)..'%,5%)'},true)..[[\n            ]]..iR('bg',{[0]='hsl('..RT.EA..','..(RT.YA*30)..'%,15%)',[100]='hsl('..RT.EA..','..(RT.YA*30)..'%,10%)'},true)..[[\n            ]]..iR('bgTransparent',{[0]={'hsl('..RT.EA..','..(RT.YA*40)..'%,15%)',0.5},[100]={'hsl('..RT.EA..','..(RT.YA*40)..'%,10%)',0.5}},true)..[[\n            ]]..iR('bgStroke',{[10]='hsl('..RT.EA..','..(RT.YA*50)..'%,50%)',[90]='hsl('..RT.EA..','..(RT.YA*40)..'%,40%)'},true)..[[\n            ]]..iR('fadeToBg',{[60]='hsl('..RT.EA..','..(RT.YA*40)..'%,20%)',[90]='hsl('..RT.EA..','..(RT.YA*40)..'%,15%)'},true)..[[\n            ]]..iR('fadeToBgStroke',{[60]='hsl('..RT.EA..','..(RT.YA*50)..'%,50%)',[90]='hsl('..RT.EA..','..(RT.YA*40)..'%,15%)'},true)..[[\n        ]],SS=\n[[\n            .mainMenu {\n                font-size: ]]..(RT.UA*11)..[[px;\n                font-family: Arial;\n            }\n            .mainMenu text {\n                alignment-baseline: middle;\n                text-shadow: none;\n                stroke-width: 0;\n                white-space: pre;\n                fill: hsl(0,0%,95%);\n                text-anchor: start;\n            }\n            .menuOption text {\n                alignment-baseline: central;\n            }\n            text.valueText {\n                text-anchor: end;\n            }\n            .mainMenu path {\n                fill: hsla(]]..RT.EA..[[,]]..(RT.YA*50)..[[%,80%,0.5);\n            }\n\n            /*hover */\n            [data-hover=true] text {\n                fill: hsl(]]..RT.EA..[[,]]..(RT.YA*50)..[[%,100%);\n            }\n            [data-hover=true] rect {\n                fill: hsla(]]..RT.EA..[[,]]..(\nRT.YA*50)..[[%,50%,0.5);\n            }\n            [data-hover=true] path {\n                fill: hsla(]]..RT.EA..[[,]]..(RT.YA*50)..[[%,100%,0.7);\n            }\n            [data-hover=true] rect.separator {\n                fill: hsl(0,0%,85%);\n            }\n            /*active */\n            [data-active=true] rect.separator {\n                fill: hsl(0,0%,100%);\n            }\n            /*active hover */\n            [data-active=true][data-hover=true] rect {\n            }\n\n            rect.inputHold {\n                fill: hsl(0,0%,75%)\n            }\n\n            text.outlined {\n                text-shadow: 0 0 1vh black;\n            }\n            rect.separator {\n                fill: hsl(0,0%,100%);\n            }\n            \n            rect.checkBox {\n                fill: hsl(0,0%,70%);\n            }\n            rect.checkBox.checked {\n                fill: hsl(0,0%,100%);\n            }\n            rect.editableBg {\n                fill: hsla(0,0%,0%,0.3);\n            }\n            rect.editableGlyph {\n                fill: hsl(0,0%,95%);\n            }\n\n            .menuLegendGlyph {\n                overflow: visible;\n            }\n            text.menuLegendText {\n            }\n            text.menuLegendKey {\n                fill: hsl(0,0%,75%);\n                text-anchor: end;\n            }\n            path.menuLegendKey {\n                fill: hsl(0,0%,95%);\n            }\n            .menuLegend[data-active=true] text, .menuLegend[data-active=true] path {\n                fill: hsl(0,0%,100%);\n            }\n        ]],sS=\n[[\n            .widget {\n                position: absolute;\n                white-space: pre;\n                font-size: ]]..(RT.UA*11)..[[px;\n                font-family: Arial;\n                color: hsl(0,0%,95%);\n                background-color: hsla(0,0%,0%,0.2);\n                border:0.1vh;\n                border-style: solid;\n                border-color: hsl(0,0%,95%);\n                text-shadow: 0.2vh 0.2vh 1vh black;\n                padding: ]]..(RT.UA*5)..[[px;\n            }\n            .widget.alert {\n                border-color: hsl(16,100%,50%);\n            }\n            .radarRow {\n                display: relative;\n                height: 1.2vh;\n            }\n            .radarText {\n                position: absolute;\n                overflow: hidden;\n            }\n\n            .coreInfo {\n                text-align: center;\n            }\n\n            .dottext {\n                position:absolute; width:6vh; height:6vh; left:-6vh; top:-6vh; border-radius:1vh;\n            }\n            .dot {\n                position:absolute; width:3vh; height:3vh; left:-1.5vh; top:-1.5vh; border-radius:1vh;\n            }\n            .planets {\n                position:absolute; width:2vh; height:2vh; left:-1vh; top:-1vh; border-radius:1vh;\n            }\n            .ptext {\n                position:absolute; width:3vh; height:3vh; left:-1.5vh; top:-3vh; border-radius:1vh;\n            }\n            .mtext {\n                position:absolute; width:3vh; height:3vh; left:-1.5vh; top:3vh; border-radius:1vh;\n            }\n            .debugInfo {\n                position:absolute; top:17vh; right:76vw; width:10vw; padding-left: 0.5vh; padding-top: 0.5vh; padding-bottom: 0.5vh; padding-right: 0.5vh; border:0.1vh; border-style: solid; border-color: orangered; background-color: rgba(0,0,0, 0.2);\n            }\n            .collision {\n                position:absolute; top:94vh; right:80vw; width:18vw; padding-left: 1vh; padding-top: 1vh; padding-right: 1vh; padding-bottom: 1vh; border:0.1vh; border-style: solid; border-color: orangered; \n            }\n            .radar1 {\n                position:absolute; top:83vh; right:25vw; width:12vw; padding-left: 1vh; padding-right: 1vh; padding-top: 1vh; padding-bottom: 1vh; border:0.1vh; border-style: solid; border-color: ivory;\n            }\n            .radar2 {\n                position:absolute; top:83vh; right:38vw; width:12vw; padding-left: 1vh; padding-right: 1vh; padding-top: 1vh; padding-bottom: 1vh; border:0.1vh; border-style: solid; border-color: ivory;\n            }\n            .radar3 {\n                position:absolute; top:83vh; right:51vw; width:12vw; padding-left: 1vh; padding-right: 1vh; padding-top: 1vh; padding-bottom: 1vh; border:0.1vh; border-style: solid; border-color: ivory;\n            }\n            .speedBar {\n                position:absolute; width:11.5vh; height:11.5vh; left:30vh; top:-12vh; border-radius:1vh;\n            }\n            .throttleBar {\n                position:absolute; width:11.5vh; height:11.5vh; left:35vh; top:-8vh; border-radius:1vh;\n            }\n            .altBar {\n                position:absolute; width:11.5vh; height:11.5vh; left:-40vh; top:-12vh; border-radius:1vh;\n            }\n            .apAlert {\n                position:absolute; top:70vh; right:45vw; width:10vw; padding-left: 1vh; padding-top: 1vh; padding-right: 1vh; padding-bottom: 1vh; border:0.2vh; border-style: solid; border-color: orangered;\n            }\n            .atmoAlert {\n                position:absolute; top:71vh; right:58.5vw; width:10vw; padding-left: 0.2vh; padding-top: 0.2vh; padding-right: 0.2vh; padding-bottom: 0.2vh; border:0.1vh;\n            }\n            .brakeAlert {\n                position:absolute; top:75vh; right:45vw; width:10vw; padding-left: 1vh; padding-top: 1vh; padding-right: 1vh; padding-bottom: 1vh;\n            }\n            \n        ]],sD=[[\n            .infoPanel{\n                position:absolute; width:140vh; height:140; left:0vh; top:0vh; border-radius:1vh;\n            }\n        ]]}end\nfunction IW()local AS=j\nlocal ZX=h\nlocal OP=p\nlocal LZ=0\nlocal DF=0\nlocal GH=0\nlocal UI=150\nlocal TY=150\nlocal IO=150\nlocal HJ=100\nlocal FG=A.e(Z.vQ())local PA=0\nlocal JK=0\nlocal SD=0\nlocal KL=0\nlocal YU='Travel'local RT=0\nif ZX.nT~=nil and OP.DT~=nil then\nRT=fE((A.e(OW.dist(OP.DT,ZX.nT))),true)end\nif ZX.WY~=nil then\nLZ=A.e(ZX.WY*3.6)\nif AS.oT then DF=A.e(ZX.YY*3.6)else DF=A.e(ZX.PU*3.6)end\nif LZ~=0 and DF~=0 then GH=A.t(LZ/DF*200,0,200)\nUI=A.e(A.i(A.t(GH,170,200),170,200,150,255))\nTY=A.e(A.i(A.t(GH,170,200),170,200,150,40))\nIO=A.e(A.i(A.t(GH,170,200),170,200,150,0))end\nif AW()=='travel'then PA=200*(R.A(FG)/100)else\nif LZ*3.6 <=1000 then\nHJ=1000 elseif LZ*3.6 <=5000 then HJ=5000 elseif LZ*3.6 <=10000 then HJ=10000 elseif LZ*3.6 <=20000 then HJ=20000 else HJ=30000 end\nFG=A.e(R.A(FG/100))PA=A.t(FG/HJ*200,0,200)end\nif AS.lS then KL=pW()\nif AS.oT then JK=A.e(ZX.DY.tY)\nSD=A.t(KL/JK*200,0,200)elseif ZX.DY.rY and AS.zT~=nil and KL<=100000 then JK=100000\nSD=A.t(((KL-\nZX.DY.tY)/JK)*200,0,200)elseif KL<=100000 then JK=100000\nSD=A.t((KL/JK)*200,0,200)end end\nYU=AW()end\no.kS={vS=\n[[\n            <svg viewBox=\"-77.91 -57.847 135.41 86.458\">\n            <text style=\"fill: rgb(204, 204, 204); font-family: Arial, sans-serif; font-size: 30px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; white-space: pre;\" transform=\"matrix(0.955784, 0, 0, 1.03899, -3.444869, 2.252162)\" x=\"-77.91\" y=\"-30.551\">]]..RT..[[</text>\n            <path style=\"fill: none; stroke: rgb(204, 204, 204);\" d=\"M -77.91 -22.808 L 0.342 -22.808 L 57.5 28.611\"/>\n            </svg>\n        ]],jS=\n[[\n            <svg viewBox=\"-29 -24 72 240\" >\n            <rect width=\"5\" height=\"200\" style=\"fill: rgb(255, 255, 255); fill-opacity: 0; paint-order: stroke; stroke: rgb(94, 94, 94);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <rect width=\"5\" height=\"]]..GH..[[\" style=\"stroke: rgb(255, 0, 0); stroke-opacity: 0; fill: rgb(]]..I(UI)..[[, ]]..I(TY)..[[, ]]..I(IO)..[[);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <text style=\"white-space: pre; fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 12px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; text-anchor: middle;\" x=\"1.4\" y=\"-2.6\" transform=\"matrix(1.1, 0, 0, 1, 1, 0)\">]]..LZ..[[</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 14px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; white-space: pre;\" transform=\"matrix(0, -1, 1, 0, -102, 9.5)\" x=\"-100\" y=\"100\">Speed</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 10px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 1px; white-space: pre;\" x=\"6\" y=\"5.5\">]]..DF..[[</text>\n            </svg>\n        ]],hS=\n[[\n            <svg viewBox=\"-29 -24 72 240\">\n            <rect width=\"5\" height=\"200\" style=\"fill: rgb(255, 255, 255); fill-opacity: 0; paint-order: stroke; stroke: rgb(94, 94, 94);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <rect width=\"5\" height=\"]]..PA..[[\" style=\"stroke: rgb(255, 0, 0); stroke-opacity: 0; fill: rgb(150, 150, 150);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <text style=\"white-space: pre; fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 12px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; text-anchor: middle;\" x=\"1.4\" y=\"-2.6\" transform=\"matrix(1.1, 0, 0, 1, 1, 0)\">]]..FG..[[</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 14px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; white-space: pre;\" transform=\"matrix(0, -1, 1, 0, -102, 9.5)\" x=\"-100\" y=\"100\">Throttle</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 10px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 1px; white-space: pre;\" x=\"6\" y=\"5.5\">]]..HJ..[[</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 10px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 1px; white-space: pre;\" x=\"6\" y=\"200\">]]..YU..[[</text>\n            </svg>\n        ]],gS=\n[[\n            <svg viewBox=\"-29 -24 72 240\">\n            <rect width=\"5\" height=\"200\" style=\"fill: rgb(255, 255, 255); fill-opacity: 0; paint-order: stroke; stroke: rgb(94, 94, 94);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <rect width=\"5\" height=\"]]..SD..[[\" style=\"stroke: rgb(255, 0, 0); stroke-opacity: 0; fill: rgb(150, 150, 150);\" transform=\"matrix(-1, 0, 0, -1, 0, 0)\" x=\"-5\" y=\"-200\" bx:origin=\"0 0\"/>\n            <text style=\"white-space: pre; fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 12px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; text-anchor: middle;\" x=\"1.4\" y=\"-2.6\" transform=\"matrix(1.1, 0, 0, 1, 1, 0)\">]]..KL..[[</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 14px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 2px; white-space: pre;\" transform=\"matrix(0, -1, 1, 0, -102, 9.5)\" x=\"-100\" y=\"100\">Altitude</text>\n            <text style=\"fill: rgb(200, 200, 200); font-family: Bank, sans-serif; font-size: 10px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 1px; white-space: pre;\" x=\"6\" y=\"5.5\">]]..JK..[[</text>\n            </svg>\n        ]]}end\nfunction CE(RT)\nif W(RT)=='table'then local TY='{'\nif E.bP(RT)then\nfor YU,RT in ipairs(RT)do TY=TY..oR(RT)..','end else local YU={}\nfor UI,RT in pairs(RT)do E.W(YU,UI..'='..oR(RT))end\nTY=TY..E.E(YU,',')end\nTY=TY..'}'return TY else return oR(RT)end end\nfunction oR(RT)\nif RT==nil then return'nil'elseif W(RT)=='table'then return CE(RT)elseif W(RT)=='string'then return'\"'..RT:format(\"%q\")..'\"'elseif W(RT)=='number'then return RT elseif W(RT)=='boolean'then return\nuE(RT,'true','false')end end\nuR={}pR={}pR.xD='middle'\nfunction uR.cD(RT)local GH=''if RT.XS==false then return GH end\nif\nRT.vD==nil then RT.vD=3 end\nif RT.aA==nil then RT.aA=3 end\nif RT.BA==nil then RT.BA=1 end\nif RT.x==nil then RT.x=0 end\nif RT.y==nil then RT.y=0 end\nRT.bD=RT.x\nRT.nD=RT.y\nlocal SD=RT.bD+RT.BA\nlocal IO=RT.nD+RT.BA\nif RT.mD~=nil then RT.zO=RT.mD(RT)end\nlocal FG='uiButton'if RT._D then FG=FG..' disabled'end\nif RT.AA then\nFG=FG..' '..RT.AA end\nlocal DF='text-anchor: start;'if RT.QF==pR.xD then\nSD=RT.bD+RT.aA/2\nDF='text-anchor: middle;'end\nlocal AS=''if RT.WF~=nil then AS=\n'font-size: '..RT.WF..'%; 'end\nlocal UI=uE(RT.EF==nil,'',rx(RT.RF))\nlocal YU='data-active=\"'..uE(RT.zO,'true','false')..'\"'\nlocal OP='data-hover=\"'..uE(RT.TF,'true','false')..'\"'local PA={}\nif RT.YF~=nil then for HJ,JK in pairs(RT.YF)do\nE.W(PA,'data-'..HJ..'=\"'..uE(JK,'true','false')..'\"')end end\nlocal TY=E.E(PA,' ')\nGH=GH..'<g class=\"'..FG..'\" '..YU..' '..OP..' '..TY..'>'\nGH=GH..'<rect'..UI..' x=\"'..(RT.bD)..'vh\" y=\"'..(RT.nD)..'vh\" width=\"'..(RT.aA)..'vh\" height=\"'..(RT.vD)..'vh\" />'if RT.TS~=nil then\nGH=GH..'<text style=\"'..AS..DF..'\" x=\"'..(SD*0.54)..'%\" y=\"'..(IO)..'%\">'..(RT.TS)..'</text>'end\nif RT.UF~=nil then\nGH=GH..'<svg x=\"'..(RT.bD)..'vh\" y=\"'..(RT.nD)..'vh\">'..(RT.UF)..'</svg>'end\nGH=GH..'</g>\\n'return GH end\nfunction lR(RT)if RT==nil then RT={}end\nif RT.x==nil then RT.x=0 end\nif RT.y==nil then RT.y=0 end\nlocal TY=kR(RT.IF)local UI=wR(RT.AA)\nlocal YU='<text'..UI..''..TY..' x=\"'..(RT.x)..'%\" y=\"'..(RT.y)..'%\">'..(RT.TS)..'</text>'if RT.OF then UI=UI('outlined')\nYU=YU..'<text'..UI..''..TY..' x=\"'..(RT.x)..'%\" y=\"'..(RT.y)..'%\">'..(RT.TS)..'</text>'end\nreturn YU end\nfunction jR(RT)if RT.x==nil then RT.x=0 end\nif RT.y==nil then RT.y=0 end\nif RT.aA==nil then\nRT.aA=3 end\nif RT.vD==nil then RT.vD=3 end\nlocal TY=kR(RT.IF)\nlocal YU=wR(RT.AA)\nreturn'<rect'..YU..''..TY..' x=\"'..(RT.x)..'vh\" y=\"'..(RT.y)..'vh\" width=\"'..(RT.aA)..'vh\" height=\"'..(RT.vD)..'vh\" />'end\nfunction wR(RT)local TY={}if RT~=nil then\nif W(RT)=='table'then E.aP(TY,RT)elseif W(RT)=='string'then E.W(TY,RT)end end\nlocal RT=''if#TY>0 then RT=' class=\"'..(E.E(TY,' '))..'\"'end\nreturn RT end\nfunction kR(RT)local TY={}\nif RT~=nil then for YU,UI in pairs(RT)do local IO=UI\nif W(UI)=='boolean'then\nIO=uE(UI,'true','false')end\nE.W(TY,' data-'..YU..'=\"'..IO..'\"')end\nreturn E.E(TY,' ')else return''end end\nfunction iR(id,TY,RT)if RT==nil then RT=false end\nlocal YU=uE(RT,'x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"','x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"')\nlocal IO='<linearGradient id=\"'..id..'\"'..YU..'>'local UI=E.SP(TY)E.I(UI)\nfor OP,PA in ipairs(UI)do local AS=PA\nlocal SD=TY[PA]\nif W(SD)=='table'then\nSD=TY[PA][1]local DF=TY[PA][2]\nIO=IO..'<stop offset=\"'..AS..'%\" stop-color=\"'..SD..'\" stop-opacity=\"'..DF..'\" />'else IO=IO..'<stop offset=\"'..AS..'%\" stop-color=\"'..SD..'\" />'end end\nIO=IO..'</linearGradient>'return IO end\nfunction rx(RT)if RT==nil then return''else\nreturn' rx=\"'..RT..'\" ry=\"'..RT..'\"'end end\nhR={PF='Alpha',AF='Beta',SF='Release'}\ngR={DF=4,FF=0,GF=hR.PF}\nfunction _W()return gR.DF..'.'..gR.FF..' '..gR.GF end\nfunction fR()return gR.DF*1000+gR.FF end",
+      "filter": {
+        "args": [],
+        "signature": "onStart()",
+        "slotKey": "-3"
+      },
+      "key": "3"
+    },
+    {
+      "code": "kQ()",
+      "filter": {
+        "args": [],
+        "signature": "onFlush()",
+        "slotKey": "-2"
+      },
+      "key": "1"
+    },
+    {
+      "code": "nQ()",
+      "filter": {
+        "args": [],
+        "signature": "onUpdate()",
+        "slotKey": "-2"
+      },
+      "key": "2"
+    },
+    {
+      "code": "\nj={HF=false,rR=0,BY=100000,pR=dR,mR=false,fS=false,bR=false,dS=false,AY=false,vY=-10000000,cY=true,bY=false,yR=false,QY=false,oT=false,tR=false,oR=false,SY=false,lR=false,kR=false,OU=0,JF=0,uR=2500,IU='none',gR='all',jY=false,oY=false,lY=false,MY=false,pY=false,KF=0,LF=0,ZF=0,sY=false,aY=10000000,zY=false,iY=false,IY='standby',sR=true,dR='none',hR='none',jR=false,KT=false,zT=\nnil,xY=nil,xT=nil,cT=nil,vT=false,XF=0,XU=false,CU=false,lS=true,CF=oE,JU={0,0,0,0},KU={0,0,0,0},LU={0,0,0,0},ZU={0,0,0,0},yS=false,tS=false,rS=false,oS=false,uS=false,iS=false,DT=vec3()}",
+      "filter": {
+        "args": [],
+        "signature": "onStart()",
+        "slotKey": "-1"
+      },
+      "key": "1"
+    },
+    {
+      "code": "onUnitStart(system, unit, construct, library, player)",
+      "filter": {
+        "args": [],
+        "signature": "onStart()",
+        "slotKey": "-1"
+      },
+      "key": "2"
+    },
+    {
+      "code": "RE()",
+      "filter": {
+        "args": [],
+        "signature": "onStop()",
+        "slotKey": "-1"
+      },
+      "key": "3"
+    },
+    {
+      "code": "rW()",
+      "filter": {
+        "args": [
+          {
+            "value": "FUELUPDATE"
+          }
+        ],
+        "signature": "onTimer(timerId)",
+        "slotKey": "-1"
+      },
+      "key": "4"
+    },
+    {
+      "code": "sR()",
+      "filter": {
+        "args": [
+          {
+            "value": "RADARUPDATE"
+          }
+        ],
+        "signature": "onTimer(timerId)",
+        "slotKey": "-1"
+      },
+      "key": "5"
+    },
+    {
+      "code": "yW()",
+      "filter": {
+        "args": [
+          {
+            "value": "DEBUGHUD"
+          }
+        ],
+        "signature": "onTimer(timerId)",
+        "slotKey": "-1"
+      },
+      "key": "6"
+    },
+    {
+      "code": "aR()",
+      "filter": {
+        "args": [
+          {
+            "value": "APU"
+          }
+        ],
+        "signature": "onTimer(timerId)",
+        "slotKey": "-1"
+      },
+      "key": "7"
+    },
+    {
+      "code": "onInput(text)",
+      "filter": {
+        "args": [
+          {
+            "variable": "*"
+          }
+        ],
+        "signature": "onInputText(text)",
+        "slotKey": "-2"
+      },
+      "key": "3"
+    },
+    {
+      "code": "y()",
+      "filter": {
+        "args": [
+          {
+            "value": "leftmouse"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "4"
+    },
+    {
+      "code": "t()",
+      "filter": {
+        "args": [
+          {
+            "value": "leftmouse"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "5"
+    },
+    {
+      "code": "q()",
+      "filter": {
+        "args": [
+          {
+            "value": "lshift"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "6"
+    },
+    {
+      "code": "w()",
+      "filter": {
+        "args": [
+          {
+            "value": "lshift"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "7"
+    },
+    {
+      "code": "e()",
+      "filter": {
+        "args": [
+          {
+            "value": "lalt"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "8"
+    },
+    {
+      "code": "r()",
+      "filter": {
+        "args": [
+          {
+            "value": "lalt"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "9"
+    },
+    {
+      "code": "u()",
+      "filter": {
+        "args": [
+          {
+            "value": "option1"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "10"
+    },
+    {
+      "code": "l()",
+      "filter": {
+        "args": [
+          {
+            "value": "option2"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "11"
+    },
+    {
+      "code": "g()",
+      "filter": {
+        "args": [
+          {
+            "value": "option3"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "12"
+    },
+    {
+      "code": "s()",
+      "filter": {
+        "args": [
+          {
+            "value": "option4"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "13"
+    },
+    {
+      "code": "a()",
+      "filter": {
+        "args": [
+          {
+            "value": "option5"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "14"
+    },
+    {
+      "code": "z()",
+      "filter": {
+        "args": [
+          {
+            "value": "option6"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "15"
+    },
+    {
+      "code": "x()",
+      "filter": {
+        "args": [
+          {
+            "value": "option7"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "16"
+    },
+    {
+      "code": "c()",
+      "filter": {
+        "args": [
+          {
+            "value": "option8"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "17"
+    },
+    {
+      "code": "v()",
+      "filter": {
+        "args": [
+          {
+            "value": "option9"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "18"
+    },
+    {
+      "code": "b()",
+      "filter": {
+        "args": [
+          {
+            "value": "warp"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "19"
+    },
+    {
+      "code": "m()",
+      "filter": {
+        "args": [
+          {
+            "value": "antigravity"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "20"
+    },
+    {
+      "code": "EQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "stopengines"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "21"
+    },
+    {
+      "code": "RQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "stopengines"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "22"
+    },
+    {
+      "code": "_()",
+      "filter": {
+        "args": [
+          {
+            "value": "gear"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "23"
+    },
+    {
+      "code": "QQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "booster"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "24"
+    },
+    {
+      "code": "IQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "down"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "25"
+    },
+    {
+      "code": "OQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "down"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "26"
+    },
+    {
+      "code": "TQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "up"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "27"
+    },
+    {
+      "code": "YQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "up"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "28"
+    },
+    {
+      "code": "PQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "strafeleft"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "29"
+    },
+    {
+      "code": "AQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "strafeleft"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "30"
+    },
+    {
+      "code": "SQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "straferight"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "31"
+    },
+    {
+      "code": "DQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "straferight"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "32"
+    },
+    {
+      "code": "ZQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "right"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "33"
+    },
+    {
+      "code": "XQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "right"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "34"
+    },
+    {
+      "code": "KQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "left"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "35"
+    },
+    {
+      "code": "LQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "left"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "36"
+    },
+    {
+      "code": "HQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "backward"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "37"
+    },
+    {
+      "code": "JQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "backward"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "38"
+    },
+    {
+      "code": "FQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "forward"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "39"
+    },
+    {
+      "code": "GQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "forward"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "40"
+    },
+    {
+      "code": "BQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "yawright"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "41"
+    },
+    {
+      "code": "NQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "yawright"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "42"
+    },
+    {
+      "code": "CQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "yawleft"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "43"
+    },
+    {
+      "code": "VQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "yawleft"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "44"
+    },
+    {
+      "code": "WQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "light"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "45"
+    },
+    {
+      "code": "MQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "groundaltitudedown"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "46"
+    },
+    {
+      "code": "qQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "groundaltitudedown"
+          }
+        ],
+        "signature": "onActionLoop(action)",
+        "slotKey": "-2"
+      },
+      "key": "47"
+    },
+    {
+      "code": "wQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "groundaltitudeup"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "48"
+    },
+    {
+      "code": "eQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "groundaltitudeup"
+          }
+        ],
+        "signature": "onActionLoop(action)",
+        "slotKey": "-2"
+      },
+      "key": "49"
+    },
+    {
+      "code": "rQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "speedup"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "50"
+    },
+    {
+      "code": "tQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "speedup"
+          }
+        ],
+        "signature": "onActionLoop(action)",
+        "slotKey": "-2"
+      },
+      "key": "51"
+    },
+    {
+      "code": "yQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "speeddown"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "52"
+    },
+    {
+      "code": "uQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "speeddown"
+          }
+        ],
+        "signature": "onActionLoop(action)",
+        "slotKey": "-2"
+      },
+      "key": "53"
+    },
+    {
+      "code": "iQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "brake"
+          }
+        ],
+        "signature": "onActionStart(action)",
+        "slotKey": "-2"
+      },
+      "key": "54"
+    },
+    {
+      "code": "lQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "brake"
+          }
+        ],
+        "signature": "onActionStop(action)",
+        "slotKey": "-2"
+      },
+      "key": "55"
+    },
+    {
+      "code": "pQ()",
+      "filter": {
+        "args": [
+          {
+            "value": "brake"
+          }
+        ],
+        "signature": "onActionLoop(action)",
+        "slotKey": "-2"
+      },
+      "key": "56"
+    }
+  ],
+  "methods": [],
+  "events": []
+}

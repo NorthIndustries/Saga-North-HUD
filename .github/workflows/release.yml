@@ -1,0 +1,50 @@
+name: Build and Release Saga North HUD
+on:
+  push:
+    branches: master
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
+
+      - name: Static verify
+        run: |
+          chmod +x scripts/*.sh
+          ./scripts/verify.sh
+
+      - name: Build artifacts
+        if: github.ref == 'refs/heads/master'
+        run: ./scripts/build.sh
+
+      - name: Create Release Notes
+        if: github.ref == 'refs/heads/master'
+        run: |
+          cat > ReleaseNotes.md <<'EOF'
+          Saga North HUD with bundled MyDU planet data.
+
+          - **Saga-North-HUD.zip** — recommended modular install
+          - **Saga-North-HUD.conf** — conf only (needs atlas from zip)
+          - **Saga-North-HUD-GFN.conf** — atlas embedded in conf
+
+          See INSTALL.md in the repository.
+          EOF
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v0.1.2-ni.1
+          name: Saga North HUD v0.1.2-ni.1
+          body_path: ReleaseNotes.md
+          files: |
+            Saga-North-HUD.zip
+            Saga-North-HUD.conf
+            Saga-North-HUD-GFN.conf
