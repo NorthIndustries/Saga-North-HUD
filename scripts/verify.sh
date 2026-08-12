@@ -29,6 +29,8 @@ import json, sys
 from pathlib import Path
 data = json.loads(Path("scripts/work/Saga-North-HUD.conf").read_text())
 slots = data["slots"]
+assert slots["0"]["name"] == "core", slots["0"]
+assert slots["1"]["name"] == "slot1", slots.get("1")
 assert slots["-5"]["name"] == "library", slots
 assert slots["-4"]["name"] == "system", slots
 assert slots["-3"]["name"] == "player", slots

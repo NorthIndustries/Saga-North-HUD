@@ -48,7 +48,8 @@ This variant is suitable when you cannot drop extra `.lua` files beside the conf
 |---------|-----|
 | Wrong planet names / autopilot targets vanilla bodies | Reinstall from **Saga-North-HUD.zip**; ensure `mydu_atlas.lua` is present |
 | `no file '…lua' in the lua folder` | Extract the full zip so `autoconf/custom/saganorth/custom/mydu_atlas.lua` exists |
-| `=> -3: missing 'class' description` | Old release with legacy slot keys — reinstall from **v0.1.2-ni.2** or later |
+| `=> -3: missing 'class' description` | Old release with legacy slot keys — rebuild from latest repo |
+| `=> 0: missing 'class' description` | Old release without core slot at index 0 — rebuild from latest repo |
 | HUD works but map icons wrong | Add missing planet PNGs or fix `iconPath` in atlas |
 
 ## Help

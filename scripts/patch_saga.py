@@ -64,6 +64,24 @@ def normalize_slot_keys(data: dict) -> None:
             handler["filter"]["slotKey"] = HANDLER_SLOT_KEY_REMAP[slot_key]
 
 
+def insert_core_slot(data: dict) -> None:
+    """MyDU requires element slot 0 to be core (CoreUnit inferred from name)."""
+    slots = data.get("slots", {})
+    if slots.get("0", {}).get("name") == "core":
+        return
+
+    element_slots = {
+        key: value
+        for key, value in slots.items()
+        if key.lstrip("-").isdigit() and int(key) >= 0
+    }
+    shifted = {str(int(key) + 1): value for key, value in element_slots.items()}
+    shifted["0"] = {"name": "core", "type": dict(EMPTY_SLOT_TYPE)}
+
+    builtin = {key: value for key, value in slots.items() if str(key).startswith("-")}
+    data["slots"] = {**shifted, **builtin}
+
+
 def patch_source(inline: bool) -> dict:
     data = json.loads(SOURCE.read_text(encoding="utf-8"))
     version = "0.1.2"
@@ -91,6 +109,7 @@ def patch_source(inline: bool) -> dict:
         raise SystemExit(f"Expected exactly 1 atlas require, found {hits}")
 
     normalize_slot_keys(data)
+    insert_core_slot(data)
     return data
 
 
