@@ -35,10 +35,15 @@ if grep -q "require('atlas')" "$MODULAR"; then
   exit 1
 fi
 python3 <<'PY'
+import re
 from pathlib import Path
 text = Path("scripts/work/Saga-North-HUD.conf").read_text()
 for token in ["    core:", "    s1:", "    s14:", "    s21:", "    unit:", "    system:", "    library:"]:
     assert token in text, token
+lib = re.search(r"    library:(.*?)(?=\n\S|\Z)", text, re.S)
+assert lib and len(re.findall(r"^\s+onStart:\s*$", lib.group(1), re.M)) == 3, "expected 3 library onStart handlers"
+unit = re.search(r"    unit:(.*?)(?=\n    system:)", text, re.S)
+assert unit and len(re.findall(r"^\s+onStart:\s*$", unit.group(1), re.M)) == 2, "expected 2 unit onStart handlers"
 print("YAML structure OK")
 PY
 

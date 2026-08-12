@@ -121,13 +121,10 @@ def emit_lua_block(lines: list[str], indent_level: int, code: str) -> None:
     pad = INDENT * indent_level
     pad_code = INDENT * (indent_level + 1)
     lines.append(f"{pad}lua: |")
-    stripped = code.strip("\n")
-    if not stripped:
+    if not code:
         lines.append(pad_code)
         return
-    for line in stripped.splitlines():
-        if not line.strip():
-            continue
+    for line in code.splitlines():
         lines.append(f"{pad_code}{line}")
 
 
@@ -159,40 +156,27 @@ def emit_handlers(
 ) -> None:
     pad = INDENT * indent_level
     pad2 = INDENT * (indent_level + 1)
-    index = 0
     prefix_used = False
-    while index < len(handlers):
-        handler = handlers[index]
+
+    for handler in handlers:
         filt = handler["filter"]
-        signature = filt["signature"]
-        args = filt.get("args", [])
-
-        if signature in ("onStart()", "onStop()") and not args:
-            chunks = [handler["code"]]
-            next_index = index + 1
-            while (
-                next_index < len(handlers)
-                and handlers[next_index]["filter"]["signature"] == signature
-                and not handlers[next_index]["filter"].get("args")
-            ):
-                chunks.append(handlers[next_index]["code"])
-                next_index += 1
-            event_name = signature[:-2]
-            if event_name == "onStart" and on_start_prefix and not prefix_used:
-                chunks.insert(0, on_start_prefix)
-                prefix_used = True
-            lines.append(f"{pad}{event_name}:")
-            emit_lua_block(lines, indent_level + 1, "\n".join(chunk for chunk in chunks if chunk.strip()))
-            index = next_index
-            continue
-
+        code = handler["code"]
         event_name, yaml_args = handler_yaml_key(filt)
+
+        if (
+            event_name == "onStart"
+            and on_start_prefix
+            and not prefix_used
+            and not yaml_args
+        ):
+            code = on_start_prefix + "\n" + code.lstrip("\n")
+            prefix_used = True
+
         lines.append(f"{pad}{event_name}:")
         if yaml_args:
             rendered = ", ".join(yaml_arg(value) for value in yaml_args)
             lines.append(f"{pad2}args: [{rendered}]")
-        emit_lua_block(lines, indent_level + 1, handler["code"])
-        index += 1
+        emit_lua_block(lines, indent_level + 1, code)
 
 
 def to_yaml(data: dict, name: str) -> str:
@@ -238,6 +222,8 @@ def patch_source(inline: bool) -> tuple[dict, str]:
             break
 
     name = display_name(version)
+    if inline:
+        name = f"{name} GFN"
     hits = 0
     bundled_require = f"require('{BUNDLED_REQUIRE}')"
 

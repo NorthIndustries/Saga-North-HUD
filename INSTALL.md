@@ -50,7 +50,7 @@ This variant is suitable when you cannot drop extra `.lua` files beside the conf
 |---------|-----|
 | Wrong planet names / autopilot targets vanilla bodies | Reinstall from **Saga-North-HUD.zip**; ensure `mydu_atlas.lua` is present |
 | `no file '…lua' in the lua folder` | Extract the full zip so `autoconf/custom/saganorth/custom/mydu_atlas.lua` exists |
-| `=> N: missing 'class' description` | Old build used reserved names `slot1` in YAML — reinstall latest build (uses `s1`…`s21`) |
+| `=> N: missing 'class' description` | Often the old **JSON** `Saga-North-HUD-GFN.conf` (same display name) — delete it and use **Saga North HUD v0.1.2 (North Industries)** only, or update to latest GFN build (YAML) |
 | HUD works but map icons wrong | Add missing planet PNGs or fix `iconPath` in atlas |
 
 ## Help
